@@ -1,7 +1,7 @@
 <template>
 <div>branch-1</div>
  <div class='search-div'>
-   <div>useless div</div>
+   <div>useless div again</div>
         <div class='title-and-menu'>
             <a class='website-title' href="index.html">ANIME GETTER</a>
               <div id="nav">
