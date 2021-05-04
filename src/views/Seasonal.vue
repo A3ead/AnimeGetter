@@ -1,6 +1,5 @@
 <template>
 <div v-if="entireArchive!=null">
-    <div>Hello World</div>
     <button class="button" @click="currentYear++">Previous Year</button>
     <button class="button" @click="getSeasonal(entireArchive[currentYear].year,season)" v-for="season in entireArchive[currentYear].seasons" :key="season">{{season}} {{entireArchive[currentYear].year}}</button>
     <button class="button" @click="currentYear--" v-if="currentYear!=0">Next Year</button>
