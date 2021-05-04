@@ -1,4 +1,5 @@
 <template>
+<div>master test</div>
  <div class='search-div'>
    <div>useless div</div>
         <div class='title-and-menu'>
