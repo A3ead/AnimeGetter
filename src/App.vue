@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
 <div>branch-1</div>
-=======
-<div>master test</div>
->>>>>>> f45c1d100e21a179d49cdb463904c7677d0355e5
  <div class='search-div'>
    <div>useless div again</div>
         <div class='title-and-menu'>
