@@ -73,7 +73,7 @@ export default {
         {   
 
             let currentData = res.data
-            //console.log(res.data)
+            console.log(res.data)
             let tempArray = [currentData.monday, currentData.tuesday, currentData.wednesday, currentData.thursday, currentData.friday, currentData.saturday, currentData.sunday]
             this.schedule = tempArray.map(this.removeKids)
             
