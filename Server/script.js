@@ -141,6 +141,16 @@ app.get('/seasonal',function(req,res)
     })
 })
 
+app.get('/current',function(req,res)
+{
+ axios.get(`https://api.jikan.moe/v3/season`)
+    .then(function (response) 
+    {
+       //console.log(response.data);
+        res.json(response.data)
+    })
+})
+
 
 
 app.listen(3000, function()

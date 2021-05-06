@@ -409,7 +409,11 @@ body {
     width: 100%;
     border-top: solid blueviolet 1px;
     padding-top: 10px;
-
- 
-    
+}
+.Season-Type{
+    background-color: blueviolet;
+    margin: 20px 65px 5px 65px;
+    color: white;
+    padding: 5px;
+    font-size: 19px;
 }

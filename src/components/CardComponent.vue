@@ -11,7 +11,7 @@
                 </div>
                 <div class="anime-card-info-container">
                     <div>
-                        <div class="anime-card-info"> Episodes: {{anime.episodes}}</div>
+                        <div class="anime-card-info"> Episodes: {{anime.episodes}} &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Source: {{anime.source}}</div> 
                         <div class="anime-card-info">Studio:&nbsp;<div v-for="producer in anime.producers" :key="producer"> {{producer.name}}</div></div>
                     </div>
                     <div class="anime-card-info-genres" >Genres:&nbsp;<div v-for="genre in anime.genres" :key="genre" class="single-genre"> {{genre.name}}</div></div>
@@ -28,7 +28,7 @@
 import axios from 'axios'
 
 export default {
-  name: 'ScheduleShower',
+  name: 'CardComponent',
   props: {
       schedule:'',
   },

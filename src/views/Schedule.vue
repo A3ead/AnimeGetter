@@ -25,36 +25,36 @@
     </div>
     
     <div v-if="selected_day=='monday'" class="single-day-container">
-        <ScheduleShower :schedule='schedule[0]'/>
+        <CardComponent :schedule='schedule[0]'/>
     </div>
     <div v-if="selected_day=='tuesday'" class="single-day-container">
-        <ScheduleShower :schedule='schedule[1]'/>
+        <CardComponent :schedule='schedule[1]'/>
     </div>
     <div v-if="selected_day=='wednesday'" class="single-day-container">
-        <ScheduleShower :schedule='schedule[2]'/>
+        <CardComponent :schedule='schedule[2]'/>
     </div>
     <div v-if="selected_day=='thursday'" class="single-day-container">
-        <ScheduleShower :schedule='schedule[3]'/>
+        <CardComponent :schedule='schedule[3]'/>
     </div>
     <div v-if="selected_day=='friday'" class="single-day-container">
-        <ScheduleShower :schedule='schedule[4]'/>
+        <CardComponent :schedule='schedule[4]'/>
     </div>
     <div v-if="selected_day=='saturday'" class="single-day-container">
-        <ScheduleShower :schedule='schedule[5]'/>
+        <CardComponent :schedule='schedule[5]'/>
     </div>
     <div v-if="selected_day=='sunday'" class="single-day-container">
-        <ScheduleShower :schedule='schedule[6]'/>
+        <CardComponent :schedule='schedule[6]'/>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
-import ScheduleShower from '@/components/ScheduleShower.vue'
+import CardComponent from '@/components/CardComponent.vue'
 
 export default {
 
   components:{
-        ScheduleShower
+        CardComponent
     },
 
   data(){
@@ -73,7 +73,7 @@ export default {
         {   
 
             let currentData = res.data
-            console.log(res.data)
+           // console.log(res.data)
             let tempArray = [currentData.monday, currentData.tuesday, currentData.wednesday, currentData.thursday, currentData.friday, currentData.saturday, currentData.sunday]
             this.schedule = tempArray.map(this.removeKids)
             

@@ -61,7 +61,7 @@ export default {
       .then(res=>
       {
           this.topAnimeList = res.data.top
-          console.log(res.data.top)
+          //console.log(res.data.top)
 
       })
   }
