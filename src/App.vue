@@ -32,6 +32,9 @@ export default {
       userInput:null
     }
   },
+  mounted(){
+    document.title = 'Anime Getter'
+  },
   methods:{
     getdata(){
         //  let trolllist = ['Domestic Girlfriend', 'Boku no Pico', 'Redo of a Healer', 'Ishozuku Reviewers', 'Naruto', 'One Piece', 'konosuba']
