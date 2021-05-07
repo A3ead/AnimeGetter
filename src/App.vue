@@ -32,6 +32,9 @@ export default {
       userInput:null
     }
   },
+  mounted(){
+    document.title = 'Anime Getter'
+  },
   methods:{
     getdata(){
         //  let trolllist = ['Domestic Girlfriend', 'Boku no Pico', 'Redo of a Healer', 'Ishozuku Reviewers', 'Naruto', 'One Piece', 'konosuba']
@@ -58,7 +61,9 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 #app {
+  
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
