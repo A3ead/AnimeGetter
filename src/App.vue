@@ -5,8 +5,8 @@
               <div id="nav">
                   <router-link class="menu-item" to="/">Home</router-link>
                   <router-link class="menu-item" to="/top">Top Anime</router-link>
-                  <router-link class="menu-item" to="/schedule">Schedule</router-link>
                   <router-link class="menu-item" to="/seasonal">Seasonal</router-link>
+                  <router-link class="menu-item" to="/schedule">Schedule</router-link>
               </div>
         </div>
 

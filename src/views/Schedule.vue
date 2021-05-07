@@ -25,25 +25,25 @@
     </div>
     
     <div v-if="selected_day=='monday'" class="single-day-container">
-        <CardComponent :schedule='schedule[0]'/>
+        <CardComponent :animeList='schedule[0]'/>
     </div>
     <div v-if="selected_day=='tuesday'" class="single-day-container">
-        <CardComponent :schedule='schedule[1]'/>
+        <CardComponent :animeList='schedule[1]'/>
     </div>
     <div v-if="selected_day=='wednesday'" class="single-day-container">
-        <CardComponent :schedule='schedule[2]'/>
+        <CardComponent :animeList='schedule[2]'/>
     </div>
     <div v-if="selected_day=='thursday'" class="single-day-container">
-        <CardComponent :schedule='schedule[3]'/>
+        <CardComponent :animeList='schedule[3]'/>
     </div>
     <div v-if="selected_day=='friday'" class="single-day-container">
-        <CardComponent :schedule='schedule[4]'/>
+        <CardComponent :animeList='schedule[4]'/>
     </div>
     <div v-if="selected_day=='saturday'" class="single-day-container">
-        <CardComponent :schedule='schedule[5]'/>
+        <CardComponent :animeList='schedule[5]'/>
     </div>
     <div v-if="selected_day=='sunday'" class="single-day-container">
-        <CardComponent :schedule='schedule[6]'/>
+        <CardComponent :animeList='schedule[6]'/>
     </div>
 </template>
 
