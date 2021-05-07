@@ -8,6 +8,18 @@ body {
     margin: 0px;
 }
 
+body::-webkit-scrollbar{
+    background-color: #f7f6fb5b;
+    width: 0.7rem;
+}
+body::-webkit-scrollbar-thumb{
+    background-color: blueviolet;
+    border-radius: 7px;
+}
+body::-webkit-scrollbar-thumb:hover{
+    background-color: rgb(168, 87, 243);
+}
+
 
 .datashower
 {   display: flex;
