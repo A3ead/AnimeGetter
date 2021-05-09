@@ -1,5 +1,5 @@
 <template>
-        <div v-for="anime in schedule" :key="anime" class="card-container">
+        <div v-for="anime in animeList" :key="anime" class="card-container">
             <div class="card">
             <div class="anime-card-image" :style="{ backgroundImage: 'url(' + anime.image_url + ')' }"></div>
             <div class="anime-card-data-container">
@@ -30,7 +30,7 @@ import axios from 'axios'
 export default {
   name: 'CardComponent',
   props: {
-      schedule:'',
+      animeList:'',
   },
   data(){
     return{

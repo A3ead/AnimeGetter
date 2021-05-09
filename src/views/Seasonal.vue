@@ -8,37 +8,37 @@
     <div>
       <div class="Season-Type">TV</div>
       <div class="single-day-container">
-          <CardComponent :schedule='tvArray'/>
+          <CardComponent :animeList='tvArray'/>
       </div>
     </div>
     <div>
       <div class="Season-Type">TV Continuing</div>
       <div class="single-day-container"> 
-          <CardComponent :schedule='tvCArray'/>
+          <CardComponent :animeList='tvCArray'/>
       </div>
     </div>
     <div>
       <div class="Season-Type">Movies</div>
       <div class="single-day-container"> 
-          <CardComponent :schedule='movieArray'/>
+          <CardComponent :animeList='movieArray'/>
       </div>
     </div>
     <div>
       <div class="Season-Type">OVA</div>
       <div class="single-day-container">
-          <CardComponent :schedule='ovaArray'/>
+          <CardComponent :animeList='ovaArray'/>
       </div>
     </div>
     <div>
       <div class="Season-Type">ONA</div>
       <div class="single-day-container">
-          <CardComponent :schedule='onaArray'/>
+          <CardComponent :animeList='onaArray'/>
       </div>
     </div>
     <div>
       <div class="Season-Type">Special</div>
       <div class="single-day-container">
-          <CardComponent :schedule='specialArray'/>
+          <CardComponent :animeList='specialArray'/>
       </div>
     </div>
 
@@ -90,7 +90,6 @@ export default {
           { 
             let tempArray = res.data.anime
             //console.log(res.data)
-            this.animeArray = tempArray
             //this.animeArray = tempArray.filter(this.deleteKidsFromDay)
             this.tvArray = tempArray.filter(this.getTV)
             this.tvCArray = tempArray.filter(this.getTVC)
@@ -131,7 +130,6 @@ export default {
           { 
             let tempArray = res.data.anime
             //console.log(res.data)
-            this.animeArray = tempArray
             //this.animeArray = tempArray.filter(this.deleteKidsFromDay)
             this.tvArray = tempArray.filter(this.getTV)
             this.tvCArray = tempArray.filter(this.getTVC)

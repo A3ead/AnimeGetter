@@ -1,12 +1,12 @@
 <template>
  <div class='search-div'>
         <div class='title-and-menu'>
-            <a class='website-title' href="index.html">ANIME GETTER</a>
+            <router-link class="website-title" to="/">ANIME GETTER</router-link>
               <div id="nav">
                   <router-link class="menu-item" to="/">Home</router-link>
                   <router-link class="menu-item" to="/top">Top Anime</router-link>
-                  <router-link class="menu-item" to="/schedule">Schedule</router-link>
                   <router-link class="menu-item" to="/seasonal">Seasonal</router-link>
+                  <router-link class="menu-item" to="/schedule">Schedule</router-link>
               </div>
         </div>
 
