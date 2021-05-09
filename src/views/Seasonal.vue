@@ -1,8 +1,8 @@
 <template>
 <div v-if="entireArchive!=null">
-    <button class="button" @click="currentYear++">Previous Year</button>
-    <button class="button" @click="getSeasonal(entireArchive[currentYear].year,season)" v-for="season in entireArchive[currentYear].seasons" :key="season">{{season}} {{entireArchive[currentYear].year}}</button>
-    <button class="button" @click="currentYear--" v-if="currentYear!=0">Next Year</button>
+    <button class="button" @click="highlightTabBasedOnSeason(), currentYear++">Previous Year</button>
+    <button class="button" :id="entireArchive[currentYear].year + season" @click="getSeasonal(entireArchive[currentYear].year,season), currentSelectedButton = entireArchive[currentYear].year + season, highlightTab(entireArchive[currentYear].year + season)" v-for="season in entireArchive[currentYear].seasons" :key="season">{{season}} {{entireArchive[currentYear].year}}</button>
+    <button class="button" @click=" highlightTabBasedOnSeason(),currentYear--" v-if="currentYear!=0">Next Year</button>
 </div>
 
     <div>
@@ -58,6 +58,7 @@ export default {
     },
   data(){
     return{
+        currentSelectedButton: null,
         currentYear:0,
         entireArchive:null,
         animeArray:null,
@@ -139,10 +140,49 @@ export default {
             this.onaArray = tempArray.filter(this.getONA)
             this.specialArray = tempArray.filter(this.getSpecial)
 
+            this.currentSelectedButton = res.data.season_year + res.data.season_name
+            this.highlightTabBasedOnSeason()
+
 
          })
         
-      }
+      },
+      highlightTab(dayID){
+        try {
+            document.getElementsByClassName('button-selected')[0].className = 'button'
+        }
+        catch {
+            
+        }
+        finally {
+            document.getElementById(dayID).classList.add('button-selected')
+        }
+        },
+      highlightTabBasedOnSeason(){
+        try {
+            document.getElementsByClassName('button-selected')[0].className = 'button'
+        }
+        catch{
+
+        }
+        finally{
+        setTimeout(() => {
+         let buttonsArray = document.getElementsByClassName('button')
+         for(let button of buttonsArray){
+           if (button.id === this.currentSelectedButton){
+             button.className = 'button-selected'
+           }
+           else{
+             button.className = 'button'
+           }
+         }
+        },50);
+
+
+        }
+        }
+
+    
 
     
   },
