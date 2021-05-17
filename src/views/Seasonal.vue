@@ -5,7 +5,7 @@
     <button class="button" @click=" highlightTabBasedOnSeason(),currentYear--" v-if="currentYear!=0">Next Year</button>
 </div>
 
-<div class="tabs-div">
+<div class="filters-div">
     <button class="button-filter" @click="selectedFilter = 'All',highlightFilter('All')" id="All">All</button>
     <button class="button-filter" @click="selectedFilter = 'TV',highlightFilter('TV')" id="TV">TV</button>
     <button class="button-filter" @click="selectedFilter = 'Movies',highlightFilter('Movies')" id="Movies">Movies</button>
@@ -150,6 +150,7 @@ export default {
 
             this.currentSelectedButton = res.data.season_year + res.data.season_name
             this.highlightTabBasedOnSeason()
+            this.highlightFilter('All')
 
 
          })

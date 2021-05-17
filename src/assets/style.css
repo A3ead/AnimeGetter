@@ -430,7 +430,8 @@ body::-webkit-scrollbar-thumb:hover{
     font-size: 19px;
 }
 .button-filter{
-    padding: 15px;
+    padding: 4px 15px 4px 15px;
+    height: 2em;
     background-color: #F3F3F5;
     border: solid 2px blueviolet;
     border-radius: 5px;
@@ -442,9 +443,11 @@ body::-webkit-scrollbar-thumb:hover{
 }
 .button-filter-selected{
     border: solid 2px blueviolet;
-    padding: 15px;
-    border-radius: 5px;
     background-color: blueviolet;
     color: white;
     cursor: pointer;
+}
+.filters-div{
+    display: flex;
+    margin-left: 65px;
 }
