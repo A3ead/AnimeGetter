@@ -12,7 +12,7 @@
 
 
         <div>
-            <input type="text" id = 'search' class='search-input' v-model="userInput" @keydown.enter="getdata()">
+            <input type="text" id='search' class='search-input' v-model="userInput" @keydown.enter="getdata()" autocomplete = 'off'>
             <button class='button' v-on:click='getdata()'>Show Data</button>
         </div>
 

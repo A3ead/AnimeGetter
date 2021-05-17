@@ -429,3 +429,22 @@ body::-webkit-scrollbar-thumb:hover{
     padding: 5px;
     font-size: 19px;
 }
+.button-filter{
+    padding: 15px;
+    background-color: #F3F3F5;
+    border: solid 2px blueviolet;
+    border-radius: 5px;
+}
+.button-filter:hover{
+    background-color: blueviolet;
+    color: white;
+    cursor: pointer;
+}
+.button-filter-selected{
+    border: solid 2px blueviolet;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: blueviolet;
+    color: white;
+    cursor: pointer;
+}
