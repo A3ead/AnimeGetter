@@ -7,6 +7,7 @@
                   <router-link class="menu-item" to="/top">Top Anime</router-link>
                   <router-link class="menu-item" to="/seasonal">Seasonal</router-link>
                   <router-link class="menu-item" to="/schedule">Schedule</router-link>
+                  <router-link class="menu-item" to="/info">Anime Info</router-link>
               </div>
         </div>
 
@@ -45,6 +46,7 @@ export default {
       axios.get(`http://127.0.0.1:3000/anime?anime=${OGanimeID}`)
       .then(response=> 
       {
+        console.log(response.data)
         let currentData = response.data
         this.fetcheddata.title = currentData.title
         this.fetcheddata.synopsis = currentData.synopsis

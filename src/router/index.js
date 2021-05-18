@@ -24,6 +24,11 @@ const routes = [
     path: '/seasonal',
     name: 'Seasonal',
     component: () => import( '../views/Seasonal.vue')
+  },
+  {
+    path: '/info',
+    name: 'Anime Info',
+    component: () => import( '../views/AnimeInfo.vue')
   }
 ]
 
