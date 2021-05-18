@@ -7,7 +7,9 @@ body {
     font-weight: 900;
     margin: 0px;
 }
-
+h1, h4{
+    margin: 10px;
+}
 body::-webkit-scrollbar{
     background-color: #f7f6fb5b;
     width: 0.7rem;
@@ -458,4 +460,64 @@ body::-webkit-scrollbar-thumb:hover{
     margin-left: 65px;
     margin-right: 65px;
     margin-top: 10px;
+}
+.anime-info-entire-container{
+    margin: 0px 65px 20px 65px;
+}
+.anime-info-title-synopsis-card{
+    display: flex;
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 5px;
+    border-bottom: solid 2px blueviolet;
+    box-shadow: #0000003d 2px 2px 6px 1px;
+}
+.anime-info-img{
+    margin-right: 20px;
+    border-radius: 5px;
+
+}
+.anime-info-title{
+    text-align: start;
+    margin-bottom: 10px;
+    border-bottom: 0.5px solid black;
+}
+.anime-info-synopsis{
+padding-top: 30px;
+}
+.anime-info-information-card{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 5px;
+    border-bottom: solid 2px blueviolet;
+    box-shadow: #0000003d 2px 2px 6px 1px;
+}
+.anime-info-single-info-div{
+
+
+    padding: 20px 0px 20px 0px;
+   
+}
+.anime-info-single-info-div-seperator{
+    border-right: solid 2px blueviolet;
+    padding: 20px 0px 20px 0px;
+   
+}
+.anime-info-related-card{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    justify-content: space-evenly;
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 5px;
+    border-bottom: solid 2px blueviolet;
+    box-shadow: #0000003d 2px 2px 6px 1px;
+}
+.anime-info-single-related{
+    padding: 10px 20px 10px 20px ;
 }
