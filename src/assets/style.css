@@ -424,7 +424,7 @@ body::-webkit-scrollbar-thumb:hover{
 }
 .Season-Type{
     background-color: blueviolet;
-    margin: 20px 65px 5px 65px;
+    margin: 15px 65px 5px 65px;
     color: white;
     padding: 5px;
     font-size: 19px;
@@ -449,5 +449,13 @@ body::-webkit-scrollbar-thumb:hover{
 }
 .filters-div{
     display: flex;
+    justify-content: space-between;
+    background-color: #FFFFFF;
+    box-shadow: #0000002b 2px 2px 6px 1px;
+    border-radius: 5px;
+    border-top: solid 2px blueviolet;
+    padding: 10px;
     margin-left: 65px;
+    margin-right: 65px;
+    margin-top: 10px;
 }

@@ -7,12 +7,17 @@
 </div>
 
 <div class="filters-div">
+  <div>
     <button class="button-filter" @click="selectedFilter = 'All',highlightFilter('All')" id="All">All</button>
     <button class="button-filter" @click="selectedFilter = 'TV',highlightFilter('TV')" id="TV">TV</button>
     <button class="button-filter" @click="selectedFilter = 'Movies',highlightFilter('Movies')" id="Movies">Movies</button>
     <button class="button-filter" @click="selectedFilter = 'OVA',highlightFilter('OVA')" id="OVA">OVA</button>
     <button class="button-filter" @click="selectedFilter = 'ONA',highlightFilter('ONA')" id="ONA">ONA</button>
     <button class="button-filter" @click="selectedFilter = 'Special',highlightFilter('Special')" id="Special">Special</button>
+  </div>
+  <div>
+     here goes jump to and dropdown   
+  </div>
 </div>
 
     <div v-if="selectedFilter == 'All' || selectedFilter == 'TV'">
@@ -152,6 +157,7 @@ export default {
 
             this.currentSelectedButton = res.data.season_year + res.data.season_name
             this.currentSeasonCheck = res.data.season_year + res.data.season_name
+            this.selectedFilter = 'All'
 
             this.highlightTabBasedOnSeason()
             this.highlightFilter('All')
