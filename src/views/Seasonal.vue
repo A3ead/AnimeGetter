@@ -2,6 +2,7 @@
 <div v-if="entireArchive!=null">
     <button class="button" @click="highlightTabBasedOnSeason(), currentYear++">Previous Year</button>
     <button class="button" :id="entireArchive[currentYear].year + season" @click="getSeasonal(entireArchive[currentYear].year,season), currentSelectedButton = entireArchive[currentYear].year + season, highlightTab(entireArchive[currentYear].year + season)" v-for="season in entireArchive[currentYear].seasons" :key="season">{{season}} {{entireArchive[currentYear].year}}</button>
+    <button class="button" v-if="currentSeasonCheck != currentSelectedButton"  @click="getCurrentSeason()">Current Season</button>
     <button class="button" @click=" highlightTabBasedOnSeason(),currentYear--" v-if="currentYear!=0">Next Year</button>
 </div>
 
@@ -77,7 +78,8 @@ export default {
         onaArray:null,
         specialArray:null,
         movieArray:null,
-        selectedFilter:'All'
+        selectedFilter:'All',
+        currentSeasonCheck:null
 
     }
   },
@@ -149,6 +151,8 @@ export default {
             this.specialArray = tempArray.filter(this.getSpecial)
 
             this.currentSelectedButton = res.data.season_year + res.data.season_name
+            this.currentSeasonCheck = res.data.season_year + res.data.season_name
+
             this.highlightTabBasedOnSeason()
             this.highlightFilter('All')
 
