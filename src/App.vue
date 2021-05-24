@@ -8,6 +8,7 @@
                   <router-link class="menu-item" to="/seasonal">Seasonal</router-link>
                   <router-link class="menu-item" to="/schedule">Schedule</router-link>
                   <router-link class="menu-item" to="/info">Anime Info</router-link>
+                  <button @click="pushing()">text</button>
               </div>
         </div>
 
@@ -41,9 +42,7 @@ export default {
         //  let trolllist = ['Domestic Girlfriend', 'Boku no Pico', 'Redo of a Healer', 'Ishozuku Reviewers', 'Naruto', 'One Piece', 'konosuba']
         //  const random = Math.floor(Math.random() * trolllist.length);
         //   this.userInput = trolllist[random]
-      let OGanimeID = this.userInput
-      console.log(OGanimeID)
-      axios.get(`http://127.0.0.1:3000/anime?anime=${OGanimeID}`)
+      axios.get(`http://127.0.0.1:3000/anime?anime=${this.userInput}`)
       .then(response=> 
       {
         console.log(response.data)
@@ -57,6 +56,9 @@ export default {
       this.$store.commit('changeFetcheddata',this.fetcheddata)
      })
 
+    },
+    pushing(){
+      this.$router.push({name:'Anime Info',query:{AG_ID:1}})
     }
   }
 }

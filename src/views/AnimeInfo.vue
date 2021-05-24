@@ -42,12 +42,36 @@
 </template>
 
 <script>
-
-
+import axios from 'axios'
 
 export default {
   name: 'AnimeInfo',
+  
   components: {
+
+  },
+    data(){
+    return{
+      fetcheddata:{title:'',synopsis:'',episodes:'',rating:'',image:'',imagelink:''},
+    }
+  },
+  mounted(){
+    let malID = this.$route.query.AG_ID
+    console.log(malID);
+     (()=>{
+      axios.get(`http://127.0.0.1:3000/animeInfo?animeID=${malID}`)
+      .then(response=> 
+      {
+        console.log(response.data)
+        let currentData = response.data
+        this.fetcheddata.title = currentData.title
+        this.fetcheddata.synopsis = currentData.synopsis
+        this.fetcheddata.episodes = currentData.episodes
+        this.fetcheddata.rating = currentData.score
+        this.fetcheddata.image = currentData.image_url
+      //  this.fetcheddata.imagelink.setAttribute('href',OGanimeID)
+     })
+    })()
 
   }
 }
