@@ -20,9 +20,9 @@ app.use(express.json())
 
 app.get('/anime',function(req,res)
 {
-    let animeID = req.query.anime
+    let receievedText = req.query.anime
 
-    axios.get(`https://api.jikan.moe/v3/search/anime?q=${animeID}&page=1`)
+    axios.get(`https://api.jikan.moe/v3/search/anime?q=${receievedText}&page=1`)
     .then(function(resp)
     {
         let malID = resp.data.results[0].mal_id
@@ -36,6 +36,23 @@ app.get('/anime',function(req,res)
             res.json(response.data)
         })
     })
+
+
+})
+
+app.get('/animeInfo',function(req,res)
+{
+    let malID = req.query.animeID
+
+        //console.log(malID)
+        axios.get(`https://api.jikan.moe/v3/anime/${malID}`)
+        .then(function (response) 
+        {
+            // handle success
+           // console.log(response.data.synopsis);
+           // res.setHeader('Access-Control-Allow-Origin', '*')
+            res.json(response.data)
+        })
 
 
 })
