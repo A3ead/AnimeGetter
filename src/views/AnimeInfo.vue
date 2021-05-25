@@ -1,31 +1,29 @@
 <template>
   <div class="anime-info-entire-container">
     <div class="anime-info-title-synopsis-card"> 
-        <img class="anime-info-img" src="https://cdn.myanimelist.net/images/anime/1582/101697.jpg" alt="" srcset="">
+        <img class="anime-info-img" :src="fetcheddata.image" alt="" srcset="">
       <div>
           <div class="anime-info-title">
-              <h1>Honzuki no Gekokujou: Shisho ni Naru Tame ni wa Shudan wo Erandeiraremasen</h1>
-              <h4>Ascendance of a Bookworm</h4>
+              <h1> {{fetcheddata.title}} </h1>
+              <h4> {{fetcheddata.title_english}} ({{fetcheddata.title_japanese}}) </h4>
           </div>
           <div class="anime-info-synopsis">
-              Urano Motosu loves books and has an endless desire to read literature, no matter the subject. She almost fulfills her dream job of becoming a librarian before her life is ended in an accident. As she draws her last breath, she wishes to be able to read more books in her next life.
-              As if fate was listening to her prayer, she wakes up reincarnated as Myne—a frail five-year-old girl living in a medieval era. What immediately comes to her mind is her passion. She tries to find something to read, only to become frustrated by the lack of books at her disposal.
-              Without the printing press, books have to be written and copied by hand, making them very expensive; as such, only a few nobles can afford them—but this won't stop Myne. She will prove that her will to read is unbreakable, and if there are no books around, she will make them herself!
+              {{fetcheddata.synopsis}}
           </div>
       </div>
     </div>
     <div class="anime-info-information-card">
-      <div class="anime-info-single-info-div">Episodes: 24</div>
+      <div class="anime-info-single-info-div">Episodes: {{fetcheddata.episodes}}</div>
       <span class="anime-info-single-info-div-seperator"></span>
-      <div class="anime-info-single-info-div">Genres: Action, Fantasy, blabla,  Action, Fantasy, blabla</div>
+      <div class="anime-info-single-info-div">Genres: <span v-for="genre in fetcheddata.genres" :key="genre"> {{genre.name + ' '}} </span></div>
       <span class="anime-info-single-info-div-seperator"></span>
-      <div class="anime-info-single-info-div">rank: 198</div>
+      <div class="anime-info-single-info-div">rank: {{this.fetcheddata.rank}}</div>
       <span class="anime-info-single-info-div-seperator"></span>
-      <div class="anime-info-single-info-div">score: 8.33</div>
+      <div class="anime-info-single-info-div">score: {{this.fetcheddata.rating}}</div>
       <span class="anime-info-single-info-div-seperator"></span>
-      <div class="anime-info-single-info-div">Studios: Ufotable, A1Pictures, KyoAni</div>
+      <div class="anime-info-single-info-div">Studios: <span v-for="studio in fetcheddata.studios" :key="studio"> {{studio.name + ' '}} </span></div>
       <span class="anime-info-single-info-div-seperator"></span>
-      <div class="anime-info-single-info-div">Status: Finished Airing</div>
+      <div class="anime-info-single-info-div">Status: {{this.fetcheddata.status}} </div>
     </div>
     <div class="anime-info-related-card">
       <div class="anime-info-single-related"> Adaptation:	Fate/Zero </div>
@@ -52,7 +50,7 @@ export default {
   },
     data(){
     return{
-      fetcheddata:{title:'',synopsis:'',episodes:'',rating:'',image:'',imagelink:''},
+      fetcheddata:{title:'',synopsis:'',episodes:'',rating:'',image:'',imagelink:'',title_japanese:'', title_english:'',genres:'',rank:'',studios:'',status:'',related:'',},
     }
   },
   mounted(){
@@ -65,11 +63,18 @@ export default {
         console.log(response.data)
         let currentData = response.data
         this.fetcheddata.title = currentData.title
+        this.fetcheddata.title_english = currentData.title_english
         this.fetcheddata.synopsis = currentData.synopsis
         this.fetcheddata.episodes = currentData.episodes
         this.fetcheddata.rating = currentData.score
         this.fetcheddata.image = currentData.image_url
-      //  this.fetcheddata.imagelink.setAttribute('href',OGanimeID)
+        this.fetcheddata.title_japanese = currentData.title_japanese
+        this.fetcheddata.genres = currentData.genres
+        this.fetcheddata.rank = currentData.rank
+        this.fetcheddata.studios = currentData.studios
+        this.fetcheddata.status = currentData.status
+        this.fetcheddata.related = currentData.related
+        
      })
     })()
 
