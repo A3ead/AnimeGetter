@@ -385,6 +385,10 @@ body::-webkit-scrollbar-thumb:hover{
     align-items: center;
     border-bottom: 1px solid blueviolet;
 }
+.anime-card-title:hover {
+    cursor:pointer;
+    color: blueviolet;
+}
 .anime-card-image {
     min-height: 318px;
     min-width: 225px;
@@ -392,6 +396,9 @@ body::-webkit-scrollbar-thumb:hover{
     transform: scale(0.85);
 
     transition: min-height 0.2s;
+}
+.anime-card-image:hover {
+    cursor: pointer;
 }
 .single-day-container{
     padding: 1px;

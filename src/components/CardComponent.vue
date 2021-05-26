@@ -1,9 +1,9 @@
 <template>
         <div v-for="anime in animeList" :key="anime" class="card-container">
             <div class="card">
-            <div class="anime-card-image" :style="{ backgroundImage: 'url(' + anime.image_url + ')' }"></div>
+            <div class="anime-card-image" :style="{ backgroundImage: 'url(' + anime.image_url + ')' }" @click="pushing(anime.mal_id)"></div>
             <div class="anime-card-data-container">
-                <div class="anime-card-title">
+                <div @click="pushing(anime.mal_id)" class="anime-card-title">
                         {{anime.title}}
                 </div>        
                 <div class="anime-card-synopsis">
@@ -26,6 +26,7 @@
 
 <script>
 import axios from 'axios'
+import AnimeInfo_mixins from '../mixins/AnimeInfo_mixins'
 
 export default {
   name: 'CardComponent',
@@ -37,6 +38,7 @@ export default {
 
     }
   },
+  mixins:[AnimeInfo_mixins],
   methods:{
 
   },

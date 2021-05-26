@@ -7,8 +7,6 @@
                   <router-link class="menu-item" to="/top">Top Anime</router-link>
                   <router-link class="menu-item" to="/seasonal">Seasonal</router-link>
                   <router-link class="menu-item" to="/schedule">Schedule</router-link>
-                  <router-link class="menu-item" to="/info">Anime Info</router-link>
-                  <button @click="pushing()">text</button>
               </div>
         </div>
 
@@ -25,6 +23,7 @@
 
 <script>
 import axios from 'axios'
+import AnimeInfo_mixins from './mixins/AnimeInfo_mixins'
 
 export default {
 
@@ -34,6 +33,7 @@ export default {
       userInput:null
     }
   },
+  mixins:[AnimeInfo_mixins],
   mounted(){
     document.title = 'Anime Getter'
   },
@@ -57,9 +57,6 @@ export default {
      })
 
     },
-    pushing(){
-      this.$router.push({name:'Anime Info',query:{AG_ID:1}})
-    }
   }
 }
 </script>

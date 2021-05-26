@@ -10,7 +10,7 @@
         <th class="top-anime-list-header-element">Date</th>
       </tr>
 
-      <tr class="top-anime-list-element" v-for="anime in topAnimeList" :key="anime">
+      <tr class="top-anime-list-element" v-for="anime in topAnimeList" :key="anime" @click="pushing(anime.mal_id)">
         <td class="top-anime-list-element-part">{{anime.rank}}</td>
         <td class="top-anime-list-element-part"><img class="top-list-image" v-bind:src="anime.image_url" alt=""></td>
         <td class="top-anime-list-element-part">{{anime.title}}</td>
@@ -39,6 +39,7 @@
 
 <script>
 import axios from 'axios'
+import AnimeInfo_mixins from '../mixins/AnimeInfo_mixins'
 
 export default {
 
@@ -48,6 +49,7 @@ export default {
 
     }
   },
+  mixins:[AnimeInfo_mixins],
   mounted(){
     this.getTopAnime()
 

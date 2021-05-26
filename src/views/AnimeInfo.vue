@@ -17,22 +17,16 @@
       <span class="anime-info-single-info-div-seperator"></span>
       <div class="anime-info-single-info-div">Genres: <span v-for="genre in fetcheddata.genres" :key="genre"> {{genre.name + ' '}} </span></div>
       <span class="anime-info-single-info-div-seperator"></span>
-      <div class="anime-info-single-info-div">rank: {{this.fetcheddata.rank}}</div>
+      <div class="anime-info-single-info-div">rank: {{fetcheddata.rank}}</div>
       <span class="anime-info-single-info-div-seperator"></span>
-      <div class="anime-info-single-info-div">score: {{this.fetcheddata.rating}}</div>
+      <div class="anime-info-single-info-div">score: {{fetcheddata.rating}}</div>
       <span class="anime-info-single-info-div-seperator"></span>
       <div class="anime-info-single-info-div">Studios: <span v-for="studio in fetcheddata.studios" :key="studio"> {{studio.name + ' '}} </span></div>
       <span class="anime-info-single-info-div-seperator"></span>
-      <div class="anime-info-single-info-div">Status: {{this.fetcheddata.status}} </div>
+      <div class="anime-info-single-info-div">Status: {{fetcheddata.status}} </div>
     </div>
     <div class="anime-info-related-card">
-      <div class="anime-info-single-related"> Adaptation:	Fate/Zero </div>
-      <div class="anime-info-single-related">Sequel:	Fate/Zero 2nd Season</div>
-      <div class="anime-info-single-related"> Summary:	Fate/Zero Remix</div>
-      <div class="anime-info-single-related">Side story:	Fate/Zero: Onegai! Einzbern Soudanshitsu</div>
-      <div class="anime-info-single-related"> Other:	Fate/Zero Cafe</div>
-      <div class="anime-info-single-related"> Character:	Lord El-Melloi II Sei no Jikenbo: Rail Zeppelin Grace Note - Hakamori to Neko to Majutsushi, Lord El-Melloi II Sei no Jikenbo: Rail Zeppelin Grace Note</div>
-
+      <div class="anime-info-single-related" v-for="related in Object.entries(fetcheddata.related)" :key="related">{{related[0]}}: {{related[1][0].name}}</div>
     </div>
 
 
@@ -54,8 +48,8 @@ export default {
     }
   },
   mounted(){
-    let malID = this.$route.query.AG_ID
-    console.log(malID);
+    let malID = this.$route.query.AG_ID;
+    //console.log(malID);
      (()=>{
       axios.get(`http://127.0.0.1:3000/animeInfo?animeID=${malID}`)
       .then(response=> 
@@ -77,6 +71,9 @@ export default {
         
      })
     })()
+
+  },
+  methods:{
 
   }
 }
