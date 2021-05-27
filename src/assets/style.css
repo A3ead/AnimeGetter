@@ -159,15 +159,36 @@ body::-webkit-scrollbar-thumb:hover{
 .search-input
 {
     padding: 15px;
-    background-color: #F3F3F5;
-    border: solid 2px blueviolet;
-    width: 350px;
+    background-color: #ffffff;
+    border: none;
+    width: 200px;
     transition: all 0.2s;
     
 }
-.search-input:focus {
-    width: 700px;
+.search-input-focus {
+    width: 400px;
     outline: none;
+    padding: 15px;
+    background-color: #ffffff;
+    border: none;
+    transition: all 0.2s;
+    
+}
+.search-input:focus{
+    outline: none;
+    width: 400px;
+}
+
+.search-dropdown{
+    background-color: #FFFFFF;
+    position: absolute;
+    width: 400px;
+    padding: 15px;
+    transform: translateY(-2px);
+    border-radius: 0px 0px 5px 5px;
+    border-bottom: solid 3px blueviolet;
+    box-shadow: #0000003d 2px 2px 6px 1px;
+
 }
 
 

@@ -12,8 +12,11 @@
 
 
         <div>
-            <input type="text" id='search' class='search-input' v-model="userInput" @keydown.enter="getdata()" autocomplete = 'off'>
+          <div id="search-dropdown-parent">
+            <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" @keydown.enter="getdata()" autocomplete = 'off'>
+            <div v-if="searchDropDown==true" class="search-dropdown" tabindex="0">blablablabla</div>
             <button class='button' v-on:click='getdata()'>Show Data</button>
+          </div>
         </div>
 
     </div>
@@ -30,12 +33,34 @@ export default {
   data(){
     return{
       fetcheddata:{title:'',synopsis:'',episodes:'',rating:'',image:'',imagelink:''},
-      userInput:null
+      userInput:null,
+      searchDropDown:false,
     }
   },
   mixins:[AnimeInfo_mixins],
   mounted(){
     document.title = 'Anime Getter'
+    let searchTab = document.getElementById('search')
+    searchTab.addEventListener('keydown',event=>{
+      this.searchDropDown = true
+    })
+    searchTab.addEventListener('focus',event=>{
+      if(searchTab.value != '')
+      {
+        setTimeout(()=>{this.searchDropDown = true},200)
+      }
+
+    })
+    let searchParent = document.getElementById('search-dropdown-parent')
+    searchParent.addEventListener('focusout', event=> {
+    if (searchParent.contains(event.relatedTarget)) {
+        // don't react to this
+        //console.log('ifffed')
+        return;
+    }
+    //console.log('didnt if')
+    this.searchDropDown = false  
+});
   },
   methods:{
     getdata(){

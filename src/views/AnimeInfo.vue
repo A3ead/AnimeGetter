@@ -68,7 +68,7 @@ export default {
         this.fetcheddata.studios = currentData.studios
         this.fetcheddata.status = currentData.status
         this.fetcheddata.related = currentData.related
-        
+        console.log(currentData.related)
      })
     })()
 
