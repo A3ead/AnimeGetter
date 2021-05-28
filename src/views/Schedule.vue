@@ -15,7 +15,7 @@
             <div class="Day">{{day[index]}}</div>
             <div class="Day-Schedule">
                 <div class="Schedule-Anime" v-for="anime in days" :key="anime">
-                    <div class="anime-schedule-title">
+                    <div class="anime-schedule-title" @click="pushing(anime.mal_id)">
                          {{anime.title}}
                     </div>                 
                 </div>
@@ -50,6 +50,8 @@
 <script>
 import axios from 'axios'
 import CardComponent from '@/components/CardComponent.vue'
+import AnimeInfo_mixins from '../mixins/AnimeInfo_mixins'
+
 
 export default {
 
@@ -61,10 +63,12 @@ export default {
     return{
         day:['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
         schedule:[],
-        selected_day:''
+        selected_day:'',
+
 
     }
   },
+  mixins:[AnimeInfo_mixins],
   methods:{
       getSchedule()
       {
@@ -73,7 +77,7 @@ export default {
         {   
 
             let currentData = res.data
-           console.log(res.data)
+           //console.log(res.data)
             let tempArray = [currentData.monday, currentData.tuesday, currentData.wednesday, currentData.thursday, currentData.friday, currentData.saturday, currentData.sunday]
             this.schedule = tempArray.map(this.removeKids)
             
@@ -104,8 +108,12 @@ export default {
   },
 
   mounted(){
-      this.getSchedule(),
-      console.log(this.$router)
+      this.getSchedule()
+      //console.log(this.$router)
+      let daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednseday', 'tuesday', 'friday', 'saturday']
+      this.selected_day = daysOfWeek[new Date().getDay()]
+      this.highlightTab(this.selected_day)
+      
   }
 }
 </script>

@@ -335,7 +335,11 @@ body::-webkit-scrollbar-thumb:hover{
     border-radius: 5px;
     border: blueviolet 1px solid;
     padding: 5px;
-    
+}
+.anime-schedule-title:hover{
+    cursor: pointer;
+    background-color: blueviolet;
+    color: white;
 }
 .Day{
     color: white;

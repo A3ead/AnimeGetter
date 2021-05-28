@@ -154,6 +154,7 @@ export default {
             this.ovaArray = tempArray.filter(this.getOVA)
             this.onaArray = tempArray.filter(this.getONA)
             this.specialArray = tempArray.filter(this.getSpecial)
+            this.currentYear = 0
 
             this.currentSelectedButton = res.data.season_year + res.data.season_name
             this.currentSeasonCheck = res.data.season_year + res.data.season_name
