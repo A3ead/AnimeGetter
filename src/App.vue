@@ -14,7 +14,7 @@
         <div>
           <div id="search-dropdown-parent">
             <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" @keydown.enter="getdata()" autocomplete = 'off'>
-            <div v-if="searchDropDown==true" class="search-dropdown" tabindex="0">blablablabla</div>
+            <div v-if="searchDropDown==true" class="search-dropdown" tabindex="0"><SearchDropdown :searchResults='searchResults'/></div>
             <button class='button' v-on:click='getdata()'>Show Data</button>
           </div>
         </div>
@@ -27,14 +27,22 @@
 <script>
 import axios from 'axios'
 import AnimeInfo_mixins from './mixins/AnimeInfo_mixins'
+import SearchDropdown from '@/components/SearchDropdown.vue'
 
 export default {
 
+  components:{
+        SearchDropdown
+    },
+
   data(){
+    
     return{
       fetcheddata:{title:'',synopsis:'',episodes:'',rating:'',image:'',imagelink:''},
       userInput:null,
       searchDropDown:false,
+      timer:null,
+      searchResults:null
     }
   },
   mixins:[AnimeInfo_mixins],
@@ -43,6 +51,8 @@ export default {
     let searchTab = document.getElementById('search')
     searchTab.addEventListener('keydown',event=>{
       this.searchDropDown = true
+      clearTimeout(this.timer)
+      this.timer = setTimeout(()=>{this.animeSearch(searchTab.value)},700)
     })
     searchTab.addEventListener('focus',event=>{
       if(searchTab.value != '')
@@ -59,7 +69,7 @@ export default {
         return;
     }
     //console.log('didnt if')
-    this.searchDropDown = false  
+    //this.searchDropDown = false  
 });
   },
   methods:{
@@ -82,6 +92,14 @@ export default {
      })
 
     },
+    animeSearch(searchQuery){
+       axios.get(`http://127.0.0.1:3000/search?q=${searchQuery}`)
+      .then(response=> 
+      {
+        console.log(response.data)
+        this.searchResults = response.data
+     })      
+    }
   }
 }
 </script>

@@ -168,6 +168,20 @@ app.get('/current',function(req,res)
     })
 })
 
+app.get('/search',function(req,res)
+{
+    let receievedText = req.query.q
+
+    axios.get(`https://api.jikan.moe/v3/search/anime?q=${receievedText}&page=1`)
+    .then(function(resp)
+    {
+        let searchResults = resp.data.results.splice(0,10)
+        res.json(searchResults)
+    })
+
+
+})
+
 
 
 app.listen(3000, function()

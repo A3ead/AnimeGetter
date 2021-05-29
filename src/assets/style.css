@@ -553,3 +553,27 @@ padding-top: 30px;
 .anime-info-single-related{
     padding: 10px 20px 10px 20px ;
 }
+
+.search-dropdown-result{
+    display:flex;
+    border: solid black 1px;
+}
+.search-dropdown-result-image{
+    min-height: 318px;
+    min-width: 225px;
+    border-radius: 10px 10px 10px 10px;
+    transform: scale(0.5);
+}
+.search-dropdown-result-data-container{
+    display:flex;
+    flex-direction: column;
+}
+.search-dropdown-result-title{
+
+}
+.search-dropdown-result-episodes{
+
+}
+.search-dropdown-result-score{
+
+}
