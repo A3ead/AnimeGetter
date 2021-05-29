@@ -69,8 +69,10 @@ export default {
         return;
     }
     //console.log('didnt if')
-    //this.searchDropDown = false  
-});
+    this.searchDropDown = false  
+  });
+    
+    
   },
   methods:{
     getdata(){
@@ -93,12 +95,16 @@ export default {
 
     },
     animeSearch(searchQuery){
-       axios.get(`http://127.0.0.1:3000/search?q=${searchQuery}`)
-      .then(response=> 
-      {
-        console.log(response.data)
-        this.searchResults = response.data
-     })      
+      if(searchQuery.trim() != ""){
+            console.log('searching')
+            axios.get(`http://127.0.0.1:3000/search?q=${searchQuery}`)
+            .then(response=> 
+            {
+              console.log(response.data)
+              this.searchResults = response.data
+          }) 
+      }
+     
     }
   }
 }

@@ -38,6 +38,9 @@ import axios from 'axios'
 
 export default {
   name: 'AnimeInfo',
+  watch: {
+      '$route': 'renderAnimeInfo'
+  },
   
   components: {
 
@@ -48,9 +51,13 @@ export default {
     }
   },
   mounted(){
-    let malID = this.$route.query.AG_ID;
+    this.renderAnimeInfo()
+  },
+  methods:{
+    
     //console.log(malID);
-     (()=>{
+     renderAnimeInfo(){
+      let malID = this.$route.query.AG_ID
       axios.get(`http://127.0.0.1:3000/animeInfo?animeID=${malID}`)
       .then(response=> 
       {
@@ -70,11 +77,7 @@ export default {
         this.fetcheddata.related = currentData.related
         console.log(currentData.related)
      })
-    })()
-
-  },
-  methods:{
-
+    }
   }
 }
 </script>

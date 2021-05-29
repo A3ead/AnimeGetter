@@ -182,8 +182,8 @@ body::-webkit-scrollbar-thumb:hover{
 .search-dropdown{
     background-color: #FFFFFF;
     position: absolute;
-    width: 400px;
-    padding: 15px;
+    width: 430px;
+   
     transform: translateY(-2px);
     border-radius: 0px 0px 5px 5px;
     border-bottom: solid 3px blueviolet;
@@ -553,27 +553,77 @@ padding-top: 30px;
 .anime-info-single-related{
     padding: 10px 20px 10px 20px ;
 }
+.search-dropdown{
 
+    overflow-y: scroll;
+    max-height: 600px;
+    
+}
+.search-dropdown::-webkit-scrollbar{
+    background-color: #f7f6fb5b;
+    width: 0.7rem;
+}
+.search-dropdown::-webkit-scrollbar-thumb{
+    background-color: blueviolet;
+    border-radius: 7px;
+}
+.search-dropdown::-webkit-scrollbar-thumb:hover{
+    background-color: rgb(168, 87, 243);
+}
 .search-dropdown-result{
+
+
+}
+.search-dropdown-result:hover{
+   
+}
+.search-dropdown-entire-container{
     display:flex;
-    border: solid black 1px;
+    max-height: 15em;
+    padding: 10px;
+    border-bottom: 0.5px rgba(5, 5, 5, 0.24) solid;
+}
+.search-dropdown-entire-container:hover{
+    color: #FFFFFF;
+    background-color: blueviolet; 
+    cursor: pointer;
 }
 .search-dropdown-result-image{
-    min-height: 318px;
-    min-width: 225px;
-    border-radius: 10px 10px 10px 10px;
-    transform: scale(0.5);
+    height: 8em;
+    width: 5.5em;
+
+
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    border-radius: 5px 5px 5px 5px;
+    /* transform: scale(0.5); */
+    cursor: pointer;
 }
+
 .search-dropdown-result-data-container{
     display:flex;
     flex-direction: column;
+    max-width: 290px;
+    margin-left: 20px;
+   
 }
 .search-dropdown-result-title{
 
+    margin-bottom: 10px;
+    text-align: left;
+}
+.search-dropdown-result-title:hover{
+    
+    cursor: pointer;
 }
 .search-dropdown-result-episodes{
-
+    margin-bottom: 10px;
+    text-align: left;
+    font-size: 13px;
 }
 .search-dropdown-result-score{
-
+    margin-bottom: 10px;
+    text-align: left;
+    font-size: 13px;
 }
