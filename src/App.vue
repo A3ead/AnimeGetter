@@ -13,7 +13,7 @@
 
         <div>
           <div id="search-dropdown-parent">
-            <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" @keydown.enter="getdata()" autocomplete = 'off'>
+            <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" autocomplete = 'off'>
             <div v-if="searchDropDown==true" class="search-dropdown" tabindex="0"><SearchDropdown :searchResults='searchResults'/></div>
             <button class='button' v-on:click='getdata()'>Show Data</button>
           </div>
@@ -96,7 +96,7 @@ export default {
     },
     animeSearch(searchQuery){
       if(searchQuery.trim() != ""){
-            console.log('searching')
+            console.log('searching', 'search q = : ' + searchQuery)
             axios.get(`http://127.0.0.1:3000/search?q=${searchQuery}`)
             .then(response=> 
             {
