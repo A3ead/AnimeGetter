@@ -101,10 +101,14 @@ export default {
             .then(response=> 
             {
               console.log(response.data)
-              this.searchResults = response.data
+              let temp = response.data
+              this.searchResults = temp.filter(this.deleteHentai)
           }) 
       }
      
+    },
+    deleteHentai(anime){
+        return anime.rated != "Rx"
     },
     sendSearch(){
       if(this.userInput.trim().length > 2)
