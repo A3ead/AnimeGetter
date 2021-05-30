@@ -617,12 +617,7 @@ padding-top: 30px;
     
     cursor: pointer;
 }
-.search-dropdown-result-episodes{
-    margin-bottom: 10px;
-    text-align: left;
-    font-size: 13px;
-}
-.search-dropdown-result-score{
+.search-dropdown-result-info{
     margin-bottom: 10px;
     text-align: left;
     font-size: 13px;

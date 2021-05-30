@@ -13,9 +13,9 @@
 
         <div>
           <div id="search-dropdown-parent">
-            <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" autocomplete = 'off'>
+            <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" autocomplete = 'off' @keydown.enter="sendSearch()" placeholder="Search Anime ..">
             <div v-if="searchDropDown==true" class="search-dropdown" tabindex="0"><SearchDropdown :searchResults='searchResults'/></div>
-            <button class='button' v-on:click='getdata()'>Show Data</button>
+            <button class='button' v-on:click='getdata(), sendSearch()'>Search</button>
           </div>
         </div>
 
@@ -52,10 +52,10 @@ export default {
     searchTab.addEventListener('keydown',event=>{
       this.searchDropDown = true
       clearTimeout(this.timer)
-      this.timer = setTimeout(()=>{this.animeSearch(searchTab.value)},700)
+      this.timer = setTimeout(()=>{this.animeSearch(this.userInput)},500)
     })
     searchTab.addEventListener('focus',event=>{
-      if(searchTab.value != '')
+      if(this.userInput != '')
       {
         setTimeout(()=>{this.searchDropDown = true},200)
       }
@@ -82,7 +82,7 @@ export default {
       axios.get(`http://127.0.0.1:3000/anime?anime=${this.userInput}`)
       .then(response=> 
       {
-        console.log(response.data)
+        //console.log(response.data)
         let currentData = response.data
         this.fetcheddata.title = currentData.title
         this.fetcheddata.synopsis = currentData.synopsis
@@ -95,9 +95,9 @@ export default {
 
     },
     animeSearch(searchQuery){
-      if(searchQuery.trim() != ""){
-            console.log('searching', 'search q = : ' + searchQuery)
-            axios.get(`http://127.0.0.1:3000/search?q=${searchQuery}`)
+      if(searchQuery.trim() != "" && searchQuery.trim().length > 2){
+            //console.log('searching', 'search q = : ' + searchQuery)
+            axios.get(`http://127.0.0.1:3000/search?q=${searchQuery.trim()}`)
             .then(response=> 
             {
               console.log(response.data)
@@ -105,6 +105,13 @@ export default {
           }) 
       }
      
+    },
+    sendSearch(){
+      if(this.userInput.trim().length > 2)
+      {
+        this.$router.push({name:'Search Page',query:{q:this.userInput.trim()}})    
+      }
+  
     }
   }
 }

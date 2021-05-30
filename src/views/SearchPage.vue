@@ -9,43 +9,52 @@
             <div class="search-dropdown-result-info">Aired: {{dateForSearch(anime.start_date)}} to <br> {{dateForSearch(anime.end_date)}}</div>
         </div>
       </div>
-    </div>
-
+    </div>   
 </template>
 
 <script>
+import axios from 'axios'
 import AnimeInfo_mixins from '../mixins/AnimeInfo_mixins'
 
 export default {
-  name: 'searchDropdown',
-  props: {
-      searchResults:'',
+  name: 'SearchInfo',
+  watch: {
+      '$route': 'animeSearch'
   },
-  data(){
+  
+  components: {
+
+  },
+    data(){
     return{
+        searchResults:null
 
     }
   },
   mixins:[AnimeInfo_mixins],
+  mounted(){
+      this.animeSearch()
+  },
   methods:{
-      dateForSearch(dateFromAPI){
+
+     animeSearch(){
+        let searchQuery = this.$route.query.q
+      if(searchQuery != ""){
+            //console.log('searching', 'search q = : ' + searchQuery)
+            axios.get(`http://127.0.0.1:3000/search?q=${searchQuery}`)
+            .then(response=> 
+            {
+              //console.log(response.data)
+              this.searchResults = response.data
+          }) 
+      }
+     
+    },
+    dateForSearch(dateFromAPI){
       const options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' }
       let blabla = new Date(dateFromAPI).toLocaleDateString('en-GB', options).replaceAll('/', '-')
       return blabla
-
-      
-    } 
-  },
-  computed:{
-
-  },
-
-  
+    }
+  }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-@import '../assets/style.css';
-
-</style>

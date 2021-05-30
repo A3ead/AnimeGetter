@@ -198,7 +198,6 @@ export default {
          }
         },50);
 
-
         }
         },
        highlightFilter(filterID){
@@ -206,16 +205,13 @@ export default {
             document.getElementsByClassName('button-filter-selected')[0].className = 'button-filter'
         }
         catch {
-            
+         
         }
         finally {
             document.getElementById(filterID).classList.add('button-filter-selected')
         }
         }
 
-    
-
-    
   },
   created(){
     this.getArchive()
@@ -223,7 +219,6 @@ export default {
   },
    mounted(){
     this.getCurrentSeason()
-
   },
 
   computed:{
