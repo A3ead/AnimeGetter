@@ -9,8 +9,7 @@
                   <router-link class="menu-item" to="/schedule">Schedule</router-link>
               </div>
         </div>
-
-
+        <button @click="darkModeToggle()">Dark Mode</button>
         <div>
           <div id="search-dropdown-parent">
             <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" autocomplete = 'off' @keydown.enter="sendSearch()" placeholder="Search Anime ..">
@@ -42,7 +41,10 @@ export default {
       userInput:null,
       searchDropDown:false,
       timer:null,
-      searchResults:null
+      searchResults:null,
+      darkMode:false,
+      dark:'#FFFFFF',
+      darker:'#F7F6FB'
     }
   },
   mixins:[AnimeInfo_mixins],
@@ -116,6 +118,22 @@ export default {
         this.$router.push({name:'Search Page',query:{q:this.userInput.trim()}})    
       }
   
+    },
+    darkModeToggle(){
+      if(this.darkMode == false)
+      {
+        this.darkMode = true
+        this.dark = 'blue'
+        this.darker = 'red'
+        console.log("should be dark")
+      }
+      if(this.darkMode == true)
+      {
+        this.darkMode = false
+        document.documentElement.style.setProperty('--main-bg-color','#F7F6FB')
+        document.documentElement.style.setProperty('--main-card-bg-color','#FFFFFF')
+        console.log("should be light")
+      }
     }
   }
 }
@@ -147,7 +165,7 @@ export default {
   background-color: rgba(255, 255, 255, 0.205);
   margin-left: 0px;
   margin-right: 14px;
-  border: solid 1px #ffffff;
+  border: solid 1px #FFFFFF;
   border-radius: 5px;
 }
 
@@ -158,5 +176,9 @@ export default {
   border: solid 1px #ffffff;
   border-radius: 5px;
 
+}
+:root{
+    --main-bg-color:darker;
+    --main-card-bg-color:dark;
 }
 </style>

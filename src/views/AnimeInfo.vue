@@ -39,8 +39,7 @@ import axios from 'axios'
 export default {
   name: 'AnimeInfo',
   watch: {
-      '$route': 'renderAnimeInfo'
-  },
+      '$route': function(){if(this.$route.path == '/info') this.renderAnimeInfo()}},
   
   components: {
 
