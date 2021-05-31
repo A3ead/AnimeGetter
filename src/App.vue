@@ -122,18 +122,21 @@ export default {
     darkModeToggle(){
       if(this.darkMode == false)
       {
-        this.darkMode = true
-        this.dark = 'blue'
-        this.darker = 'red'
+        
+        document.documentElement.style.setProperty('--main-bg-color','#292C35')
+        document.documentElement.style.setProperty('--main-card-bg-color','#2F353F')
         console.log("should be dark")
+        this.darkMode = true
       }
-      if(this.darkMode == true)
+      else
       {
-        this.darkMode = false
+        
         document.documentElement.style.setProperty('--main-bg-color','#F7F6FB')
         document.documentElement.style.setProperty('--main-card-bg-color','#FFFFFF')
         console.log("should be light")
+        this.darkMode = false
       }
+      
     }
   }
 }
@@ -177,8 +180,5 @@ export default {
   border-radius: 5px;
 
 }
-:root{
-    --main-bg-color:darker;
-    --main-card-bg-color:dark;
-}
+
 </style>
