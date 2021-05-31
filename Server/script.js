@@ -21,7 +21,7 @@ app.use(express.json())
 app.get('/anime',function(req,res)
 {
     let receievedText = req.query.anime
-
+    console.log(`recieved request "/anime" with data: {${receievedText}}`)
     axios.get(`https://api.jikan.moe/v3/search/anime?q=${receievedText}&page=1`)
     .then(function(resp)
     {
@@ -43,7 +43,7 @@ app.get('/anime',function(req,res)
 app.get('/animeInfo',function(req,res)
 {
     let malID = req.query.animeID
-
+    console.log(`recieved request "/animeInfo" with data: {${malID}}`)
         //console.log(malID)
         axios.get(`https://api.jikan.moe/v3/anime/${malID}`)
         .then(function (response) 
@@ -60,6 +60,7 @@ app.get('/animeInfo',function(req,res)
 app.post('/addanime',function(req,res)
 {
     let data = req.body
+    console.log(`recieved request "/addanime" with data: {${data}}`)
     if (fs.existsSync('./AnimeData.json') == false)
      {
         fs.writeFileSync('./AnimeData.json',JSON.stringify([]))
@@ -88,6 +89,7 @@ app.post('/addanime',function(req,res)
 
 app.get('/list',function(req,res)
 {
+    console.log(`recieved request "/list" with data: {}`)
     if (fs.existsSync('./AnimeData.json') == true)
     {
         let x = fs.readFileSync('./AnimeData.json')
@@ -103,7 +105,9 @@ app.get('/list',function(req,res)
 
 app.get('/get', function(req,res)
 {
+    
     let title = req.query.title
+    console.log(`recieved request "/get" with data: {${title}}`)
     //console.log(title)
     let x = fs.readFileSync('./AnimeData.json')
     let saveddata = JSON.parse(x)
@@ -119,6 +123,7 @@ app.get('/get', function(req,res)
 
 app.get('/top',function(req,res)
 {
+ console.log(`recieved request "/top"`)
  axios.get(`https://api.jikan.moe/v3/top/anime`)
     .then(function (response) 
     {
@@ -129,6 +134,7 @@ app.get('/top',function(req,res)
 
 app.get('/schedule',function(req,res)
 {
+    console.log(`recieved request "/schedule"`)
     axios.get('https://api.jikan.moe/v3/schedule')
     .then(function(response)
     {   
@@ -138,6 +144,7 @@ app.get('/schedule',function(req,res)
 
 app.get('/archive',function(req,res)
 {
+ console.log(`recieved request "/archive"`)
  axios.get(`https://api.jikan.moe/v3/season/archive`)
     .then(function (response) 
     {
@@ -150,6 +157,7 @@ app.get('/seasonal',function(req,res)
 {
     let year = req.query.year
     let season = req.query.season
+    console.log(`recieved request "/archive" with data: {season: ${season}, year: ${year}}`)
  axios.get(`https://api.jikan.moe/v3/season/${year}/${season}`)
     .then(function (response) 
     {
@@ -160,6 +168,7 @@ app.get('/seasonal',function(req,res)
 
 app.get('/current',function(req,res)
 {
+ console.log(`recieved request "/current"`)
  axios.get(`https://api.jikan.moe/v3/season`)
     .then(function (response) 
     {
@@ -171,7 +180,7 @@ app.get('/current',function(req,res)
 app.get('/search',function(req,res)
 {
     let receievedText = req.query.q
-
+    console.log(`recieved request "/current" with data: {${receievedText}}`)
     axios.get(`https://api.jikan.moe/v3/search/anime?q=${receievedText}&page=1`)
     .then(function(resp)
     {
