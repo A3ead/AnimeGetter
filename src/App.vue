@@ -120,19 +120,24 @@ export default {
   
     },
     darkModeToggle(){
+      function setPropertyLeDocument(varName, value){
+        document.documentElement.style.setProperty(varName, value)
+      }
       if(this.darkMode == false)
       {
         
-        document.documentElement.style.setProperty('--main-bg-color','#292C35')
-        document.documentElement.style.setProperty('--main-card-bg-color','#2F353F')
+        setPropertyLeDocument('--main-bg-color','#2f353f')
+        setPropertyLeDocument('--main-card-bg-color','#3b414b')
+        setPropertyLeDocument('--main-text-color','#F3F3F3')
         console.log("should be dark")
         this.darkMode = true
       }
       else
       {
         
-        document.documentElement.style.setProperty('--main-bg-color','#F7F6FB')
-        document.documentElement.style.setProperty('--main-card-bg-color','#FFFFFF')
+        setPropertyLeDocument('--main-bg-color','#F7F6FB')
+        setPropertyLeDocument('--main-card-bg-color','#FFFFFF')
+        setPropertyLeDocument('--main-text-color','#2c3e50')
         console.log("should be light")
         this.darkMode = false
       }
@@ -144,14 +149,7 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-#app {
-  
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+
 
 #nav {
   padding: 30px;
