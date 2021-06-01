@@ -9,8 +9,14 @@
                   <router-link class="menu-item" to="/schedule">Schedule</router-link>
               </div>
         </div>
-        <button @click="darkModeToggle()">Dark Mode</button>
-        <div>
+        <div class="search-toggle-container">
+         <div>
+           <font-awesome-icon :icon="['fas','sun']"/>
+          <label class="switch" @change="darkModeToggle()">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+         </div>
           <div id="search-dropdown-parent">
             <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" autocomplete = 'off' @keydown.enter="sendSearch()" placeholder="Search Anime ..">
             <div v-if="searchDropDown==true" class="search-dropdown" tabindex="0"><SearchDropdown :searchResults='searchResults'/></div>
@@ -126,9 +132,12 @@ export default {
       if(this.darkMode == false)
       {
         
-        setPropertyLeDocument('--main-bg-color','#2f353f')
-        setPropertyLeDocument('--main-card-bg-color','#3b414b')
+        setPropertyLeDocument('--main-bg-color','#1F1E1F')
+        setPropertyLeDocument('--main-card-bg-color','#2D2C2D')
         setPropertyLeDocument('--main-text-color','#F3F3F3')
+        setPropertyLeDocument('--main-button-bg-color','#2D2C2D')
+        setPropertyLeDocument('--main-button-text-color','#F3F3F3')
+        
         console.log("should be dark")
         this.darkMode = true
       }
@@ -138,6 +147,8 @@ export default {
         setPropertyLeDocument('--main-bg-color','#F7F6FB')
         setPropertyLeDocument('--main-card-bg-color','#FFFFFF')
         setPropertyLeDocument('--main-text-color','#2c3e50')
+        setPropertyLeDocument('--main-button-bg-color','#FFFFFF')
+        setPropertyLeDocument('--main-button-text-color','#2c3e50')
         console.log("should be light")
         this.darkMode = false
       }
@@ -148,7 +159,6 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 
 
 #nav {

@@ -1,13 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 :root{
     --main-bg-color: #F7F6FB;
     --main-card-bg-color: #FFFFFF;
     --main-text-color: #2c3e50;
+    --main-button-bg-color: #FFFFFF;
+    --main-button-text-color: #2c3e50;
 }
 body {
     overflow-y: scroll;
     background-color: var(--main-bg-color);
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 900;
     margin: 0px;
 }
@@ -44,8 +47,9 @@ body::-webkit-scrollbar-thumb:hover{
 
 .button, .button-list
 {
+    color: var(--main-button-text-color);
     padding: 15px;
-    background-color: white;
+    background-color: var(--main-button-bg-color);
     border: solid 2px blueviolet;
     border-radius: 5px;
 }
@@ -84,6 +88,73 @@ body::-webkit-scrollbar-thumb:hover{
     position: relative;
     left: 45%;
     width: 200px;
+}
+.switch {
+position: relative;
+display: inline-block;
+width: 45px;
+height: 23px;
+}
+
+.switch input { 
+opacity: 0;
+width: 0;
+height: 0;
+}
+
+.slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: white;
+-webkit-transition: .4s;
+transition: .4s;
+}
+
+.slider:before {
+position: absolute;
+content: "";
+height: 16px;
+width: 16px;
+left: 4px;
+bottom: 3.6px;
+background-color: #262526;
+-webkit-transition: .4s;
+transition: .4s;
+}
+
+input:checked + .slider {
+background-color: #262526;
+}
+
+input:focus + .slider {
+box-shadow: 0 0 1px #262526;
+}
+
+input:checked + .slider:before {
+    background-color: white;
+-webkit-transform: translateX(21.5px);
+-ms-transform: translateX(21.5px);
+transform: translateX(21.5px);
+}
+
+/* Rounded sliders */
+.slider.round {
+border-radius: 34px;
+}
+
+.slider.round:before {
+border-radius: 50%;
+}
+
+.search-toggle-container{
+    width: 600px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .image
@@ -169,18 +240,19 @@ body::-webkit-scrollbar-thumb:hover{
 
 .search-input
 {
+    color: var(--main-button-text-color);
     padding: 15px;
-    background-color: #ffffff;
+    background-color: var(--main-card-bg-color);
     border: none;
     width: 200px;
-    transition: all 0.2s;
+    transition: width 0.2s;
     
 }
 .search-input-focus {
     width: 400px;
     outline: none;
     padding: 15px;
-    background-color: #ffffff;
+    background-color: var(--main-card-bg-color);
     border: none;
     transition: all 0.2s;
     
@@ -191,7 +263,7 @@ body::-webkit-scrollbar-thumb:hover{
 }
 
 .search-dropdown{
-    background-color: #FFFFFF;
+    background-color: var(--main-card-bg-color);
     position: absolute;
     width: 430px;
    
@@ -475,9 +547,10 @@ body::-webkit-scrollbar-thumb:hover{
     font-size: 19px;
 }
 .button-filter{
+    color: var(--main-button-text-color);
     padding: 4px 15px 4px 15px;
     height: 2em;
-    background-color: white;
+    background-color: var(--main-button-bg-color);
     border: solid 2px blueviolet;
     border-radius: 5px;
 }
