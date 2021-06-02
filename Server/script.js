@@ -123,8 +123,10 @@ app.get('/get', function(req,res)
 
 app.get('/top',function(req,res)
 {
- console.log(`recieved request "/top"`)
- axios.get(`https://api.jikan.moe/v3/top/anime`)
+    let subtype = req.query.subtype
+    let page = req.query.page
+    console.log(`recieved request "/top" with data: {${subtype},${page}}`)
+    axios.get(`https://api.jikan.moe/v3/top/anime/${page}/${subtype}`)
     .then(function (response) 
     {
        //console.log(response.data);

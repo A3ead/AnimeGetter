@@ -1,5 +1,23 @@
 <template>
   <div class='mainDiv'>
+    <div class="top-filters-div">
+      <div>
+        <button class="button-filter" @click="highlightFilter('All'), currentPage = 1, subtype = '', getTop(subtype,currentPage)" id="All">All Anime</button>
+        <button class="button-filter" @click="highlightFilter('Airing'), currentPage = 1, subtype = 'airing', getTop(subtype,currentPage)" id="Airing">Top Airing</button>
+        <button class="button-filter" @click="highlightFilter('Upcoming'), currentPage = 1, subtype = 'upcoming', getTop(subtype,currentPage)" id="Upcoming">Top Upcoming</button>
+        <button class="button-filter" @click="highlightFilter('TV'), currentPage = 1, subtype = 'tv', getTop(subtype,currentPage)" id="TV">Top TV Series</button>
+        <button class="button-filter" @click="highlightFilter('Movies'), currentPage = 1, subtype = 'movie', getTop(subtype,currentPage)" id="Movies">Top Movies</button>
+        <button class="button-filter" @click="highlightFilter('OVA'), currentPage = 1, subtype = 'ova', getTop(subtype,currentPage)" id="OVA">Top OVAs</button>
+        <!-- <button class="button-filter" @click="highlightFilter('ONA'), currentPage = 1, subtype = 'ona', getTop(subtype,currentPage)" id="ONA">Top ONAs</button> -->
+        <button class="button-filter" @click="highlightFilter('Special'), currentPage = 1, subtype = 'special', getTop(subtype,currentPage)" id="Special">Top Specials</button>
+        <button class="button-filter" @click="highlightFilter('Popular'), currentPage = 1, subtype = 'bypopularity', getTop(subtype,currentPage)" id="Popular">Most Popular</button>
+        <button class="button-filter" @click="highlightFilter('Favorite'), currentPage = 1, subtype = 'favorite', getTop(subtype,currentPage)" id="Favorite">Most Favorited</button>
+      </div>
+      <div>
+        <button class="button-filter" @click="currentPage--, getTop(subtype,currentPage)" v-if="currentPage != 1">Prev 50</button>
+        <button class="button-filter" @click="currentPage++, getTop(subtype,currentPage)">Next 50</button>
+      </div>
+    </div>
     <table class="top-anime-table">
       <tr class="top-anime-table-header">
         <th class="top-anime-list-header-element">Rank</th>
@@ -21,20 +39,6 @@
     </table>
   </div>
     
-  <!-- <ul id='mainDiv' class='mainDiv'>
-    <li class="top-list-element" v-for="anime in topAnimeList" :key="anime">
-      <div class="top-list-container">
-        <div>
-          <div>{{anime.title}}</div>
-          <div>{{anime.episodes}}</div>
-          <div>{{anime.score}}</div>
-          <div>{{anime.type}}</div>
-          <div>{{anime.start_date}} - {{anime.end_date}}</div>
-        </div>
-        <img class="top-list-image" v-bind:src="anime.image_url" alt="">
-      </div>
-    </li>
-  </ul> -->
 </template>
 
 <script>
@@ -45,28 +49,42 @@ export default {
 
   data(){
     return{
-      topAnimeList:''
+      topAnimeList:'',
+      currentPage:1,
+      subtype:''
 
     }
   },
   mixins:[AnimeInfo_mixins],
   mounted(){
-    this.getTopAnime()
+    this.getTop('',this.currentPage)
+    this.highlightFilter('All')
 
   },
 
   methods:{
-    getTopAnime()
+    getTop(subtype,page)
   {
 
-      axios.get(`http://127.0.0.1:3000/top`)
+      axios.get(`http://127.0.0.1:3000/top`,{params:{'subtype':subtype,'page':page}})
       .then(res=>
       {
           this.topAnimeList = res.data.top
-          //console.log(res.data.top)
+          console.log(res.data.top)
 
       })
-  }
+  },
+    highlightFilter(filterID){
+      try {
+          document.getElementsByClassName('button-filter-selected')[0].className = 'button-filter'
+      }
+      catch {
+        
+      }
+      finally {
+          document.getElementById(filterID).classList.add('button-filter-selected')
+      }
+      }
    
   }
 }
