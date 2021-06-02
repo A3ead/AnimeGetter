@@ -11,11 +11,12 @@
         </div>
         <div class="search-toggle-container">
          <div>
-           <font-awesome-icon :icon="['fas','sun']"/>
+           <Font-awesome-icon :icon="faSun" />
           <label class="switch" @change="darkModeToggle()">
             <input type="checkbox">
             <span class="slider round"></span>
           </label>
+           <Font-awesome-icon :icon="faMoon" />
          </div>
           <div id="search-dropdown-parent">
             <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" autocomplete = 'off' @keydown.enter="sendSearch()" placeholder="Search Anime ..">
@@ -33,11 +34,15 @@
 import axios from 'axios'
 import AnimeInfo_mixins from './mixins/AnimeInfo_mixins'
 import SearchDropdown from '@/components/SearchDropdown.vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faSun } from '@fortawesome/free-solid-svg-icons'
+import { faMoon } from '@fortawesome/free-solid-svg-icons'
 
 export default {
 
   components:{
-        SearchDropdown
+        SearchDropdown,
+        FontAwesomeIcon,
     },
 
   data(){
@@ -50,7 +55,9 @@ export default {
       searchResults:null,
       darkMode:false,
       dark:'#FFFFFF',
-      darker:'#F7F6FB'
+      darker:'#F7F6FB',
+      faSun: faSun,
+      faMoon: faMoon
     }
   },
   mixins:[AnimeInfo_mixins],
