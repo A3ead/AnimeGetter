@@ -109,9 +109,10 @@ export default {
 
   mounted(){
       this.getSchedule()
-      //console.log(this.$router)
-      let daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednseday', 'tuesday', 'friday', 'saturday']
+    //   //console.log(this.$router)
+      let daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'tuesday', 'friday', 'saturday']
       this.selected_day = daysOfWeek[new Date().getDay()]
+      console.log(this.selected_day)
       this.highlightTab(this.selected_day)
       
   }
