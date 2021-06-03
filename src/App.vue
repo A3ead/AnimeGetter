@@ -35,6 +35,9 @@
 import axios from 'axios'
 import AnimeInfo_mixins from './mixins/AnimeInfo_mixins'
 import SearchDropdown from '@/components/SearchDropdown.vue'
+import config from "./assets/config.json"
+let {ipServer, ipHeroku} = config.apiLocation
+
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faSun } from '@fortawesome/free-solid-svg-icons'
 import { faMoon } from '@fortawesome/free-solid-svg-icons'
@@ -102,7 +105,7 @@ export default {
         //  let trolllist = ['Domestic Girlfriend', 'Boku no Pico', 'Redo of a Healer', 'Ishozuku Reviewers', 'Naruto', 'One Piece', 'konosuba']
         //  const random = Math.floor(Math.random() * trolllist.length);
         //   this.userInput = trolllist[random]
-      axios.get(`http://127.0.0.1:3000/anime?anime=${this.userInput}`)
+      axios.get(`${ipServer}/anime?anime=${this.userInput}`)
       .then(response=> 
       {
         //console.log(response.data)
@@ -120,7 +123,7 @@ export default {
     animeSearch(searchQuery){
       if(searchQuery.trim() != "" && searchQuery.trim().length > 2){
             //console.log('searching', 'search q = : ' + searchQuery)
-            axios.get(`http://127.0.0.1:3000/search?q=${searchQuery.trim()}`)
+            axios.get(`${ipServer}/search?q=${searchQuery.trim()}`)
             .then(response=> 
             {
               console.log(response.data)

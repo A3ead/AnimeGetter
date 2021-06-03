@@ -27,6 +27,9 @@
 
 <script>
 import axios from 'axios'
+import config from "../assets/config.json"
+let {ipServer, ipHeroku} = config.apiLocation
+
 
 export default {
   name: 'ListShower',
@@ -41,7 +44,7 @@ export default {
   methods:{
     showList()
     {   
-        axios.get(`http://127.0.0.1:3000/list`)
+        axios.get(`${ipServer}/list`)
         .then(res=>
         {   
             //this.animeList = res.data
@@ -52,7 +55,7 @@ export default {
 
 showInfo(title)
 {
-    axios.get('http://127.0.0.1:3000/get',{params:{'title':title}})
+    axios.get(`${ipServer}/get`,{params:{'title':title}})
     .then(res=>
     {   
 

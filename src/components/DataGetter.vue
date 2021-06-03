@@ -19,6 +19,8 @@
 
 <script>
 import axios from 'axios'
+import config from "../assets/config.json"
+let {ipServer, ipHeroku} = config.apiLocation
 
 export default {
   name: 'DataGetter',
@@ -34,7 +36,7 @@ export default {
     {
         if(this.fetcheddata.title != '')
         {
-            axios.post('http://127.0.0.1:3000/addanime', this.fetcheddata)
+            axios.post(`${ipServer}/addanime`, this.fetcheddata)
             .then(res=>
             {
                 this.$store.commit('changeAnimeList',res.data) 

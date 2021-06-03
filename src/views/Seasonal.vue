@@ -63,6 +63,9 @@
 <script>
 import axios from 'axios'
 import CardComponent from '@/components/CardComponent.vue'
+import config from "../assets/config.json"
+let {ipServer, ipHeroku} = config.apiLocation
+
 
 export default {
   name: 'Seasonal',
@@ -90,7 +93,7 @@ export default {
   },
   methods:{
       getArchive() {
-          axios.get(`http://127.0.0.1:3000/archive`)
+          axios.get(`${ipServer}/archive`)
           .then(res => 
           {
              this.entireArchive = res.data.archive
@@ -102,7 +105,7 @@ export default {
       getSeasonal(year,season) {
           //console.log(year,season)
 
-          axios.get('http://127.0.0.1:3000/seasonal',{params:{'year':year,'season':season.toLowerCase()}})
+          axios.get(`${ipServer}/seasonal`,{params:{'year':year,'season':season.toLowerCase()}})
           .then(res => 
           { 
             let tempArray = res.data.anime
@@ -142,7 +145,7 @@ export default {
       },
 
       getCurrentSeason(){
-                  axios.get('http://127.0.0.1:3000/current')
+          axios.get(`${ipServer}/current`)
           .then(res => 
           { 
             let tempArray = res.data.anime

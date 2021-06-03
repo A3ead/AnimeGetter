@@ -52,6 +52,9 @@
 <script>
 import axios from 'axios'
 import AnimeInfo_mixins from '../mixins/AnimeInfo_mixins'
+import config from "../assets/config.json"
+let {ipServer, ipHeroku} = config.apiLocation
+
 
 export default {
 
@@ -74,7 +77,7 @@ export default {
     getTop(subtype,page)
   {
 
-      axios.get(`http://127.0.0.1:3000/top`,{params:{'subtype':subtype,'page':page}})
+      axios.get(`${ipServer}/top`,{params:{'subtype':subtype,'page':page}})
       .then(res=>
       {
           this.topAnimeList = res.data.top

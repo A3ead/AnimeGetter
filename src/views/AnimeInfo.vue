@@ -35,6 +35,9 @@
 
 <script>
 import axios from 'axios'
+import config from "../assets/config.json"
+let {ipServer, ipHeroku} = config.apiLocation
+
 
 export default {
   name: 'AnimeInfo',
@@ -57,7 +60,7 @@ export default {
     //console.log(malID);
      renderAnimeInfo(){
       let malID = this.$route.query.AG_ID
-      axios.get(`http://127.0.0.1:3000/animeInfo?animeID=${malID}`)
+      axios.get(`${ipServer}/animeInfo?animeID=${malID}`)
       .then(response=> 
       {
         console.log(response.data)

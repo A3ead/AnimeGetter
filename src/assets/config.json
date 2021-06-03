@@ -1,0 +1,9 @@
+{
+    "apiLocation": 
+        {   
+            "ipServer": "http://127.0.0.1:3000",
+            "ipHeroku": "https://arcane-tor-25574.herokuapp.com"
+        }
+      
+    
+}

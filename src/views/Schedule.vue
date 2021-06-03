@@ -51,6 +51,8 @@
 import axios from 'axios'
 import CardComponent from '@/components/CardComponent.vue'
 import AnimeInfo_mixins from '../mixins/AnimeInfo_mixins'
+import config from "../assets/config.json"
+let {ipServer, ipHeroku} = config.apiLocation
 
 
 export default {
@@ -72,7 +74,7 @@ export default {
   methods:{
       getSchedule()
       {
-         axios.get('http://127.0.0.1:3000/schedule')
+         axios.get(`${ipServer}/schedule`)
         .then(res=>
         {   
 
