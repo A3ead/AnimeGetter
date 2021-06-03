@@ -28,6 +28,7 @@
     </div>
 
   <router-view/>
+  <button v-if="scrollCheck == true" class="scroll-up-button" @click="scrollUp()"><Font-awesome-icon :icon="faArrowUp"/></button>
 </template>
 
 <script>
@@ -37,6 +38,7 @@ import SearchDropdown from '@/components/SearchDropdown.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faSun } from '@fortawesome/free-solid-svg-icons'
 import { faMoon } from '@fortawesome/free-solid-svg-icons'
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 export default {
 
@@ -57,7 +59,9 @@ export default {
       dark:'#FFFFFF',
       darker:'#F7F6FB',
       faSun: faSun,
-      faMoon: faMoon
+      faMoon: faMoon,
+      faArrowUp: faArrowUp,
+      scrollCheck:false
     }
   },
   mixins:[AnimeInfo_mixins],
@@ -85,7 +89,11 @@ export default {
     }
     //console.log('didnt if')
     this.searchDropDown = false  
-  });
+  })
+  document.addEventListener('scroll',event=>{
+    window.scrollY >= 1500 ? this.scrollCheck = true : this.scrollCheck = false
+    
+  })
     
     
   },
@@ -144,6 +152,7 @@ export default {
         setPropertyLeDocument('--main-text-color','#F3F3F3')
         setPropertyLeDocument('--main-button-bg-color','#2D2C2D')
         setPropertyLeDocument('--main-button-text-color','#F3F3F3')
+        setPropertyLeDocument('--main-darkmode-icon-color','#FFFFFF')
         
         console.log("should be dark")
         this.darkMode = true
@@ -156,11 +165,15 @@ export default {
         setPropertyLeDocument('--main-text-color','#2c3e50')
         setPropertyLeDocument('--main-button-bg-color','#FFFFFF')
         setPropertyLeDocument('--main-button-text-color','#2c3e50')
+        setPropertyLeDocument('--main-darkmode-icon-color','#1F1E1F')
         console.log("should be light")
         this.darkMode = false
       }
       
-    }
+    },
+    scrollUp(){
+      window.scrollTo({top:0,left:0,behavior:'smooth'}) 
+      }
   }
 }
 </script>

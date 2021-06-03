@@ -6,6 +6,7 @@
     --main-text-color: #2c3e50;
     --main-button-bg-color: #FFFFFF;
     --main-button-text-color: #2c3e50;
+    --main-darkmode-icon-color: #1F1E1F;
 }
 body {
     overflow-y: scroll;
@@ -18,7 +19,7 @@ h1, h4{
     margin: 10px;
 }
 body::-webkit-scrollbar{
-    background-color: #f7f6fb5b;
+    background-color: #f7f6fb00;
     width: 0.7rem;
 }
 body::-webkit-scrollbar-thumb{
@@ -70,7 +71,31 @@ body::-webkit-scrollbar-thumb:hover{
     cursor: pointer;
 
 }
+.scroll-up-button{
+    position: fixed;
+    bottom: 10px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 50%;
+    background-color: hsla(0, 0%, 0%, 0.055);
+    transition: all 0.2s;
+}
+.scroll-up-button:hover{
+    cursor: pointer;
+    transform: translateY(-12.5px)
+}
+.svg-inline--fa.fa-w-14{
+    width: 40px;
+    height: 40px;
+    color: blueviolet;
+}
 .dark-mode-toggle-switch{
+    color: var(--main-darkmode-icon-color);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -381,11 +406,21 @@ border-radius: 50%;
     border-radius: 5px;
     border-top: solid 2px blueviolet;
     padding: 10px;
-
-    
-
 }
-
+.top-filters-bottom-div{
+    display: flex;
+    justify-content: center;
+    background-color: var(--main-card-bg-color);
+    box-shadow: #0000002b 2px 2px 6px 1px;
+    border-radius: 5px;
+    border-bottom: solid 2px blueviolet;
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.top-anime-list-element{
+    height: 150px;
+}
 .top-anime-table {
     border-collapse: collapse;
     width: 100%;
@@ -669,7 +704,7 @@ padding-top: 30px;
     
 }
 .search-dropdown::-webkit-scrollbar{
-    background-color: #f7f6fb5b;
+    background-color: #f7f6fb00;
     width: 0.7rem;
 }
 .search-dropdown::-webkit-scrollbar-thumb{

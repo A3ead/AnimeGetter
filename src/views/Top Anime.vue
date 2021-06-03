@@ -38,6 +38,13 @@
         <td class="top-anime-list-element-part">{{anime.start_date}} - {{anime.end_date}}</td>
       </tr>
     </table>
+     <div class="top-filters-bottom-div">
+      <div>
+        <button class="button-filter" @click="currentPage = 1, getTop(subtype,currentPage)" v-if="currentPage > 2"> First </button>
+        <button class="button-filter" @click="currentPage--, getTop(subtype,currentPage)" v-if="currentPage != 1">Prev 50</button>
+        <button class="button-filter" @click="currentPage++, getTop(subtype,currentPage)">Next 50</button>
+      </div>
+    </div>
   </div>
     
 </template>
@@ -71,7 +78,7 @@ export default {
       .then(res=>
       {
           this.topAnimeList = res.data.top
-          console.log(res.data.top)
+          //console.log(res.data.top)
 
       })
   },
