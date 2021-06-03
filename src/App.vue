@@ -10,7 +10,7 @@
               </div>
         </div>
         <div class="search-toggle-container">
-         <div>
+         <div class="dark-mode-toggle-switch">
            <Font-awesome-icon :icon="faSun" />
           <label class="switch" @change="darkModeToggle()">
             <input type="checkbox">

@@ -8,12 +8,12 @@
 
 <div class="filters-div">
   <div>
-    <button class="button-filter" @click="selectedFilter = 'All',highlightFilter('All')" id="All">All</button>
-    <button class="button-filter" @click="selectedFilter = 'TV',highlightFilter('TV')" id="TV">TV</button>
-    <button class="button-filter" @click="selectedFilter = 'Movies',highlightFilter('Movies')" id="Movies">Movies</button>
-    <button class="button-filter" @click="selectedFilter = 'OVA',highlightFilter('OVA')" id="OVA">OVA</button>
-    <button class="button-filter" @click="selectedFilter = 'ONA',highlightFilter('ONA')" id="ONA">ONA</button>
-    <button class="button-filter" @click="selectedFilter = 'Special',highlightFilter('Special')" id="Special">Special</button>
+    <button class="button-filter-no-border" @click="selectedFilter = 'All',highlightFilter('All')" id="All">All</button>
+    <button class="button-filter-no-border" @click="selectedFilter = 'TV',highlightFilter('TV')" id="TV">TV</button>
+    <button class="button-filter-no-border" @click="selectedFilter = 'Movies',highlightFilter('Movies')" id="Movies">Movies</button>
+    <button class="button-filter-no-border" @click="selectedFilter = 'OVA',highlightFilter('OVA')" id="OVA">OVA</button>
+    <button class="button-filter-no-border" @click="selectedFilter = 'ONA',highlightFilter('ONA')" id="ONA">ONA</button>
+    <button class="button-filter-no-border" @click="selectedFilter = 'Special',highlightFilter('Special')" id="Special">Special</button>
   </div>
   <div>
      here goes jump to and dropdown   
@@ -202,13 +202,13 @@ export default {
         },
        highlightFilter(filterID){
         try {
-            document.getElementsByClassName('button-filter-selected')[0].className = 'button-filter'
+            document.getElementsByClassName('button-filter-no-border-selected')[0].className = 'button-filter-no-border'
         }
         catch {
          
         }
         finally {
-            document.getElementById(filterID).classList.add('button-filter-selected')
+            document.getElementById(filterID).classList.add('button-filter-no-border-selected')
         }
         }
 
