@@ -96,6 +96,7 @@ export default {
   document.addEventListener('scroll',event=>{
     window.scrollY >= 1500 ? this.scrollCheck = true : this.scrollCheck = false
     
+    
   })
     
     
