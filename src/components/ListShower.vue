@@ -38,13 +38,14 @@ export default {
   data(){
     return{
         fetcheddata:{title:'',synopsis:'',episodes:'',rating:'',image:'',imagelink:''},
-        isShown:false
+        isShown:false,
+        apiIP: ipServer
     }
   },
   methods:{
     showList()
     {   
-        axios.get(`${ipServer}/list`)
+        axios.get(`${this.apiIP}/list`)
         .then(res=>
         {   
             //this.animeList = res.data
@@ -55,7 +56,7 @@ export default {
 
 showInfo(title)
 {
-    axios.get(`${ipServer}/get`,{params:{'title':title}})
+    axios.get(`${this.apiIP}/get`,{params:{'title':title}})
     .then(res=>
     {   
 

@@ -50,6 +50,7 @@ export default {
     data(){
     return{
       fetcheddata:{title:'',synopsis:'',episodes:'',rating:'',image:'',imagelink:'',title_japanese:'', title_english:'',genres:'',rank:'',studios:'',status:'',related:'',},
+      apiIP: ipServer
     }
   },
   mounted(){
@@ -60,7 +61,7 @@ export default {
     //console.log(malID);
      renderAnimeInfo(){
       let malID = this.$route.query.AG_ID
-      axios.get(`${ipServer}/animeInfo?animeID=${malID}`)
+      axios.get(`${this.apiIP}/animeInfo?animeID=${malID}`)
       .then(response=> 
       {
         console.log(response.data)

@@ -66,7 +66,7 @@ export default {
         day:['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
         schedule:[],
         selected_day:'',
-
+        apiIP: ipServer,
 
     }
   },
@@ -74,7 +74,7 @@ export default {
   methods:{
       getSchedule()
       {
-         axios.get(`${ipServer}/schedule`)
+         axios.get(`${this.apiIP}/schedule`)
         .then(res=>
         {   
 

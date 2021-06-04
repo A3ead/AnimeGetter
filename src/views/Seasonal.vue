@@ -87,13 +87,14 @@ export default {
         specialArray:null,
         movieArray:null,
         selectedFilter:'All',
-        currentSeasonCheck:null
+        currentSeasonCheck:null,
+        apiIP: ipServer
 
     }
   },
   methods:{
       getArchive() {
-          axios.get(`${ipServer}/archive`)
+          axios.get(`${this.apiIP}/archive`)
           .then(res => 
           {
              this.entireArchive = res.data.archive
@@ -105,7 +106,7 @@ export default {
       getSeasonal(year,season) {
           //console.log(year,season)
 
-          axios.get(`${ipServer}/seasonal`,{params:{'year':year,'season':season.toLowerCase()}})
+          axios.get(`${this.apiIP}/seasonal`,{params:{'year':year,'season':season.toLowerCase()}})
           .then(res => 
           { 
             let tempArray = res.data.anime
@@ -145,7 +146,7 @@ export default {
       },
 
       getCurrentSeason(){
-          axios.get(`${ipServer}/current`)
+          axios.get(`${this.apiIP}/current`)
           .then(res => 
           { 
             let tempArray = res.data.anime

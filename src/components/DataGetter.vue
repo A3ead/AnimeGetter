@@ -28,7 +28,8 @@ export default {
   },
   data(){
     return{
-      userInput:null
+      userInput:null,
+      apiIP: ipServer
     }
   },
   methods:{
@@ -36,7 +37,7 @@ export default {
     {
         if(this.fetcheddata.title != '')
         {
-            axios.post(`${ipServer}/addanime`, this.fetcheddata)
+            axios.post(`${this.apiIP}/addanime`, this.fetcheddata)
             .then(res=>
             {
                 this.$store.commit('changeAnimeList',res.data) 

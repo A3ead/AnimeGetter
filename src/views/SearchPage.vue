@@ -29,7 +29,8 @@ export default {
   },
     data(){
     return{
-        searchResults:null
+        searchResults:null,
+        apiIP: ipServer
 
     }
   },
@@ -43,7 +44,7 @@ export default {
         let searchQuery = this.$route.query.q
       if(searchQuery != ""){
             //console.log('searching', 'search q = : ' + searchQuery)
-            axios.get(`${ipServer}/search?q=${searchQuery}`)
+            axios.get(`${this.apiIP}/search?q=${searchQuery}`)
             .then(response=> 
             {
               //console.log(response.data)

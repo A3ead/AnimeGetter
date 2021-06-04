@@ -64,7 +64,8 @@ export default {
       faSun: faSun,
       faMoon: faMoon,
       faArrowUp: faArrowUp,
-      scrollCheck:false
+      scrollCheck:false,
+      apiIP: ipServer,
     }
   },
   mixins:[AnimeInfo_mixins],
@@ -96,7 +97,7 @@ export default {
   document.addEventListener('scroll',event=>{
     window.scrollY >= 1500 ? this.scrollCheck = true : this.scrollCheck = false
     
-    
+
   })
     
     
@@ -106,7 +107,7 @@ export default {
         //  let trolllist = ['Domestic Girlfriend', 'Boku no Pico', 'Redo of a Healer', 'Ishozuku Reviewers', 'Naruto', 'One Piece', 'konosuba']
         //  const random = Math.floor(Math.random() * trolllist.length);
         //   this.userInput = trolllist[random]
-      axios.get(`${ipServer}/anime?anime=${this.userInput}`)
+      axios.get(`${this.apiIP}/anime?anime=${this.userInput}`)
       .then(response=> 
       {
         //console.log(response.data)
@@ -124,7 +125,7 @@ export default {
     animeSearch(searchQuery){
       if(searchQuery.trim() != "" && searchQuery.trim().length > 2){
             //console.log('searching', 'search q = : ' + searchQuery)
-            axios.get(`${ipServer}/search?q=${searchQuery.trim()}`)
+            axios.get(`${this.apiIP}/search?q=${searchQuery.trim()}`)
             .then(response=> 
             {
               console.log(response.data)

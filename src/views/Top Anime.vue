@@ -62,7 +62,8 @@ export default {
     return{
       topAnimeList:'',
       currentPage:1,
-      subtype:''
+      subtype:'',
+      apiIP: ipServer,
 
     }
   },
@@ -77,7 +78,7 @@ export default {
     getTop(subtype,page)
   {
 
-      axios.get(`${ipServer}/top`,{params:{'subtype':subtype,'page':page}})
+      axios.get(`${this.apiIP}/top`,{params:{'subtype':subtype,'page':page}})
       .then(res=>
       {
           this.topAnimeList = res.data.top
