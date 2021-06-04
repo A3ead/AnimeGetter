@@ -7,6 +7,8 @@
                   <router-link class="menu-item" to="/top">Top Anime</router-link>
                   <router-link class="menu-item" to="/seasonal">Seasonal</router-link>
                   <router-link class="menu-item" to="/schedule">Schedule</router-link>
+                  <router-link class="menu-item" to="/register">Register</router-link>
+                  <router-link class="menu-item" to="/login">Sign in</router-link>
               </div>
         </div>
         <div class="search-toggle-container">
@@ -39,9 +41,7 @@ import config from "./assets/config.json"
 let {ipServer, ipHeroku} = config.apiLocation
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faSun } from '@fortawesome/free-solid-svg-icons'
-import { faMoon } from '@fortawesome/free-solid-svg-icons'
-import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { faSun, faMoon, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 export default {
 

@@ -8,9 +8,6 @@ node_modules
 # local env files
 .env.local
 .env.*.local
-.firebaserc
-database.rules.json
-firebase.json
 
 # Log files
 npm-debug.log*
