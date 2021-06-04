@@ -15,6 +15,8 @@
 <script>
 import axios from 'axios'
 import AnimeInfo_mixins from '../mixins/AnimeInfo_mixins'
+import config from "../assets/config.json"
+let {ipServer, ipHeroku} = config.apiLocation
 
 export default {
   name: 'SearchInfo',
@@ -41,7 +43,7 @@ export default {
         let searchQuery = this.$route.query.q
       if(searchQuery != ""){
             //console.log('searching', 'search q = : ' + searchQuery)
-            axios.get(`http://127.0.0.1:3000/search?q=${searchQuery}`)
+            axios.get(`${ipServer}/search?q=${searchQuery}`)
             .then(response=> 
             {
               //console.log(response.data)
