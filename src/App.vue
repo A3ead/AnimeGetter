@@ -97,7 +97,6 @@ export default {
   document.addEventListener('scroll',event=>{
     window.scrollY >= 1500 ? this.scrollCheck = true : this.scrollCheck = false
     
-
   })
     
     
@@ -125,7 +124,7 @@ export default {
     animeSearch(searchQuery){
       if(searchQuery.trim() != "" && searchQuery.trim().length > 2){
             //console.log('searching', 'search q = : ' + searchQuery)
-            axios.get(`${this.apiIP}/search?q=${searchQuery.trim()}`)
+            axios.get(`${ipServer}/search?q=${searchQuery.trim()}`)
             .then(response=> 
             {
               console.log(response.data)
