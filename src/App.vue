@@ -1,6 +1,5 @@
 <template>
-<div>Hello {{userIDD}}</div>
-<button @click="consoling()">TEST</button>
+<div>Hello {{userID}}</div>
  <div class='search-div'>
         <div class='title-and-menu'>
             <router-link class="website-title" to="/">ANIME GETTER</router-link>
@@ -45,8 +44,6 @@ let {ipServer, ipHeroku} = config.apiLocation
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faSun, faMoon, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
-import firebase from 'firebase'
-import 'firebase/firestore';
 import { mapGetters } from 'vuex'
 
 export default {
@@ -106,10 +103,6 @@ export default {
     window.scrollY >= 1500 ? this.scrollCheck = true : this.scrollCheck = false
     
   })
-  //let x = this.userID
-  // console.log(firebase.auth().currentUser)
-  // console.log(this.userID)
-  // console.log(x)
 
     
     
@@ -190,18 +183,14 @@ export default {
     },
     scrollUp(){
       window.scrollTo({top:0,left:0,behavior:'smooth'}) 
-      },
-      consoling(){
-        console.log(this.userID)
       }
   },
   watch:{
-   userIDD : function(){console.log('watched')
-   this.userID = this.userIDD}
+
   },
   computed:{
     //...mapGetters(['userID'])
-    userIDD(){return this.$store.getters.usernameGetter}
+    userID(){return this.$store.getters.usernameGetter}
   }
 }
 </script>

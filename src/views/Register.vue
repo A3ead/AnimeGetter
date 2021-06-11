@@ -20,8 +20,7 @@
 </template>
 
 <script>
-import firebase from 'firebase'
-import 'firebase/firestore';
+import {db, auth} from '../firebase'
 
 export default {
   name: 'Register',
@@ -33,7 +32,8 @@ export default {
     return{
      email:'',
      password:'',
-     username:''
+     username:'',
+     userID:''
      
     }
   },
@@ -42,23 +42,34 @@ export default {
   },
   methods:{
       register(){
-          firebase
-          .auth()
+          auth
           .createUserWithEmailAndPassword(this.email,this.password)
           .then(()=>{
-              console.log('new user registered')
-              firebase
-              .firestore()
+              this.userID = auth.currentUser.uid
+              console.log('new user registered. userID = ' + this.userID)
+              db
+             // .firestore()
               .collection('users')
-              .doc(firebase.auth().currentUser.uid)
-              .set({Email:this.email, Password:this.password, Username:this.username, RegisterationDate:new Date()})
-               this.$store.commit('changeUserID',firebase.auth().currentUser.uid)
-               console.log(this.$store.state.userID)
+              .doc(this.userID)
+              .set({Email:this.email, Password:this.password, Username:this.username})
+              .then(()=>{
+               this.$store.commit('changeUserID',this.userID)
+               this.$store.dispatch('getUsername')
+               console.log('this is in register: ' + this.$store.state.userID)
+               })
+               .catch((error)=>{
+                 console.log('error in then of set')
+                 console.log(error)
+               })
+               })
+               .catch((error)=>{
+                 console.log('catch error in register')
+                 console.log(error)
                })
                 
       },
       addToDatabase(){
-        firebase
+        db
         .firestore()
         .collection('users')
         .doc('testdoc')

@@ -1,13 +1,13 @@
 import { createStore } from 'vuex'
 import { mapState } from 'vuex'
-import firebase from 'firebase'
-import 'firebase/firestore';
+import {db} from '../firebase'
 
 export default createStore({
   state: {
     fetcheddata:{title:'',synopsis:'',episodes:'',rating:'',image:'',imagelink:''},
     animeList:'',
-    userID:''
+    userID:'',
+    username:''
   },
   mutations: {
     changeFetcheddata(state,newdata)
@@ -21,10 +21,24 @@ export default createStore({
     changeUserID(state,newdata)
     {
       state.userID = newdata
+    },
+    changeUsername(state,newdata){
+      state.username = newdata
     }
 
   },
   actions: {
+    getUsername({state,commit}){
+      if (state.userID != '') {
+        console.log('state.userID = ' + state.userID)
+        db.collection('users').doc(state.userID).get()
+        .then((doc)=>{
+          console.log(doc.data())
+          commit('changeUsername',doc.data().Username)
+        })
+      }
+      else commit('changeUsername','no users found') 
+    }
   },
   modules: {
   },
@@ -32,16 +46,7 @@ export default createStore({
     fetcheddataGetter: state=>state.fetcheddata,
     animelistGetter: state=>state.animeList,
     userIDGetter: state=>state.userID,
-    usernameGetter : state=>{if (state.userID != '') {
-      console.log('state.userID = ' + state.userID)
-      firebase.firestore().collection('users').doc(state.userID).get()
-      .then((doc)=>{
-        console.log(doc.data())
-        return doc.data().Username
-      })
-    }
-    else return 'no users found'
-  }
+    usernameGetter : state=> state.username
   // computed: {
   //   ...mapState(['fetcheddata','animeList','userID'])
   // }
