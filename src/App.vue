@@ -14,20 +14,20 @@
         </div>
         <div class="search-toggle-container">
          <div class="dark-mode-toggle-switch">
-           <Font-awesome-icon :icon="faSun" />
+           <Font-awesome-icon :icon="awesomeIcons.faSun" />
           <label class="switch" @change="darkModeToggle()">
             <input type="checkbox">
             <span class="slider round"></span>
           </label>
-           <Font-awesome-icon :icon="faMoon" />
+           <Font-awesome-icon :icon="awesomeIcons.faMoon" />
          </div>
          <div class="search-profile-container">
             <div id="search-dropdown-parent" class="search-dropdown-parent">
             <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" autocomplete = 'off' @keydown.enter="sendSearch()" placeholder="Search Anime ..">
             <div v-if="searchDropDown==true" class="search-dropdown" tabindex="0"><SearchDropdown :searchResults='searchResults'/></div>
-            <button class='search-button' v-on:click='getdata(), sendSearch()'><Font-awesome-icon :icon="faSearch" /></button>
+            <button class='search-button' v-on:click='getdata(), sendSearch()'><Font-awesome-icon :icon="awesomeIcons.faSearch" /></button>
           </div>
-            <div class="profile-div" @click="logout()"><Font-awesome-icon :icon="faUser" /> <span style="margin: 0px 5px;">A3ead</span><Font-awesome-icon :icon="faAngleDown" /> </div>
+            <div class="profile-div" @click="logout()"><Font-awesome-icon :icon="awesomeIcons.faUser" /> <span style="margin: 0px 5px;">A3ead</span><Font-awesome-icon :icon="awesomeIcons.faAngleDown" /> </div>
         </div>
 
          </div>
@@ -37,7 +37,7 @@
     </div>
 
   <router-view/>
-  <button v-if="scrollCheck == true" class="scroll-up-button" @click="scrollUp()"><Font-awesome-icon :icon="faArrowUp"/></button>
+  <button v-if="scrollCheck == true" class="scroll-up-button" @click="scrollUp()"><Font-awesome-icon :icon="awesomeIcons.faArrowUp"/></button>
 </template>
 
 <script>
@@ -72,12 +72,7 @@ export default {
       darkMode:false,
       dark:'#FFFFFF',
       darker:'#F7F6FB',
-      faSun: faSun,
-      faMoon: faMoon,
-      faArrowUp: faArrowUp,
-      faSearch: faSearch,
-      faUser: faUser,
-      faAngleDown: faAngleDown,
+      awesomeIcons: {faSun:faSun, faMoon:faMoon, faArrowUp:faArrowUp, faSearch:faSearch, faUser:faUser, faAngleDown:faAngleDown,},
       scrollCheck:false,
       apiIP: ipServer,
       username:'',
