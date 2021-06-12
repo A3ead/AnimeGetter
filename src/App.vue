@@ -21,12 +21,18 @@
           </label>
            <Font-awesome-icon :icon="faMoon" />
          </div>
-          <div id="search-dropdown-parent">
+         <div class="search-profile-container">
+            <div id="search-dropdown-parent" class="search-dropdown-parent">
             <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" autocomplete = 'off' @keydown.enter="sendSearch()" placeholder="Search Anime ..">
             <div v-if="searchDropDown==true" class="search-dropdown" tabindex="0"><SearchDropdown :searchResults='searchResults'/></div>
-            <button class='button' v-on:click='getdata(), sendSearch()'>Search</button>
+            <button class='search-button' v-on:click='getdata(), sendSearch()'><Font-awesome-icon :icon="faSearch" /></button>
           </div>
+            <div class="profile-div" @click="logout()"><Font-awesome-icon :icon="faUser" /> <span style="margin: 0px 5px;">A3ead</span><Font-awesome-icon :icon="faAngleDown" /> </div>
         </div>
+
+         </div>
+
+
 
     </div>
 
@@ -42,7 +48,9 @@ import config from "./assets/config.json"
 let {ipServer, ipHeroku} = config.apiLocation
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faSun, faMoon, faArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { faSun, faMoon, faArrowUp, faSearch, faUser, faAngleDown} from '@fortawesome/free-solid-svg-icons'
+import {db, auth} from './firebase'
+
 
 import { mapGetters } from 'vuex'
 
@@ -67,6 +75,9 @@ export default {
       faSun: faSun,
       faMoon: faMoon,
       faArrowUp: faArrowUp,
+      faSearch: faSearch,
+      faUser: faUser,
+      faAngleDown: faAngleDown,
       scrollCheck:false,
       apiIP: ipServer,
       username:'',
@@ -183,6 +194,13 @@ export default {
     },
     scrollUp(){
       window.scrollTo({top:0,left:0,behavior:'smooth'}) 
+      },
+      logout(){
+        console.log('current user is: ' + auth.currentUser.email)
+        auth.signOut()
+        .then(()=>{
+          console.log('signed out ' + auth.currentUser)
+        })
       }
   },
   watch:{
