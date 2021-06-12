@@ -70,7 +70,7 @@ export default {
       scrollCheck:false,
       apiIP: ipServer,
       username:'',
-      userID:''
+      //userID:''
     }
   },
   mixins:[AnimeInfo_mixins],

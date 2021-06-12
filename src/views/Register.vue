@@ -53,19 +53,19 @@ export default {
               .doc(this.userID)
               .set({Email:this.email, Password:this.password, Username:this.username})
               .then(()=>{
-               this.$store.commit('changeUserID',this.userID)
-               this.$store.dispatch('getUsername')
-               console.log('this is in register: ' + this.$store.state.userID)
+                  this.$store.commit('changeUserID',this.userID)
+                  this.$store.dispatch('getUsername')
+                  console.log('this is in register: ' + this.$store.state.userID)
                })
                .catch((error)=>{
                  console.log('error in then of set')
                  console.log(error)
                })
                })
-               .catch((error)=>{
-                 console.log('catch error in register')
-                 console.log(error)
-               })
+        .catch((error)=>{
+          console.log('catch error in register')
+          console.log(error)
+        })
                 
       },
       addToDatabase(){
