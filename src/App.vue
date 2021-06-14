@@ -95,7 +95,7 @@ export default {
       username:'',
       //userID:'',
       profileDropDown:false,
-      loginDropdown: true
+      loginDropdown: false
 
     }
   },
