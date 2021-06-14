@@ -277,7 +277,15 @@ border-radius: 50%;
     text-decoration: none;
     font-size: xx-large;
 }
-
+.login-dropdown-container{
+    position: relative;
+}
+.login-dropdown{
+    position: absolute;
+    max-width: 50rem;
+    max-height: 50rem;
+    overflow: hidden;
+}
 .search-input
 {
     color: var(--main-button-text-color);
@@ -864,6 +872,22 @@ padding-top: 30px;
     margin-top: 75px;
     padding: 20px;
 }
+.login-card-small{
+    background-color: var(--main-card-bg-color);
+    margin: 2px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    /* height: 99%; */
+    border-radius: 5px;
+    border-bottom: solid 3px blueviolet;
+    box-shadow: #0000003d 2px 2px 6px 1px;
+    width: 300px;
+    height: 300px;
+
+}
 .login-form{
     display: flex;
     flex-direction: column;
@@ -877,8 +901,15 @@ padding-top: 30px;
     text-align: left;
     font-size: x-large;
 }
+.login-form-text-small{
+    width:100%;
+    padding: 10px 0px 5px 0px;
+    text-align: left;
+    font-size: large;
+}
 .login-form-input{
     width: 96%;
+
     padding: 10px 10px 10px 10px;
     border: none;
     border-bottom: solid 1px blueviolet;
@@ -886,10 +917,16 @@ padding-top: 30px;
     background-color: var(--main-card-bg-color);
     color: var( --main-text-color);
 }
-.login-form-input:focus{
+.login-form-input-small{
     width: 96%;
     padding: 10px 10px 10px 10px;
     border: none;
+    border: solid 3px blueviolet;
+    font-size: larger;
+    background-color: var(--main-card-bg-color);
+    color: var( --main-text-color);
+}
+.login-form-input:focus{
     border-bottom: solid 1px blueviolet;
     outline: none;
 }
@@ -901,6 +938,14 @@ padding-top: 30px;
     height: 200px;
     margin-top: 15px;
 }
+.login-form-button-container-small{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 10px;
+ 
+}
 .login-button
 {
     color: var(--main-button-text-color);
@@ -910,8 +955,17 @@ padding-top: 30px;
     border-radius: 5px;
     font-size: larger;
 }
-
-.login-button:hover
+.login-button-small
+{
+    color: var(--main-button-text-color);
+    padding: 2px 5px 2px 5px;
+    margin-bottom: 10px;
+    background-color: var(--main-button-bg-color);
+    border: solid 1px blueviolet;
+    border-radius: 2px;
+    font-size: larger;
+}
+.login-button:hover, .login-button-small:hover
 {
     background-color: blueviolet;
     color: white;
@@ -921,4 +975,8 @@ padding-top: 30px;
     color: blueviolet;
     font-size: 3rem;
     margin-bottom: 65px;
+}
+.login-card-title-small{
+    color: blueviolet;
+    font-size: large;
 }

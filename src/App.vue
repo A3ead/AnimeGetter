@@ -11,7 +11,12 @@
                   <router-link class="menu-item" to="/register">Register</router-link>
                   <router-link class="menu-item" to="/login">Sign in</router-link>
               </div>
-        </div>
+            <div class="login-dropdown-container" id="login-dropdown-parent" tabindex="0" >
+                <button @click="loginDropdown = !loginDropdown, focusLogin()">Login Drop</button>
+                <div v-if="loginDropdown==true" class="login-dropdown" tabindex="0">
+                   <Logincomponent :small="true"/>
+                </div>
+           </div>
         <div class="search-toggle-container">
          <div class="dark-mode-toggle-switch">
            <Font-awesome-icon :icon="awesomeIcons.faSun" />
@@ -40,7 +45,7 @@
 
          </div>
 
-
+       </div>
 
     </div>
 
@@ -52,6 +57,8 @@
 import axios from 'axios'
 import AnimeInfo_mixins from './mixins/AnimeInfo_mixins'
 import SearchDropdown from '@/components/SearchDropdown.vue'
+import Logincomponent from '@/components/Logincomponent.vue'
+
 import config from "./assets/config.json"
 let {ipServer, ipHeroku} = config.apiLocation
 
@@ -68,6 +75,7 @@ export default {
   components:{
         SearchDropdown,
         FontAwesomeIcon,
+        Logincomponent
     },
 
   data(){
@@ -86,7 +94,8 @@ export default {
       apiIP: ipServer,
       username:'',
       //userID:'',
-      profileDropDown:false
+      profileDropDown:false,
+      loginDropdown: true
 
     }
   },
@@ -125,6 +134,16 @@ export default {
     }
     //console.log('didnt if')
     this.profileDropDown = false  
+  })
+  let loginParent = document.getElementById('login-dropdown-parent')
+    loginParent.addEventListener('focusout', event=> {
+    if (loginParent.contains(event.relatedTarget)) {
+        // don't react to this
+        //console.log('ifffed')
+        return;
+    }
+    //console.log('didnt if')
+    this.loginDropdown = false  
   })
   document.addEventListener('scroll',event=>{
     window.scrollY >= 1500 ? this.scrollCheck = true : this.scrollCheck = false
@@ -179,6 +198,9 @@ export default {
     },
     focusProfile(){
       document.getElementById('profile-dropdown-parent').focus()
+    },
+    focusLogin(){
+      document.getElementById('login-dropdown-parent').focus()
     },
     darkModeToggle(){
       function setPropertyLeDocument(varName, value){
