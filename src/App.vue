@@ -23,11 +23,19 @@
          </div>
          <div class="search-profile-container">
             <div id="search-dropdown-parent" class="search-dropdown-parent">
-            <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" autocomplete = 'off' @keydown.enter="sendSearch()" placeholder="Search Anime ..">
-            <div v-if="searchDropDown==true" class="search-dropdown" tabindex="0"><SearchDropdown :searchResults='searchResults'/></div>
-            <button class='search-button' v-on:click='getdata(), sendSearch()'><Font-awesome-icon :icon="awesomeIcons.faSearch" /></button>
+              <input type="text" id='search' :class="[{'search-input-focus':searchDropDown},'search-input']" v-model="userInput" autocomplete = 'off' @keydown.enter="sendSearch()" placeholder="Search Anime ..">
+              <div v-if="searchDropDown==true" class="search-dropdown" tabindex="0"><SearchDropdown :searchResults='searchResults'/></div>
+              <button class='search-button' v-on:click='getdata(), sendSearch()'><Font-awesome-icon :icon="awesomeIcons.faSearch" /></button>
           </div>
-            <div class="profile-div" @click="logout()"><Font-awesome-icon :icon="awesomeIcons.faUser" /> <span style="margin: 0px 5px;">A3ead</span><Font-awesome-icon :icon="awesomeIcons.faAngleDown" /> </div>
+          <div id="profile-dropdown-parent" class="profile-dropdown-parent" tabindex="0" @click="profileDropDown = !profileDropDown, focusProfile()">
+            <div class="profile-div" @click="focusProfile()"><Font-awesome-icon :icon="awesomeIcons.faUser" /> <span style="margin: 0px 5px;">A3ead</span><Font-awesome-icon :icon="awesomeIcons.faAngleDown" /> </div>
+            <div v-if="profileDropDown==true" class="profile-dropdown" tabindex="0">
+              <div class="profile-dropdown-element"><Font-awesome-icon :icon="awesomeIcons.faUserAlt" /><span style="margin: 0px 5px;">Profile</span></div>
+              <div class="profile-dropdown-element"><Font-awesome-icon :icon="awesomeIcons.faListAlt" /><span style="margin: 0px 5px;">Anime List</span></div>
+              <div class="profile-dropdown-element" @click="logout()"><Font-awesome-icon :icon="awesomeIcons.faSignOutAlt" /><span style="margin: 0px 6px;">Logout</span></div>
+            </div>
+
+          </div>
         </div>
 
          </div>
@@ -48,7 +56,8 @@ import config from "./assets/config.json"
 let {ipServer, ipHeroku} = config.apiLocation
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faSun, faMoon, faArrowUp, faSearch, faUser, faAngleDown} from '@fortawesome/free-solid-svg-icons'
+import { faSun, faMoon, faArrowUp, faSearch, faUser, faAngleDown, faSignOutAlt, faListAlt, faUserAlt} 
+from '@fortawesome/free-solid-svg-icons'
 import {db, auth} from './firebase'
 
 
@@ -72,11 +81,13 @@ export default {
       darkMode:false,
       dark:'#FFFFFF',
       darker:'#F7F6FB',
-      awesomeIcons: {faSun:faSun, faMoon:faMoon, faArrowUp:faArrowUp, faSearch:faSearch, faUser:faUser, faAngleDown:faAngleDown,},
+      awesomeIcons: {faSun:faSun, faMoon:faMoon, faArrowUp:faArrowUp, faSearch:faSearch, faUser:faUser, faAngleDown:faAngleDown, faSignOutAlt:faSignOutAlt, faListAlt:faListAlt, faUserAlt:faUserAlt},
       scrollCheck:false,
       apiIP: ipServer,
       username:'',
-      //userID:''
+      //userID:'',
+      profileDropDown:false
+
     }
   },
   mixins:[AnimeInfo_mixins],
@@ -104,6 +115,16 @@ export default {
     }
     //console.log('didnt if')
     this.searchDropDown = false  
+  })
+    let profileParent = document.getElementById('profile-dropdown-parent')
+    profileParent.addEventListener('focusout', event=> {
+    if (profileParent.contains(event.relatedTarget)) {
+        // don't react to this
+        //console.log('ifffed')
+        return;
+    }
+    //console.log('didnt if')
+    this.profileDropDown = false  
   })
   document.addEventListener('scroll',event=>{
     window.scrollY >= 1500 ? this.scrollCheck = true : this.scrollCheck = false
@@ -156,6 +177,9 @@ export default {
       }
   
     },
+    focusProfile(){
+      document.getElementById('profile-dropdown-parent').focus()
+    },
     darkModeToggle(){
       function setPropertyLeDocument(varName, value){
         document.documentElement.style.setProperty(varName, value)
@@ -170,7 +194,7 @@ export default {
         setPropertyLeDocument('--main-button-text-color','#F3F3F3')
         setPropertyLeDocument('--main-darkmode-icon-color','#FFFFFF')
         
-        console.log("should be dark")
+        //console.log("should be dark")
         this.darkMode = true
       }
       else
@@ -182,7 +206,7 @@ export default {
         setPropertyLeDocument('--main-button-bg-color','#FFFFFF')
         setPropertyLeDocument('--main-button-text-color','#2c3e50')
         setPropertyLeDocument('--main-darkmode-icon-color','#1F1E1F')
-        console.log("should be light")
+        //console.log("should be light")
         this.darkMode = false
       }
       
@@ -190,13 +214,16 @@ export default {
     scrollUp(){
       window.scrollTo({top:0,left:0,behavior:'smooth'}) 
       },
-      logout(){
-        console.log('current user is: ' + auth.currentUser.email)
-        auth.signOut()
-        .then(()=>{
-          console.log('signed out ' + auth.currentUser)
-        })
-      }
+    logout(){
+      console.log('current user is: ' + auth.currentUser.email)
+      auth.signOut()
+      .then(()=>{
+        console.log('signed out ' + auth.currentUser)
+      })
+    },
+    consoling(){
+      console.log("definitely logged out")
+    }
   },
   watch:{
 
