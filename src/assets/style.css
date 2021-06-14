@@ -284,7 +284,8 @@ border-radius: 50%;
     position: absolute;
     max-width: 50rem;
     max-height: 50rem;
-    overflow: hidden;
+    box-shadow: #00000000 1px 1px 3px 1px;;
+    
 }
 .search-input
 {
@@ -315,6 +316,7 @@ border-radius: 50%;
 .search-profile-container{
     display: flex;
     align-items: center;
+    
 }
 .search-button{
     position: absolute;
