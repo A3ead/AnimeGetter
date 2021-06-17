@@ -2,24 +2,6 @@ import { createStore } from 'vuex'
 import { mapState } from 'vuex'
 import {auth, db} from '../firebase'
 
-async function checkUserAuthenticated(){
-  await new Promise ((resolve,reject)=>{  
-    auth.onAuthStateChanged((user) => {
-    if (user) {
-      console.log(!!user)
-
-      resolve (true)
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      // ...
-    } else {
-      reject (false)
-      // User is signed out
-      // ...
-    }
-  });
-})}
-let userAuthenticated = checkUserAuthenticated()
 
 export default createStore({
   state: {
@@ -27,7 +9,7 @@ export default createStore({
     animeList:'',
     userID:'',
     username:'',
-    loggedinUser:false || userAuthenticated
+    loggedinUser:''
   },
   mutations: {
     changeFetcheddata(state,newdata)
@@ -61,7 +43,27 @@ export default createStore({
         })
       }
       else commit('changeUsername','no users found') 
-    }
+    },
+  changeAuthenticationState({state,commit}){
+        new Promise ((resolve,reject)=>{  
+          auth.onAuthStateChanged((user) => {
+          if (user) {
+            console.log(!!user)
+            commit('changeLoggedinUser',true)
+            resolve ('resolve')
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            // ...
+          } else {
+            commit('changeLoggedinUser',false)
+            reject ('reject')
+            // User is signed out
+            // ...
+          }
+       });
+     })
+
+    },
   },
   modules: {
   },

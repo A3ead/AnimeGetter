@@ -127,6 +127,7 @@ export default {
     window.scrollY >= 1500 ? this.scrollCheck = true : this.scrollCheck = false
     
   })
+  this.$store.dispatch('changeAuthenticationState')
 
   console.log(this.userLoggedin + 'in app mounted')
 
