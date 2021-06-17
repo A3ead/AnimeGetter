@@ -9,7 +9,6 @@ export default createStore({
     animeList:'',
     userID:'',
     username:'',
-    loggedinUser:''
   },
   mutations: {
     changeFetcheddata(state,newdata)
@@ -27,9 +26,6 @@ export default createStore({
     changeUsername(state,newdata){
       state.username = newdata
     },
-    changeLoggedinUser(state,newdata){
-      state.loggedinUser = newdata
-    }
 
   },
   actions: {
@@ -44,26 +40,6 @@ export default createStore({
       }
       else commit('changeUsername','no users found') 
     },
-  changeAuthenticationState({state,commit}){
-        new Promise ((resolve,reject)=>{  
-          auth.onAuthStateChanged((user) => {
-          if (user) {
-            console.log(!!user)
-            commit('changeLoggedinUser',true)
-            resolve ('resolve')
-            // User is signed in, see docs for a list of available properties
-            // https://firebase.google.com/docs/reference/js/firebase.User
-            // ...
-          } else {
-            commit('changeLoggedinUser',false)
-            reject ('reject')
-            // User is signed out
-            // ...
-          }
-       });
-     })
-
-    },
   },
   modules: {
   },
@@ -72,7 +48,6 @@ export default createStore({
     animelistGetter: state=>state.animeList,
     userIDGetter: state=>state.userID,
     usernameGetter : state=> state.username,
-    loggedinUserGetter : state=> state.loggedinUser
 
   // computed: {
   //   ...mapState(['fetcheddata','animeList','userID'])

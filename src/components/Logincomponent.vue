@@ -19,8 +19,7 @@
 </template>
 
 <script>
-import firebase from 'firebase'
-
+import {auth} from '../firebase'
 
 export default {
   name: 'Logincomponent',
@@ -37,12 +36,11 @@ export default {
     }
   },
   mounted(){
-   console.log(firebase.auth().currentUser)
+
   },
   methods:{
       login(){
-          firebase
-          .auth()
+          auth
           .signInWithEmailAndPassword(this.email,this.password)
           .then(()=>{
               console.log('user logged in')
