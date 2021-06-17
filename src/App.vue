@@ -1,5 +1,4 @@
 <template>
-<div>Hello {{userID}}</div>
  <div class='search-div'>
         <div class='title-and-menu'>
             <router-link class="website-title" to="/">ANIME GETTER</router-link>
@@ -11,12 +10,6 @@
                   <router-link class="menu-item" to="/register">Register</router-link>
                   <router-link class="menu-item" to="/login">Sign in</router-link>
               </div>
-            <div class="login-dropdown-container" id="login-dropdown-parent" tabindex="0" >
-                <button @click="loginDropdown = !loginDropdown, focusLogin()">Login Drop</button>
-                <div v-if="loginDropdown==true" class="login-dropdown" tabindex="0">
-                   <Logincomponent :small="true"/>
-                </div>
-           </div>
         <div class="search-toggle-container">
          <div class="dark-mode-toggle-switch">
            <Font-awesome-icon :icon="awesomeIcons.faSun" />
@@ -32,15 +25,20 @@
               <div v-if="searchDropDown==true" class="search-dropdown" tabindex="0"><SearchDropdown :searchResults='searchResults'/></div>
               <button class='search-button' v-on:click='getdata(), sendSearch()'><Font-awesome-icon :icon="awesomeIcons.faSearch" /></button>
           </div>
-          <div id="profile-dropdown-parent" class="profile-dropdown-parent" tabindex="0" @click="profileDropDown = !profileDropDown, focusProfile()">
-            <div class="profile-div" @click="focusProfile()"><Font-awesome-icon :icon="awesomeIcons.faUser" /> <span style="margin: 0px 5px;">A3ead</span><Font-awesome-icon :icon="awesomeIcons.faAngleDown" /> </div>
+          <div v-if="userLoggedin==true" id="profile-dropdown-parent" class="profile-dropdown-parent" tabindex="0" @click="profileDropDown = !profileDropDown, focusProfile()">
+            <div class="profile-div" @click="focusProfile()"><Font-awesome-icon :icon="awesomeIcons.faUser" /> <span style="margin: 0px 5px;">{{username}}</span><Font-awesome-icon :icon="awesomeIcons.faAngleDown" /> </div>
             <div v-if="profileDropDown==true" class="profile-dropdown" tabindex="0">
               <div class="profile-dropdown-element"><Font-awesome-icon :icon="awesomeIcons.faUserAlt" /><span style="margin: 0px 5px;">Profile</span></div>
               <div class="profile-dropdown-element"><Font-awesome-icon :icon="awesomeIcons.faListAlt" /><span style="margin: 0px 5px;">Anime List</span></div>
               <div class="profile-dropdown-element" @click="logout()"><Font-awesome-icon :icon="awesomeIcons.faSignOutAlt" /><span style="margin: 0px 6px;">Logout</span></div>
             </div>
-
           </div>
+           <div v-else class="login-dropdown-container" id="login-dropdown-parent" tabindex="0" >
+            <button class="website-login-button" @click="loginDropdown = !loginDropdown, focusLogin()">Login Drop</button>
+            <div v-if="loginDropdown==true" class="login-dropdown" tabindex="0">
+                <Logincomponent :small="true"/>
+            </div>
+           </div>
         </div>
 
          </div>
@@ -92,10 +90,9 @@ export default {
       awesomeIcons: {faSun:faSun, faMoon:faMoon, faArrowUp:faArrowUp, faSearch:faSearch, faUser:faUser, faAngleDown:faAngleDown, faSignOutAlt:faSignOutAlt, faListAlt:faListAlt, faUserAlt:faUserAlt},
       scrollCheck:false,
       apiIP: ipServer,
-      username:'',
       //userID:'',
       profileDropDown:false,
-      loginDropdown: false
+      loginDropdown: false,
 
     }
   },
@@ -125,30 +122,13 @@ export default {
     //console.log('didnt if')
     this.searchDropDown = false  
   })
-    let profileParent = document.getElementById('profile-dropdown-parent')
-    profileParent.addEventListener('focusout', event=> {
-    if (profileParent.contains(event.relatedTarget)) {
-        // don't react to this
-        //console.log('ifffed')
-        return;
-    }
-    //console.log('didnt if')
-    this.profileDropDown = false  
-  })
-  let loginParent = document.getElementById('login-dropdown-parent')
-    loginParent.addEventListener('focusout', event=> {
-    if (loginParent.contains(event.relatedTarget)) {
-        // don't react to this
-        //console.log('ifffed')
-        return;
-    }
-    //console.log('didnt if')
-    this.loginDropdown = false  
-  })
+
   document.addEventListener('scroll',event=>{
     window.scrollY >= 1500 ? this.scrollCheck = true : this.scrollCheck = false
     
   })
+
+  console.log(this.userLoggedin + 'in app mounted')
 
     
     
@@ -198,9 +178,29 @@ export default {
     },
     focusProfile(){
       document.getElementById('profile-dropdown-parent').focus()
+      let profileParent = document.getElementById('profile-dropdown-parent')
+      profileParent.addEventListener('focusout', event=> {
+      if (profileParent.contains(event.relatedTarget)) {
+        // don't react to this
+        //console.log('ifffed')
+        return;
+     }
+    //console.log('didnt if')
+    this.profileDropDown = false  
+  })
     },
     focusLogin(){
       document.getElementById('login-dropdown-parent').focus()
+      let loginParent = document.getElementById('login-dropdown-parent')
+      loginParent.addEventListener('focusout', event=> {
+      if (loginParent.contains(event.relatedTarget)) {
+        // don't react to this
+        console.log('ifffed')
+        return;
+    }
+    console.log('didnt if')
+    this.loginDropdown = false  
+  })
     },
     darkModeToggle(){
       function setPropertyLeDocument(varName, value){
@@ -241,6 +241,8 @@ export default {
       auth.signOut()
       .then(()=>{
         console.log('signed out ' + auth.currentUser)
+              this.$store.commit('changeLoggedinUser',false)
+
       })
     },
     consoling(){
@@ -252,7 +254,9 @@ export default {
   },
   computed:{
     //...mapGetters(['userID'])
-    userID(){return this.$store.getters.usernameGetter}
+    username(){return this.$store.getters.usernameGetter},
+    userLoggedin(){return this.$store.getters.loggedinUserGetter}
+    
   }
 }
 </script>

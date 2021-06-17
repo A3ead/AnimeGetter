@@ -46,6 +46,8 @@ export default {
           .signInWithEmailAndPassword(this.email,this.password)
           .then(()=>{
               console.log('user logged in')
+              this.$store.commit('changeLoggedinUser',true)
+
           })
       }
   }

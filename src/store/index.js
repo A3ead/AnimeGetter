@@ -1,13 +1,33 @@
 import { createStore } from 'vuex'
 import { mapState } from 'vuex'
-import {db} from '../firebase'
+import {auth, db} from '../firebase'
+
+async function checkUserAuthenticated(){
+  await new Promise ((resolve,reject)=>{  
+    auth.onAuthStateChanged((user) => {
+    if (user) {
+      console.log(!!user)
+
+      resolve (true)
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      // ...
+    } else {
+      reject (false)
+      // User is signed out
+      // ...
+    }
+  });
+})}
+let userAuthenticated = checkUserAuthenticated()
 
 export default createStore({
   state: {
     fetcheddata:{title:'',synopsis:'',episodes:'',rating:'',image:'',imagelink:''},
     animeList:'',
     userID:'',
-    username:''
+    username:'',
+    loggedinUser:false || userAuthenticated
   },
   mutations: {
     changeFetcheddata(state,newdata)
@@ -24,6 +44,9 @@ export default createStore({
     },
     changeUsername(state,newdata){
       state.username = newdata
+    },
+    changeLoggedinUser(state,newdata){
+      state.loggedinUser = newdata
     }
 
   },
@@ -46,7 +69,9 @@ export default createStore({
     fetcheddataGetter: state=>state.fetcheddata,
     animelistGetter: state=>state.animeList,
     userIDGetter: state=>state.userID,
-    usernameGetter : state=> state.username
+    usernameGetter : state=> state.username,
+    loggedinUserGetter : state=> state.loggedinUser
+
   // computed: {
   //   ...mapState(['fetcheddata','animeList','userID'])
   // }

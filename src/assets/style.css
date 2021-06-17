@@ -282,10 +282,31 @@ border-radius: 50%;
 }
 .login-dropdown{
     position: absolute;
+    right: 0px;
     max-width: 50rem;
     max-height: 50rem;
     box-shadow: #00000000 1px 1px 3px 1px;;
     
+}
+.website-login-button{
+    background-color: blueviolet;
+    margin-left: 1px;
+    padding: 20px;
+    font-weight: bold;
+    font-size: large;
+    color: #ffffff;
+    border: solid 1px #ffffff;
+    border-radius: 5px;
+    font-family: roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.website-login-button:hover{
+    background-color: rgba(255, 255, 255, 0.411);
+    margin-left: 1px;
+    border: solid 1px #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
 }
 .search-input
 {
