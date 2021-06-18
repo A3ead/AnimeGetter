@@ -2,7 +2,7 @@
 <div :class="{'login-card-container': !small, 'login-card-container-small': small}">
   <div :class="{'login-card': !small, 'login-card-small': small}">
     <div :class="{'login-card-title': !small, 'login-card-title-small': small}">SIGN IN</div>
-    <form class="login-form" @submit.prevent="login()">
+    <form class="login-form" @submit.prevent="login()" novalidate>
       <label :class="{'login-form-text': !small, 'login-form-text-small': small}" for="username-input">Username</label>
       <input :class="{'login-form-input': !small, 'login-form-input-small': small}" id="username-input" type="text" v-model="email">
       <label :class="{'login-form-text': !small, 'login-form-text-small': small}" for="password-input">Password</label>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {auth} from '../firebase'
+import {auth, db} from '../firebase'
 
 export default {
   name: 'Logincomponent',
@@ -39,14 +39,37 @@ export default {
 
   },
   methods:{
-      login(){
-          auth
-          .signInWithEmailAndPassword(this.email,this.password)
-          .then(()=>{
-              console.log('user logged in')
-              this.$store.commit('changeLoggedinUser',true)
+      test(){
 
-          })
+      },
+      login(){
+          let userinput = document.getElementById('username-input')
+          userinput.type = 'email'
+          let isemail = userinput.validity.valid
+          console.log(userinput.type, userinput.validity.valid)
+          if (isemail == true && this.email != '')
+          {
+            auth
+            .signInWithEmailAndPassword(this.email,this.password)
+            .then(()=>{
+                console.log('user logged in')
+
+            })
+          }
+          else if (isemail == false && this.email != '')
+          {
+
+            db.collection('usernames').doc(this.email).get()
+            .then((doc)=>{
+              auth
+              .signInWithEmailAndPassword(doc.data().Email,this.password)
+              .then(()=>{
+                  console.log('user logged in')
+
+              })
+            })
+          }
+
       }
   }
 }

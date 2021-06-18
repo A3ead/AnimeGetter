@@ -94,6 +94,7 @@ export default {
       profileDropDown:false,
       loginDropdown: false,
       isLoggedIn: '',
+      
     }
   },
   mixins:[AnimeInfo_mixins],
@@ -129,8 +130,8 @@ export default {
   })
   auth.onAuthStateChanged((user) => {
   if (user) {
-
     this.isLoggedIn = true
+    this.$store.commit('changeUsername',user.displayName)
   } else {
     this.isLoggedIn = false
   }
@@ -241,11 +242,10 @@ export default {
       window.scrollTo({top:0,left:0,behavior:'smooth'}) 
       },
     logout(){
-      console.log('current user is: ' + auth.currentUser.email)
+      //console.log('current user is: ' + auth.currentUser.email)
       auth.signOut()
       .then(()=>{
-        console.log('signed out ' + auth.currentUser)
-              this.$store.commit('changeLoggedinUser',false)
+        //console.log('signed out ' + auth.currentUser)
 
       })
     },
