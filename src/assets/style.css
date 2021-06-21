@@ -1034,10 +1034,15 @@ padding-top: 30px;
     top: 25px;
     right: 25px;
     color: red;
-    background-color: rgb(236, 120, 120);
+    background-color: rgba(236, 120, 120, 0.11);
     display: flex;
-    white-space: nowrap;
-    font-size: 14px;
-    padding: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 8px;
     border-radius: 3px;
+    border: solid 1px red;
+    word-wrap: normal;
+    overflow-wrap:normal;
+    width: 250px;
+
 }

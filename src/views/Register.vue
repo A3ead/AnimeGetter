@@ -136,6 +136,7 @@ export default {
         }
       },
       checkUsername(){
+        console.log(`Checking user name {${this.username}}`)
         this.username = this.username.trim()
         if (this.username == ''){
         this.usernameErrorBubbleText = 'Please enter a username'
@@ -147,7 +148,7 @@ export default {
         // console.log("trimmed username is: " + this.usernameDB)
           let regexUsername = /^\w+$/
           if (!regexUsername.test(this.usernameDB)){
-            this.usernameErrorBubbleText = 'Username may only contain letters, numbers, and underscores ( _ )'
+            this.usernameErrorBubbleText = 'Username may only contain letters,  numbers, and underscores ( _ )'
             this.usernameIcon = this.awesomeIcons.faTimes
           }
           else if (this.username.length > 16){
