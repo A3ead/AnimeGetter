@@ -7,8 +7,6 @@
                   <router-link class="menu-item" to="/top">Top Anime</router-link>
                   <router-link class="menu-item" to="/seasonal">Seasonal</router-link>
                   <router-link class="menu-item" to="/schedule">Schedule</router-link>
-                  <router-link class="menu-item" to="/register">Register</router-link>
-                  <router-link class="menu-item" to="/login">Sign in</router-link>
               </div>
         <div class="search-toggle-container">
          <div class="dark-mode-toggle-switch">
@@ -34,7 +32,7 @@
             </div>
           </div>
            <div v-if="isLoggedIn===false" class="login-dropdown-container" id="login-dropdown-parent" tabindex="0" >
-            <button class="website-login-button" @click="loginDropdown = !loginDropdown, focusLogin()">Login Drop</button>
+            <button class="website-login-button" @click="loginDropdown = !loginDropdown, focusLogin()">Login | Register</button>
             <div v-if="loginDropdown==true" class="login-dropdown" tabindex="0">
                 <Logincomponent :small="true"/>
             </div>
