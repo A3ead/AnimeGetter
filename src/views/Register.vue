@@ -28,7 +28,7 @@
       </label>
       <input class="login-form-input" id="passwordR-input" type="password" v-model="passwordR">
       <div class="login-form-button-container">
-        <button class="login-button" type="submit">Sign up</button>
+        <button class="login-button" type="submit" :disabled="SignupDisabled==true">Sign up</button>
       </div>
     </form>
   </div>
@@ -213,7 +213,7 @@ export default {
       },
 
       register(){
-        if (this.emailIcon == this.awesomeIcons.faCheck && this.usernameIcon == this.awesomeIcons.faCheck && this.passwordIcon == this.awesomeIcons.faCheck && this.passwordRIcon == this.awesomeIcons.faCheck) {
+        if (!this.SignupDisabled) {
           auth
           .createUserWithEmailAndPassword(this.emailLowerCase,this.password)
           .then(()=>{
@@ -258,9 +258,18 @@ export default {
         .collection('users')
         .doc('testdoc')
         .set({Email:this.email, Password:this.password, Username:this.username, RegisterationDate:new Date()})
-        
-        
+          
       }
+  },
+  computed:{
+    SignupDisabled: function(){
+     if (this.emailIcon == this.awesomeIcons.faCheck && this.usernameIcon == this.awesomeIcons.faCheck && this.passwordIcon == this.awesomeIcons.faCheck && this.passwordRIcon == this.awesomeIcons.faCheck) {
+       return false
+     }
+     else {
+       return true
+      }
+    }
   }
 }
 </script>

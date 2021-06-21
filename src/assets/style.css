@@ -979,6 +979,13 @@ padding-top: 30px;
     border-radius: 5px;
     font-size: larger;
 }
+.login-button:disabled, 
+.login-button[disabled]:hover{
+    background-color: rgba(128, 128, 128, 0.418);
+    cursor: default;
+    border: none;
+    color: var(--main-button-text-color);
+}
 .login-button-small
 {
     color: var(--main-button-text-color);
