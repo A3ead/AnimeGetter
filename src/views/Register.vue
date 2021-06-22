@@ -8,25 +8,25 @@
           <div v-if="emailErrorBubble==true && emailIcon == awesomeIcons.faTimes" class="login-error-icon-message">{{emailErrorBubbleText}}</div>
         </div>
       </label>
-      <input class="login-form-input" id="email-input" type="email" v-model="email">
+      <input @keydown="emailInputFired()" class="login-form-input" id="email-input" type="email" v-model="email">
       <label class="login-form-text" for="username-input">Username
         <div id="login-username-error-icon" class="login-error-icon"><div v-if="usernameIcon!=''"><Font-awesome-icon :icon="usernameIcon"/></div>
           <div v-if="usernameErrorBubble==true && usernameIcon == awesomeIcons.faTimes" class="login-error-icon-message">{{usernameErrorBubbleText}}</div>
         </div>
       </label>
-      <input class="login-form-input" id="username-input" type="text" v-model="username">
+      <input @keydown="usernameInputFired()" class="login-form-input" id="username-input" type="text" v-model="username">
       <label class="login-form-text" for="password-input">Password
         <div id="login-password-error-icon" class="login-error-icon"><div v-if="passwordIcon!=''"><Font-awesome-icon :icon="passwordIcon"/></div>
           <div v-if="passwordErrorBubble==true && passwordIcon == awesomeIcons.faTimes" class="login-error-icon-message">{{passwordErrorBubbleText}}</div>
         </div>
       </label>
-      <input class="login-form-input" id="password-input" type="password" v-model="password">
+      <input @keydown="passwordInputFired()" class="login-form-input" id="password-input" type="password" v-model="password">
       <label class="login-form-text" for="passwordR-input">Repeat Password 
         <div id="login-passwordR-error-icon" class="login-error-icon"><div v-if="passwordRIcon!=''"><Font-awesome-icon :icon="passwordRIcon"/></div>
           <div v-if="passwordRErrorBubble==true && passwordRIcon == awesomeIcons.faTimes" class="login-error-icon-message">{{passwordRErrorBubbleText}}</div>
         </div>
       </label>
-      <input class="login-form-input" id="passwordR-input" type="password" v-model="passwordR">
+      <input @keydown="passwordRInputFired()" class="login-form-input" id="passwordR-input" type="password" v-model="passwordR">
       <div class="login-form-button-container">
         <button class="login-button" type="submit" :disabled="SignupDisabled==true">Sign up</button>
       </div>
@@ -65,7 +65,7 @@ export default {
      
     }
   },
-  mounted(){ 
+  mounted(){
     let emailErrorIcon = document.getElementById('login-email-error-icon')
     let usernameErrorIcon = document.getElementById('login-username-error-icon')
     let passwordErrorIcon = document.getElementById('login-password-error-icon')
@@ -80,34 +80,25 @@ export default {
     passwordRErrorIcon.addEventListener('mouseover', event=>{this.passwordRErrorBubble = true})
     passwordRErrorIcon.addEventListener('mouseout', event=>{this.passwordRErrorBubble = false})
 
-    let emailInput = document.getElementById('email-input')
-    emailInput.addEventListener('keydown', event=>{
-      clearTimeout(this.timer)
-      this.timer = setTimeout(()=>{this.checkEmail()},500)
-    })
-
-    let usernameInput = document.getElementById('username-input')
-    usernameInput.addEventListener('keydown', event=>{
-      clearTimeout(this.timer)
-      this.timer = setTimeout(()=>{this.checkUsername()},500)
-    })
-
-    let passwordInput = document.getElementById('password-input')
-    passwordInput.addEventListener('keydown', event=>{
-      clearTimeout(this.timer)
-      this.timer = setTimeout(()=>{this.checkPassword()},500)
-    })
-
-    let passwordRInput = document.getElementById('passwordR-input')
-    passwordRInput.addEventListener('keydown', event=>{
-      clearTimeout(this.timer)
-      this.timer = setTimeout(()=>{this.checkPasswordR()},500)
-    })
-   
   },
   methods:{
-      test(){
+      emailInputFired(){
+        clearTimeout(this.timer)
+        this.timer = setTimeout(()=>{this.checkEmail()},500)
       },
+      usernameInputFired(){
+        clearTimeout(this.timer)
+        this.timer = setTimeout(()=>{this.checkUsername()},500)
+      },
+      passwordInputFired(){
+        clearTimeout(this.timer)
+        this.timer = setTimeout(()=>{this.checkPassword(), this.checkPasswordR()},500) 
+      },
+      passwordRInputFired(){
+        clearTimeout(this.timer)
+        this.timer = setTimeout(()=>{this.checkPasswordR()},500) 
+      },
+
       checkEmail(){
         this.email = this.email.trim()
         if (this.email == ''){
