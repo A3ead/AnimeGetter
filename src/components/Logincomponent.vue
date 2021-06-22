@@ -8,6 +8,7 @@
       <label :class="{'login-form-text': !small, 'login-form-text-small': small}" for="password-input">Password</label>
       <input :class="{'login-form-input': !small, 'login-form-input-small': small}" id="password-input" type="password" v-model="password">
       <div :class="{'login-form-button-container': !small, 'login-form-button-container-small': small}">
+        <div v-if="invalidUserOrPs" :class="{'login-error-div': !small, 'login-error-div-small': small}">Invalid username or password.</div>
         <button :class="{'login-button': !small, 'login-button-small': small}" type="submit">Sign in</button>
         <div>Not signed up? <span class="login-to-register" @click="$router.push({name:'Register Page'})">click here</span> to create an account!</div>
       </div>
@@ -33,6 +34,7 @@ export default {
     return{
      email:'',
      password:'',
+     invalidUserOrPs:false
     }
   },
   mounted(){
@@ -46,7 +48,7 @@ export default {
           let userinput = document.getElementById('username-input')
           userinput.type = 'email'
           let isemail = userinput.validity.valid
-          console.log(userinput.type, userinput.validity.valid)
+          //console.log(userinput.type, userinput.validity.valid)
           if (isemail == true && this.email != '')
           {
             auth
@@ -54,6 +56,9 @@ export default {
             .then(()=>{
                 console.log('user logged in')
 
+            })
+            .catch(()=>{
+              this.invalidUserOrPs = true
             })
           }
           else if (isemail == false && this.email != '')
@@ -64,9 +69,15 @@ export default {
               auth
               .signInWithEmailAndPassword(doc.data().Email,this.password)
               .then(()=>{
-                  console.log('user logged in')
+                 console.log('user logged in')
 
               })
+              .catch(()=>{
+                 this.invalidUserOrPs = true
+               })
+            })
+            .catch(()=>{
+              this.invalidUserOrPs = true
             })
           }
 

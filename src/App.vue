@@ -198,10 +198,10 @@ export default {
       loginParent.addEventListener('focusout', event=> {
       if (loginParent.contains(event.relatedTarget)) {
         // don't react to this
-        console.log('ifffed')
+        //console.log('ifffed')
         return;
     }
-    console.log('didnt if')
+    //console.log('didnt if')
     this.loginDropdown = false  
   })
     },
