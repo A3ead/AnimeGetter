@@ -1059,3 +1059,21 @@ padding-top: 30px;
 .login-error-div {
     margin: 0px;
 }
+.profile-page-container{
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.profile-page-tab-selector-div{
+    display: flex;
+    justify-content: flex-start;
+    background-color: var(--main-card-bg-color);
+    box-shadow: #0000002b 2px 2px 6px 1px;
+    border-radius: 5px;
+    border-top: solid 2px blueviolet;
+    padding: 10px;
+    margin-left: 65px;
+    margin-right: 65px;
+    margin-top: 10px;
+}
