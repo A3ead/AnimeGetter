@@ -64,7 +64,7 @@ export default {
           else if (isemail == false && this.email != '')
           {
 
-            db.collection('usernames').doc(this.email).get()
+            db.collection('usernames').doc(this.email.toLowerCase()).get()
             .then((doc)=>{
               auth
               .signInWithEmailAndPassword(doc.data().Email,this.password)
