@@ -8,7 +8,8 @@
         <div v-if="currentTab=='profile'" class="profile-tab-user"></div>
         <div v-if="currentTab=='settings'" class="profile-tab-settings">
             <div class="profile-page-card">
-                <div v-if="firstTime" class="profile-page-firsttime-msg"> Welcome, you can enter more information about yourself here</div>
+                <div v-if="firstTime" class="profile-page-firsttime-msg">Welcome, you can enter more information about yourself here</div>
+                <ProfileSettings/>
             </div>
             
         </div>
@@ -20,22 +21,23 @@
 
 <script>
 
+import ProfileSettings from '@/components/ProfileSettings.vue'
 
 export default {
   name: 'Profile',
   
   components: {
+      ProfileSettings
       
 
   },
     data(){
     return{
-        currentTab: 'profile',
+        currentTab: this.$route.params.tab || 'profile',
         firstTime: this.$route.query.firstTime
     }
   },
   mounted(){
-   
   },
   methods:{
     highlightFilter(filterID){

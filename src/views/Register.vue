@@ -203,7 +203,6 @@ export default {
           }
         }
       },
-
       register(){
         if (!this.SignupDisabled) {
           auth
@@ -237,12 +236,14 @@ export default {
               .collection('emails')
               .doc(this.emailLowerCase)
               .set({exists:true})
-              })
+
+              this.$router.push({name:'Profile Page',query:{firstTime:true}, params:{tab:'settings'}}) 
+          })    
           .catch((error)=>{
             console.log('catch error in register')
             console.log(error)
           })
-        }       
+        }
       },
       addToDatabase(){
         db
