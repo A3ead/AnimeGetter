@@ -1080,7 +1080,7 @@ padding-top: 30px;
     background-color: var(--main-card-bg-color);
     margin-top: 30px;
     padding: 20px;
-    height: 700px;
+    height: clamp(700px, 1000px, 2000px);
     display: flex;
     flex-direction: column;
     /* align-items: center;
@@ -1108,4 +1108,49 @@ padding-top: 30px;
     justify-content: flex-start;
     align-items: flex-start;
     
+}
+.profile-page-settings-profile-picture-div{
+    display: flex;
+}
+.gender-selector, .nation-selector{
+    background-color: var(--main-card-bg-color);
+    color: var(--main-text-color);
+    padding: 10px;
+    font-size: 18px;
+    border: solid 1px blueviolet;
+    border-radius: 5px;
+}
+.gender-selector:focus, .nation-selector:focus{
+    outline: none;
+}
+.gender-selector-option, .nation-selector-option{
+    font-size: 17px;
+}
+.date-selector{
+    background-color: var(--main-card-bg-color);
+    color: var(--main-text-color);
+    padding: 10px;
+    border: solid 1px blueviolet;
+    font-size: 18px;
+    border-radius: 5px;
+}
+.date-selector:focus{
+    outline: none;
+}
+.date-selector::-webkit-calendar-picker-indicator{
+   background-color: #f0f0f0;
+
+   
+}
+.profile-page-settings-input-text{
+    background-color: var(--main-card-bg-color);
+    color: var(--main-text-color);
+    padding: 10px;
+    font-size: 18px;
+    border: solid 1px blueviolet;
+    border-radius: 5px;
+}
+.profile-page-settings-input-text:focus{
+    outline: none;
+    box-shadow: blueviolet 0px 0px 4px 1px;
 }
