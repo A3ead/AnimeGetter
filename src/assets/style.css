@@ -1166,3 +1166,16 @@ padding-top: 30px;
     width: 700px;
     margin-top: 35px;
 }
+.profile-page-settings-input-textarea{
+    background-color: var(--main-card-bg-color);
+    color: var(--main-text-color);
+    padding: 10px;
+    border: solid 1px blueviolet;
+    font-size: 18px;
+    border-radius: 5px;
+
+}
+.profile-page-settings-input-textarea:focus{
+    outline: none;
+    box-shadow: blueviolet 0px 0px 4px 1px;
+}

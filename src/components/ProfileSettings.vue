@@ -12,13 +12,10 @@
             </div>
             <div class="settings-detail">Birthday: <input type="date" class="date-selector" name="birthday"></div>
             <div class="settings-detail">Nationality: <Nationalities/></div>
-            <div class="settings-detail">Location: <input class="profile-page-settings-input-text" type="text"></div>
-            
-            <div class="settings-detail">First Anime: <input class="profile-page-settings-input-text" type="text"></div>
-            
-            <div class="settings-detail">First Manga:  <input class="profile-page-settings-input-text" type="text"></div>
-           
-            <div class="settings-detail">Bio: <textarea name="bio" cols="30" rows="10"></textarea></div>
+            <div class="settings-detail">Location: <input class="profile-page-settings-input-text" type="text"></div> 
+            <div class="settings-detail">First Anime: <input class="profile-page-settings-input-text" type="text"></div>  
+            <div class="settings-detail">First Manga:  <input class="profile-page-settings-input-text" type="text"></div> 
+            <div class="settings-detail">Bio: <textarea class="profile-page-settings-input-textarea" name="bio" cols="30" rows="10"></textarea></div>
             
 
         </div>
