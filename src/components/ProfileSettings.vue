@@ -1,7 +1,7 @@
 <template>
     <div class="profile-page-settings-container">
         <div class="profile-page-settings-title">Details:</div>
-        <div class="profile-page-settings-profile-picture-div">Profile Picture: <img src="https://cdn.myanimelist.net/images/userimages/3936693.jpg?t=1624917000" alt="" srcset=""><input type="file" name="profile-pic"></div>
+        <div class="profile-page-settings-profile-picture-div">Profile Picture: <img class="profile-page-settings-profile-picture" src="https://cdn.myanimelist.net/images/userimages/3936693.jpg?t=1624917000" alt="" srcset=""><input type="file" name="profile-pic"></div>
         
         <div class="profile-page-settings-details">
             <div>Gender: <select class="gender-selector" name="gender">
@@ -39,7 +39,6 @@ export default {
   },
     data(){
     return{
-
     }
   },
   mounted(){
@@ -47,7 +46,6 @@ export default {
   },
   methods:{
 
-      
       
   }
 }
