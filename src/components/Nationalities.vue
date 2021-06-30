@@ -1,5 +1,5 @@
 <template> 
-            <select id="country" name="country" class="nation-selector">
+            <select id="country" name="country" class="nation-selector" v-model="nationality">
                 <option class="nation-selector-option" value="Afghanistan">Afghanistan</option>
                 <option class="nation-selector-option" value="Åland Islands">Åland Islands</option>
                 <option class="nation-selector-option" value="Albania">Albania</option>
@@ -260,7 +260,7 @@ export default {
   },
     data(){
     return{
-
+      nationality:''
     }
   },
   mounted(){
@@ -268,6 +268,9 @@ export default {
   methods:{
 
 
+  },
+  watch:{
+    nationality:function(){this.$emit('getNationality',this.nationality)}
   }
 }
 </script>
