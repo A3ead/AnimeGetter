@@ -1045,6 +1045,22 @@ padding-top: 30px;
     overflow-wrap:normal;
     width: 250px;
 }
+.settings-error-icon-message{
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    color: red;
+    background-color: rgba(236, 120, 120, 0.11);
+    display: flex;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 8px;
+    border-radius: 3px;
+    border: solid 1px red;
+    word-wrap: normal;
+    overflow-wrap:normal;
+    width: 250px;
+}
 .login-error-div-small,.login-error-div{
     color: red;
     background-color: rgba(236, 120, 120, 0.11);
@@ -1178,4 +1194,11 @@ padding-top: 30px;
 .profile-page-settings-input-textarea:focus{
     outline: none;
     box-shadow: blueviolet 0px 0px 4px 1px;
+}
+.settings-detail-username-input-div{
+    display: flex;
+    flex-direction: row;
+    min-width: 270px;
+    justify-content: space-between;
+    align-items: flex-start;
 }

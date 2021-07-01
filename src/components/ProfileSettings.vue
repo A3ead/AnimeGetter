@@ -4,7 +4,18 @@
         <div>Profile Picture:</div>
         <div class="profile-page-settings-profile-picture-div"><img class="profile-page-settings-profile-picture" :src="imgURL" alt="" srcset=""><div style="margin-left: 5px;"><input class="profile-page-settings-input-image" type="file" name="profile-pic" size="50" @change="changePP"></div></div>
         <div class="profile-page-settings-details">
-            <div class="settings-detail">Username:<input class="profile-page-settings-input-text" type="text" v-model="location"></div> 
+            <div>    
+                <div @keydown="usernameInputFired()" class="settings-detail"><div class="settings-detail-username-input-div">Username:
+                    <div id="login-username-error-icon" class="login-error-icon"><div v-if="usernameIcon!=''"><Font-awesome-icon :icon="usernameIcon"/></div>
+                        <div v-if="usernameErrorBubble==true && usernameIcon == awesomeIcons.faTimes" class="settings-error-icon-message">{{usernameErrorBubbleText}}</div>
+                    </div>
+                    </div>
+                    <input class="profile-page-settings-input-text" type="text" v-model="username">
+                </div>
+
+            </div>
+
+
             <div class="settings-detail">Gender: <select class="gender-selector" name="gender" v-model="gender">
                 <option class="gender-selector-option" value="Male">Male</option>
                 <option class="gender-selector-option" value="Female">Female</option>
@@ -19,9 +30,9 @@
             <div class="settings-detail">Bio: <textarea class="profile-page-settings-input-textarea" name="bio" cols="30" rows="10" v-model="bio"></textarea></div>
 
         </div>
-        <div style="display:flex; justify-content:center; width:100%"><button class="button" @click="applyChanges()">Apply</button></div>
-        <div style="white-space:pre-wrap">{{test}}</div>
-        <!-- <button @click="testing()">test</button> -->
+        <div style="display:flex; justify-content:center; width:100%"><button class="login-button" @click="applyChanges()" :disabled="applyDisabled==true">Apply</button></div>
+        <!-- <div style="white-space:pre-wrap">{{test}}</div>
+        <button @click="testing()">test</button> -->
     </div>
 </template>
 
@@ -29,17 +40,22 @@
 <script>
 
 import Nationalities from '@/components/Nationalities.vue'
+import checkingMixins from '../mixins/checking_mixins'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import {faTimes, faCheck} from '@fortawesome/free-solid-svg-icons'
 import {db, auth} from '../firebase'
 
 export default {
   name: 'ProfileSettings',
   
   components: {
-      Nationalities
+    Nationalities,
+    FontAwesomeIcon,
 
   },
     data(){
     return{
+        username:'',
         gender:'',
         birthday:'',
         nationality:'',
@@ -48,6 +64,7 @@ export default {
         firstManga:'',
         bio:'',
         userID:auth.currentUser.uid,
+        awesomeIcons: {faTimes:faTimes, faCheck:faCheck},
         //test:'',
         imgURL:'https://cdn.discordapp.com/attachments/672949321032925185/859435116183027762/Untitled-1.png'
     }
@@ -55,6 +72,7 @@ export default {
   mounted(){
       
   },
+  mixins:[checkingMixins],
   methods:{
       changePP(e){
           let uploadImage = e.target.files[0]
@@ -75,6 +93,16 @@ export default {
     //           this.test = doc.data().Bio
     //       })
     //   }
-  }
+  },
+    computed:{
+      applyDisabled: function(){
+       if (this.usernameIcon != this.awesomeIcons.faTimes || this.username == '') {
+         return false
+       }
+       else {
+         return true
+        }
+      }
+    }
 }
 </script>
