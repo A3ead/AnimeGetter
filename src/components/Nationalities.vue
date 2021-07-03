@@ -253,6 +253,10 @@
 
 export default {
   name: 'Nationalities',
+
+  props:{
+    nationality:''
+  },
   
   components: {
       
@@ -260,7 +264,7 @@ export default {
   },
     data(){
     return{
-      nationality:''
+      
     }
   },
   mounted(){

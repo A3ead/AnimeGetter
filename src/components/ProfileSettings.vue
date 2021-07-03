@@ -23,7 +23,7 @@
             </select>
             </div>
             <div class="settings-detail">Birthday: <input type="date" class="date-selector" name="birthday" v-model="birthday"></div>
-            <div class="settings-detail">Nationality: <Nationalities @getNationality="setNationality"></Nationalities></div>
+            <div class="settings-detail">Nationality: <Nationalities @getNationality="setNationality" :nationality="nationality"></Nationalities></div>
             <div class="settings-detail">Location: <input class="profile-page-settings-input-text" type="text" v-model="location"></div> 
             <div class="settings-detail">First Anime: <input class="profile-page-settings-input-text" type="text" v-model="firstAnime"></div>  
             <div class="settings-detail">First Manga:  <input class="profile-page-settings-input-text" type="text" v-model="firstManga"></div> 
@@ -63,6 +63,7 @@ export default {
         firstAnime:'',
         firstManga:'',
         bio:'',
+        currentUsername:'',
         userID:auth.currentUser.uid,
         awesomeIcons: {faTimes:faTimes, faCheck:faCheck},
         //test:'',
@@ -70,7 +71,20 @@ export default {
     }
   },
   mounted(){
-      
+      db.collection('users').doc(this.userID).get()
+      .then((doc)=>{
+        this.username = doc.data().Username
+        this.gender = doc.data().Gender
+        this.birthday = doc.data().Birthday
+        this.nationality = doc.data().Nationality
+        this.location = doc.data().Location
+        this.firstAnime = doc.data().FirstAnime
+        this.firstManga = doc.data().FirstManga
+        this.bio = doc.data().Bio
+        this.currentUsername = this.username
+
+        console.log(doc.data())
+      })
   },
   mixins:[checkingMixins],
   methods:{

@@ -218,7 +218,7 @@ export default {
             // .firestore()
               .collection('users')
               .doc(this.userID)
-              .set({Email:this.email, Password:this.password, Username:this.username})
+              .set({Email:this.email, Password:this.password, Username:this.username, Gender:'', Birthday:'', Nationality:'', Location:'', FirstAnime:'', FirstManga:'', Bio:''})
               // .then(()=>{
               //     this.$store.commit('changeUserID',this.userID)
               //     this.$store.dispatch('getUsername')
