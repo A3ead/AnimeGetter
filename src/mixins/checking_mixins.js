@@ -26,7 +26,7 @@ export default {
             console.log(`Checking user name {${this.username}}`)
             this.username = this.username.trim()
             if (this.username == ''){
-            this.usernameErrorBubbleText = 'Please enter a username or leave empty to keep old'
+            this.usernameErrorBubbleText = 'Please enter a username'
             this.usernameIcon = this.awesomeIcons.faTimes
             }
             else {
@@ -49,7 +49,7 @@ export default {
               else {
                 db.collection('usernames').doc(this.usernameDB).get()
                 .then((doc)=>{
-                  if (doc.exists){
+                  if (doc.exists && doc.data().Username != this.currentUsername){
                     this.usernameErrorBubbleText = 'An account with this username already exists'
                     this.usernameIcon = this.awesomeIcons.faTimes
                   }

@@ -43,7 +43,7 @@ import Nationalities from '@/components/Nationalities.vue'
 import checkingMixins from '../mixins/checking_mixins'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {faTimes, faCheck} from '@fortawesome/free-solid-svg-icons'
-import {db, auth} from '../firebase'
+import {db, auth, storage} from '../firebase'
 
 export default {
   name: 'ProfileSettings',
@@ -55,6 +55,7 @@ export default {
   },
     data(){
     return{
+        uploadImage:null,
         username:'',
         gender:'',
         birthday:'',
@@ -81,16 +82,22 @@ export default {
         this.firstAnime = doc.data().FirstAnime
         this.firstManga = doc.data().FirstManga
         this.bio = doc.data().Bio
-        this.currentUsername = this.username
+        this.currentUsername = this.username.toLowerCase()
 
-        console.log(doc.data())
+        //console.log(doc.data())
       })
   },
   mixins:[checkingMixins],
   methods:{
       changePP(e){
-          let uploadImage = e.target.files[0]
-          this.imgURL = URL.createObjectURL(uploadImage)
+          if (e.target.files[0].size <= 2097152){
+            this.uploadImage = e.target.files[0]
+            this.imgURL = URL.createObjectURL(this.uploadImage)
+          }
+          else {
+            alert('PP too big')
+          }
+
       },
       setNationality(recievedNationality){
           this.nationality = recievedNationality
@@ -100,6 +107,11 @@ export default {
           .collection('users')
           .doc(this.userID)
           .set({Gender:this.gender, Birthday:this.birthday, Nationality:this.nationality, Location:this.location, FirstAnime:this.firstAnime, FirstManga:this.firstManga, Bio:this.bio},{merge:true})
+          storage
+          .child(`ProfilePictures/${this.userID}`)
+          .put(this.uploadImage).then((snapshot) => {
+            console.log('Uploaded a blob or file!');
+          });
       },
     //   testing(){
     //       db.collection('users').doc(this.userID).get()
