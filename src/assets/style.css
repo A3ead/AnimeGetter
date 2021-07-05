@@ -1135,6 +1135,12 @@ padding-top: 30px;
 .profile-page-settings-profile-picture-div{
     display: flex;
 }
+.profile-page-settings-profile-picture{
+    height: 350px;
+    width: 225px;
+    object-fit: cover;
+}
+
 .gender-selector, .nation-selector{
     background-color: var(--main-card-bg-color);
     color: var(--main-text-color);
@@ -1177,10 +1183,7 @@ padding-top: 30px;
     outline: none;
     box-shadow: blueviolet 0px 0px 4px 1px;
 }
-.profile-page-settings-profile-picture{
-    height: 350px;
-    width: 225px;
-}
+
 .settings-detail{
     display: flex;
     flex-direction: column;

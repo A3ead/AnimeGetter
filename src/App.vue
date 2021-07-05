@@ -24,7 +24,7 @@
               <button class='search-button' v-on:click='getdata(), sendSearch()'><Font-awesome-icon :icon="awesomeIcons.faSearch" /></button>
           </div>
           <div v-if="isLoggedIn==true" id="profile-dropdown-parent" class="profile-dropdown-parent" tabindex="0" @click="profileDropDown = !profileDropDown, focusProfile()">
-            <div class="profile-div" @click="focusProfile()"><img class="profile-picture" :src="PPURL" alt=""> <span style="margin: 0px 5px;">{{username}}</span><Font-awesome-icon :icon="awesomeIcons.faAngleDown" /> </div>
+            <div class="profile-div" @click="focusProfile()"><Font-awesome-icon v-if="!PPURL" :icon="awesomeIcons.faUser" /><img v-else class="profile-picture" :src="PPURL" alt=""> <span style="margin: 0px 5px;">{{username}}</span><Font-awesome-icon :icon="awesomeIcons.faAngleDown" /> </div>
             <div v-if="profileDropDown==true" class="profile-dropdown" tabindex="0">
               <div class="profile-dropdown-element" @click="routeToProfile()"><Font-awesome-icon :icon="awesomeIcons.faUserAlt" /><span style="margin: 0px 5px;">Profile</span></div>
               <div class="profile-dropdown-element"><Font-awesome-icon :icon="awesomeIcons.faListAlt" /><span style="margin: 0px 5px;">Anime List</span></div>
