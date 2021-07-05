@@ -24,7 +24,7 @@
               <button class='search-button' v-on:click='getdata(), sendSearch()'><Font-awesome-icon :icon="awesomeIcons.faSearch" /></button>
           </div>
           <div v-if="isLoggedIn==true" id="profile-dropdown-parent" class="profile-dropdown-parent" tabindex="0" @click="profileDropDown = !profileDropDown, focusProfile()">
-            <div class="profile-div" @click="focusProfile()"><Font-awesome-icon :icon="awesomeIcons.faUser" /> <span style="margin: 0px 5px;">{{username}}</span><Font-awesome-icon :icon="awesomeIcons.faAngleDown" /> </div>
+            <div class="profile-div" @click="focusProfile()"><img class="profile-picture" :src="PPURL" alt=""> <span style="margin: 0px 5px;">{{username}}</span><Font-awesome-icon :icon="awesomeIcons.faAngleDown" /> </div>
             <div v-if="profileDropDown==true" class="profile-dropdown" tabindex="0">
               <div class="profile-dropdown-element" @click="routeToProfile()"><Font-awesome-icon :icon="awesomeIcons.faUserAlt" /><span style="margin: 0px 5px;">Profile</span></div>
               <div class="profile-dropdown-element"><Font-awesome-icon :icon="awesomeIcons.faListAlt" /><span style="margin: 0px 5px;">Anime List</span></div>
@@ -61,7 +61,7 @@ let {ipServer, ipHeroku} = config.apiLocation
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faSun, faMoon, faArrowUp, faSearch, faUser, faAngleDown, faSignOutAlt, faListAlt, faUserAlt} 
 from '@fortawesome/free-solid-svg-icons'
-import {db, auth} from './firebase'
+import {db, auth, storage} from './firebase'
 
 
 import { mapGetters } from 'vuex'
@@ -88,11 +88,10 @@ export default {
       awesomeIcons: {faSun:faSun, faMoon:faMoon, faArrowUp:faArrowUp, faSearch:faSearch, faUser:faUser, faAngleDown:faAngleDown, faSignOutAlt:faSignOutAlt, faListAlt:faListAlt, faUserAlt:faUserAlt},
       scrollCheck:false,
       apiIP: ipServer,
-      //userID:'',
+      //userID:auth.currentUser.uid,
       profileDropDown:false,
       loginDropdown: false,
       isLoggedIn: '',
-      
     }
   },
   mixins:[AnimeInfo_mixins],
@@ -130,10 +129,12 @@ export default {
   if (user) {
     this.isLoggedIn = true
     this.$store.commit('changeUsername',user.displayName)
+    this.$store.commit('changePP',user.photoURL)
   } else {
     this.isLoggedIn = false
   }
-});
+  });
+
     
   },
   methods:{
@@ -261,6 +262,7 @@ export default {
   computed:{
     //...mapGetters(['userID'])
     username(){return this.$store.getters.usernameGetter},
+    PPURL(){return this.$store.getters.PPGetter},
     //userLoggedin(){return this.$store.getters.loggedinUserGetter}
     
   }

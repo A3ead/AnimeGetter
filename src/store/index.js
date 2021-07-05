@@ -7,7 +7,8 @@ export default createStore({
   state: {
     fetcheddata:{title:'',synopsis:'',episodes:'',rating:'',image:'',imagelink:''},
     animeList:'',
-    username:''
+    username:'',
+    PPURL:''
   },
   mutations: {
     changeFetcheddata(state,newdata)
@@ -24,6 +25,9 @@ export default createStore({
     },
     changeUsername(state,newdata){
       state.username = newdata
+    },
+    changePP(state,newdata){
+      state.PPURL = newdata
     },
 
   },
@@ -47,6 +51,8 @@ export default createStore({
     animelistGetter: state=>state.animeList,
     //userIDGetter: state=>state.userID,
     usernameGetter : state=> state.username,
+    PPGetter : state=> state.PPURL,
+
 
   // computed: {
   //   ...mapState(['fetcheddata','animeList','userID'])

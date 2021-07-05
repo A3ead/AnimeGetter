@@ -2,7 +2,7 @@
     <div class="profile-page-settings-container">
         <div class="profile-page-settings-title">Details:</div>
         <div>Profile Picture:</div>
-        <div class="profile-page-settings-profile-picture-div"><img class="profile-page-settings-profile-picture" :src="imgURL" alt="" srcset=""><div style="margin-left: 5px;"><input class="profile-page-settings-input-image" type="file" name="profile-pic" size="50" @change="changePP"></div></div>
+        <div class="profile-page-settings-profile-picture-div"><img class="profile-page-settings-profile-picture" :src="imgURL" alt="" srcset=""><img class="profile-picture" :src="imgURL" alt=""><div style="margin-left: 5px;"><input class="profile-page-settings-input-image" type="file" name="profile-pic" size="50" @change="changePP"></div></div>
         <div class="profile-page-settings-details">
             <div>    
                 <div @keydown="usernameInputFired()" class="settings-detail"><div class="settings-detail-username-input-div">Username:
@@ -68,7 +68,8 @@ export default {
         userID:auth.currentUser.uid,
         awesomeIcons: {faTimes:faTimes, faCheck:faCheck},
         //test:'',
-        imgURL:'https://cdn.discordapp.com/attachments/672949321032925185/859435116183027762/Untitled-1.png'
+        imgURL:'https://cdn.discordapp.com/attachments/672949321032925185/859435116183027762/Untitled-1.png',
+        placeholderImgURL:'https://cdn.discordapp.com/attachments/672949321032925185/859435116183027762/Untitled-1.png'
     }
   },
   mounted(){
@@ -83,9 +84,9 @@ export default {
         this.firstManga = doc.data().FirstManga
         this.bio = doc.data().Bio
         this.currentUsername = this.username.toLowerCase()
-
         //console.log(doc.data())
       })
+      this.imgURL = auth.currentUser.photoURL
   },
   mixins:[checkingMixins],
   methods:{
@@ -107,11 +108,18 @@ export default {
           .collection('users')
           .doc(this.userID)
           .set({Gender:this.gender, Birthday:this.birthday, Nationality:this.nationality, Location:this.location, FirstAnime:this.firstAnime, FirstManga:this.firstManga, Bio:this.bio},{merge:true})
-          storage
-          .child(`ProfilePictures/${this.userID}`)
-          .put(this.uploadImage).then((snapshot) => {
-            console.log('Uploaded a blob or file!');
-          });
+          if (this.imgURL != this.placeholderImgURL) {
+            storage
+            .child(`ProfilePictures/${this.userID}`)
+            .put(this.uploadImage).then((snapshot) => {
+              snapshot.ref.getDownloadURL().then((url)=>{
+                auth.currentUser.updateProfile({photoURL:url})
+                this.$store.commit('changePP',url)
+
+              })
+              //console.log('Uploaded a blob or file!');
+            });
+          }
       },
     //   testing(){
     //       db.collection('users').doc(this.userID).get()
