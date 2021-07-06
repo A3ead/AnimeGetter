@@ -257,19 +257,6 @@ border-radius: 50%;
     
 }
 
-.search-input-focus {
-    width: 400px;
-    outline: none;
-    padding: 15px;
-    background-color: var(--main-card-bg-color);
-    border: none;
-    transition: all 0.2s;
-    
-}
-.search-input:focus{
-    outline: none;
-    width: 400px;
-}
 .search-dropdown-parent{
     position: relative;
 }

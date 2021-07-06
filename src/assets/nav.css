@@ -1,27 +1,25 @@
 
 #nav {
-
+    margin-left: 25px;
+    display: flex;
 }
   
 #nav a {
-    margin-left: 1px;
     padding: 20px;
+    border: solid 1px blueviolet;
     font-weight: bold;
     color: #ffffff;
+    height: clamp(15px, 19px, 19px);
 }
 
 #nav a.router-link-exact-active {
     background-color: rgba(255, 255, 255, 0.205);
-    margin-left: 0px;
-    margin-right: 14px;
     border: solid 1px #FFFFFF;
     border-radius: 5px;
 }
 
 #nav a:hover{
     background-color: rgba(255, 255, 255, 0.411);
-    margin-left: 0px;
-    margin-right: 14px;
     border: solid 1px #ffffff;
     border-radius: 5px;
 
@@ -31,8 +29,8 @@
 {   
     background-color: blueviolet;
     padding: 15px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     margin-bottom: 20px;
     display:flex;
     align-items: center;
@@ -51,8 +49,12 @@
 .menu-item
 {
     color: white;
-    margin-right: 15px;
+    margin-right: 10px;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 
 .website-title
@@ -71,6 +73,7 @@
 .search-profile-container{
     display: flex;
     align-items: center;
+    justify-content: center;
     
 }
 
@@ -84,11 +87,15 @@
 
 
 .website-login-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: blueviolet;
     margin-left: 1px;
-    padding: 20px;
+    padding: 12px;
+    max-height: 45px;
+    font-size: medium;
     font-weight: bold;
-    font-size: large;
     color: #ffffff;
     border: solid 1px blueviolet;
     border-radius: 5px;
@@ -112,4 +119,40 @@
     width: 200px;
     transition: width 0.2s;
     
+}
+
+.search-input-focus {
+    width: 400px;
+    outline: none;
+    padding: 15px;
+    background-color: var(--main-card-bg-color);
+    border: none;
+    transition: all 0.2s;
+    
+}
+.search-input:focus{
+    outline: none;
+    width: 400px;
+}
+
+@media only screen and (max-width: 1245px)  {
+    #nav {
+        display: none;
+    }
+    .search-div{
+        flex-direction: column;
+    }
+    
+    .search-input-focus {
+        width: 200px;       
+    }
+    .search-input:focus{
+        width: 200px;
+    }
+    .search-dropdown{
+        right: -50%;
+    }
+    .search-toggle-container{
+        width: 405px;
+    }
 }

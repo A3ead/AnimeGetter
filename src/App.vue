@@ -1,15 +1,18 @@
 <template>
  <div class='search-div'>
-        <router-link class="website-title" to="/">ANIME GETTER</router-link>
+        
         <div class='title-and-menu'>
-            
+              <router-link class="website-title" to="/">ANIME GETTER</router-link>
               <div id="nav">
                   <router-link class="menu-item" to="/">Home</router-link>
                   <router-link class="menu-item" to="/top">Top Anime</router-link>
                   <router-link class="menu-item" to="/seasonal">Seasonal</router-link>
                   <router-link class="menu-item" to="/schedule">Schedule</router-link>
               </div>
-        <div class="search-toggle-container">
+
+
+       </div>
+       <div class="search-toggle-container">
          <div class="dark-mode-toggle-switch">
            <Font-awesome-icon :icon="awesomeIcons.faSun" />
           <label class="switch" @change="darkModeToggle()">
@@ -41,9 +44,6 @@
         </div>
 
          </div>
-
-       </div>
-
     </div>
 
   <router-view/>
