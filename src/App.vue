@@ -1,7 +1,8 @@
 <template>
  <div class='search-div'>
+        <router-link class="website-title" to="/">ANIME GETTER</router-link>
         <div class='title-and-menu'>
-            <router-link class="website-title" to="/">ANIME GETTER</router-link>
+            
               <div id="nav">
                   <router-link class="menu-item" to="/">Home</router-link>
                   <router-link class="menu-item" to="/top">Top Anime</router-link>
@@ -270,34 +271,5 @@ export default {
 </script>
 
 <style>
-
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  margin-left: 1px;
-  padding: 20px;
-  font-weight: bold;
-  color: #ffffff;
-}
-
-#nav a.router-link-exact-active {
-  background-color: rgba(255, 255, 255, 0.205);
-  margin-left: 0px;
-  margin-right: 14px;
-  border: solid 1px #FFFFFF;
-  border-radius: 5px;
-}
-
-#nav a:hover{
-  background-color: rgba(255, 255, 255, 0.411);
-  margin-left: 0px;
-  margin-right: 14px;
-  border: solid 1px #ffffff;
-  border-radius: 5px;
-
-}
-
+@import './assets/nav.css';
 </style>

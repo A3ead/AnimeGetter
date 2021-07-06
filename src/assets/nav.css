@@ -1,0 +1,115 @@
+
+#nav {
+
+}
+  
+#nav a {
+    margin-left: 1px;
+    padding: 20px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+#nav a.router-link-exact-active {
+    background-color: rgba(255, 255, 255, 0.205);
+    margin-left: 0px;
+    margin-right: 14px;
+    border: solid 1px #FFFFFF;
+    border-radius: 5px;
+}
+
+#nav a:hover{
+    background-color: rgba(255, 255, 255, 0.411);
+    margin-left: 0px;
+    margin-right: 14px;
+    border: solid 1px #ffffff;
+    border-radius: 5px;
+
+}
+
+.search-div
+{   
+    background-color: blueviolet;
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0px;
+    z-index: 999;
+}
+
+.title-and-menu
+{
+    align-items: center;
+    display: flex;
+}
+
+.menu-item
+{
+    color: white;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.website-title
+{
+    color: white;
+    text-decoration: none;
+    font-size: xx-large;
+}
+
+.search-toggle-container{
+    width: 750px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.search-profile-container{
+    display: flex;
+    align-items: center;
+    
+}
+
+.dark-mode-toggle-switch{
+    color: var(--main-darkmode-icon-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 85px;
+}
+
+
+.website-login-button{
+    background-color: blueviolet;
+    margin-left: 1px;
+    padding: 20px;
+    font-weight: bold;
+    font-size: large;
+    color: #ffffff;
+    border: solid 1px blueviolet;
+    border-radius: 5px;
+    font-family: avenir, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.website-login-button:hover{
+    background-color: rgba(255, 255, 255, 0.411);
+    margin-left: 1px;
+    border: solid 1px #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.search-input
+{
+    color: var(--main-button-text-color);
+    padding: 15px;
+    background-color: var(--main-card-bg-color);
+    border: none;
+    width: 200px;
+    transition: width 0.2s;
+    
+}
