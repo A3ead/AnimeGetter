@@ -86,7 +86,9 @@ export default {
         this.currentUsername = this.username.toLowerCase()
         //console.log(doc.data())
       })
-      this.imgURL = auth.currentUser.photoURL
+      if (!!auth.currentUser.photoURL) {
+        this.imgURL = auth.currentUser.photoURL
+      }
   },
   mixins:[checkingMixins],
   methods:{
