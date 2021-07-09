@@ -1,4 +1,5 @@
 <template>
+ <MiniMenu v-if="showMiniMenu"/>
  <div class='search-div'>
         
         <div class='title-and-menu'>
@@ -9,6 +10,10 @@
                   <router-link class="menu-item" to="/seasonal">Seasonal</router-link>
                   <router-link class="menu-item" to="/schedule">Schedule</router-link>
               </div>
+              
+              <Font-awesome-icon :icon="awesomeIcons.faSearch" />
+              <Font-awesome-icon @click="showMiniMenu = !showMiniMenu" :icon="awesomeIcons.faBars" />
+              
 
 
        </div>
@@ -55,12 +60,14 @@ import axios from 'axios'
 import AnimeInfo_mixins from './mixins/AnimeInfo_mixins'
 import SearchDropdown from '@/components/SearchDropdown.vue'
 import Logincomponent from '@/components/Logincomponent.vue'
+import MiniMenu from '@/components/MiniMenu.vue'
+import miniSearch from '@/components/miniSearch.vue'
 
 import config from "./assets/config.json"
 let {ipServer, ipHeroku} = config.apiLocation
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faSun, faMoon, faArrowUp, faSearch, faUser, faAngleDown, faSignOutAlt, faListAlt, faUserAlt} 
+import { faSun, faMoon, faArrowUp, faSearch, faUser, faAngleDown, faSignOutAlt, faListAlt, faUserAlt, faBars} 
 from '@fortawesome/free-solid-svg-icons'
 import {db, auth, storage} from './firebase'
 
@@ -72,7 +79,9 @@ export default {
   components:{
         SearchDropdown,
         FontAwesomeIcon,
-        Logincomponent
+        Logincomponent,
+        MiniMenu,
+        miniSearch
     },
 
   data(){
@@ -86,13 +95,14 @@ export default {
       darkMode:false,
       dark:'#FFFFFF',
       darker:'#F7F6FB',
-      awesomeIcons: {faSun:faSun, faMoon:faMoon, faArrowUp:faArrowUp, faSearch:faSearch, faUser:faUser, faAngleDown:faAngleDown, faSignOutAlt:faSignOutAlt, faListAlt:faListAlt, faUserAlt:faUserAlt},
+      awesomeIcons: {faSun:faSun, faMoon:faMoon, faArrowUp:faArrowUp, faSearch:faSearch, faUser:faUser, faAngleDown:faAngleDown, faSignOutAlt:faSignOutAlt, faListAlt:faListAlt, faUserAlt:faUserAlt, faBars:faBars},
       scrollCheck:false,
       apiIP: ipServer,
       //userID:auth.currentUser.uid,
       profileDropDown:false,
       loginDropdown: false,
       isLoggedIn: '',
+      showMiniMenu: false,
     }
   },
   mixins:[AnimeInfo_mixins],
