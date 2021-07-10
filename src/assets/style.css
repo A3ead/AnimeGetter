@@ -561,7 +561,7 @@ border-radius: 50%;
 }
 .anime-card-title{
     min-height: 50px;
-    max-height: 70px;
+    max-height: fit-content;
     margin-right: 15px;
     display: flex;
     justify-content: center;
@@ -573,7 +573,7 @@ border-radius: 50%;
     color: blueviolet;
 }
 .anime-card-image {
-    min-height: 318px;
+    height: 318px;
     min-width: 225px;
     border-radius: 10px 10px 10px 10px;
     transform: scale(0.85);
@@ -591,7 +591,7 @@ border-radius: 50%;
 .card-container{
     /* background: linear-gradient(to top, blueviolet, rgba(255, 255, 255, 0)); */
     margin: 15px;
-    min-width: 32em;
+    min-width: clamp(22em, 22em,32em);
     max-width: 32em;
     padding: 0.05px;
     border-radius: 10px;
@@ -602,7 +602,6 @@ border-radius: 50%;
     justify-content: space-between;
     margin-top: 15px;
     margin-bottom: 15px;
-    min-width: 55%;
     max-width: 55%;
 
 }

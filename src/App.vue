@@ -1,5 +1,5 @@
 <template>
- <MiniMenu v-if="showMiniMenu"/>
+<MiniMenu v-if="showMiniMenu" @hideMiniMenu="hideMiniMenu()"/>
  <div class='search-div'>
         
         <div class='title-and-menu'>
@@ -12,7 +12,7 @@
               </div>
               
               <Font-awesome-icon :icon="awesomeIcons.faSearch" />
-              <Font-awesome-icon @click="showMiniMenu = !showMiniMenu" :icon="awesomeIcons.faBars" />
+              <Font-awesome-icon @click="showMiniMenu = true" :icon="awesomeIcons.faBars" />
               
 
 
@@ -262,6 +262,9 @@ export default {
     routeToProfile(){
       this.$router.push({name:'Profile Page'})            
 
+    },
+    hideMiniMenu(){
+      this.showMiniMenu = false
     },
     consoling(){
       console.log("definitely logged out")
