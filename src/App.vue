@@ -1,5 +1,8 @@
 <template>
-<MiniMenu v-if="showMiniMenu" @hideMiniMenu="hideMiniMenu()"/>
+<div v-if="showMiniMenu" class="mini-menu-container"></div>
+<transition name="mini-menu-transition">
+  <MiniMenu v-if="showMiniMenu" @hideMiniMenu="hideMiniMenu()"/>
+</transition>
  <div class='search-div'>
         
         <div class='title-and-menu'>
@@ -10,9 +13,11 @@
                   <router-link class="menu-item" to="/seasonal">Seasonal</router-link>
                   <router-link class="menu-item" to="/schedule">Schedule</router-link>
               </div>
-              
-              <Font-awesome-icon :icon="awesomeIcons.faSearch" />
-              <Font-awesome-icon @click="showMiniMenu = true" :icon="awesomeIcons.faBars" />
+              <div class="search-and-mini-menu">
+                <Font-awesome-icon :icon="awesomeIcons.faSearch" />
+                <Font-awesome-icon @click="showMiniMenu = true" :icon="awesomeIcons.faBars" />
+              </div>
+
               
 
 
@@ -101,7 +106,6 @@ export default {
       //userID:auth.currentUser.uid,
       profileDropDown:false,
       loginDropdown: false,
-      isLoggedIn: '',
       showMiniMenu: false,
     }
   },
@@ -138,11 +142,13 @@ export default {
   })
   auth.onAuthStateChanged((user) => {
   if (user) {
-    this.isLoggedIn = true
+    //this.isLoggedIn = true
+    this.$store.commit('changeLoggedIn',true)
     this.$store.commit('changeUsername',user.displayName)
     this.$store.commit('changePP',user.photoURL)
   } else {
-    this.isLoggedIn = false
+    this.$store.commit('changeLoggedIn',false)
+    //this.isLoggedIn = false
   }
   });
 
@@ -277,6 +283,7 @@ export default {
     //...mapGetters(['userID'])
     username(){return this.$store.getters.usernameGetter},
     PPURL(){return this.$store.getters.PPGetter},
+    isLoggedIn(){return this.$store.getters.isLoggedInGetter},
     //userLoggedin(){return this.$store.getters.loggedinUserGetter}
     
   }

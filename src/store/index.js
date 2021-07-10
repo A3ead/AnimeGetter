@@ -6,6 +6,7 @@ import {auth, db} from '../firebase'
 export default createStore({
   state: {
     fetcheddata:{title:'',synopsis:'',episodes:'',rating:'',image:'',imagelink:''},
+    isLoggedIn:'',
     animeList:'',
     username:'',
     PPURL:''
@@ -29,7 +30,9 @@ export default createStore({
     changePP(state,newdata){
       state.PPURL = newdata
     },
-
+    changeLoggedIn(state,newdata){
+      state.isLoggedIn = newdata
+    },
   },
   actions: {
     // getUsername({state,commit}){
@@ -52,6 +55,7 @@ export default createStore({
     //userIDGetter: state=>state.userID,
     usernameGetter : state=> state.username,
     PPGetter : state=> state.PPURL,
+    isLoggedInGetter : state=> state.isLoggedIn,
 
 
   // computed: {
