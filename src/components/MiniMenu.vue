@@ -1,13 +1,19 @@
 <template>
 
     <div class="mini-menu-container" id="mini-menu-container" style="backdrop-filter: blur(0px); background: none;">
-        
+    <div style="width: 70%; background-color: blueviolet;">
         <div class="mini-menu" tabindex="0">
             <!-- <div class="mini-menu-profile-picture-container"><img class="mini-menu-profile-picture" :src="PPURL" alt="" srcset=""></div> -->
             <div v-if="isLoggedIn" class="mini-menu-profile-picture-container"><Font-awesome-icon v-if="!PPURL" :icon="awesomeIcons.faUser" /><img v-else class="mini-menu-profile-picture" :src="PPURL" alt=""> <span style="margin: 0px 5px; color: white;font-size: x-large;">{{username}}</span></div>
-            <div class="mini-menu-login-register-container">
-              <button class="mini-menu-signin-button" style="border-right: 0.5px solid var(--main-card-bg-color); border-bottom: 2px solid var(--main-card-bg-color);">Login</button>
-              <button class="mini-menu-signin-button" style="border-left: 0.5px solid var(--main-card-bg-color); border-bottom: 2px solid var(--main-card-bg-color);">Register</button>
+            <div v-else class="mini-menu-login-register-container">
+             <div style="font-size: x-large; text-align: left; font-weight: 600; letter-spacing:1px; margin-bottom:10px">
+               Welcome to AnimeGetter 
+             </div>
+             <div>
+               <button class="button">Login</button>
+               <button class="button">Register</button>
+             </div>
+             
             </div>
             <div class="mini-menu-items">
                 <router-link class="mini-menu-item" to="/">Home</router-link>
@@ -17,10 +23,10 @@
             </div>
 
         </div>
+        
 
 
-
-
+    </div>
     </div>
 
 </template>
@@ -32,12 +38,14 @@ import { faSun, faMoon, faArrowUp, faSearch, faUser, faAngleDown, faSignOutAlt, 
 from '@fortawesome/free-solid-svg-icons'
 
 
+import Logincomponent from '@/components/Logincomponent.vue'
+
 export default {
   name: 'miniMenu',
   
   components: {
         FontAwesomeIcon,
-    
+        Logincomponent
     
 
   },
