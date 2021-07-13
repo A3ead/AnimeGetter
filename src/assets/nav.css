@@ -211,7 +211,7 @@
     flex-direction: column;
     background-color: blueviolet;
     color: white;
-    height: 80px;
+    height: fit-content;
     
 }
 
@@ -219,10 +219,12 @@
 
     background: none;
     color: rgb(43, 43, 43);
-    border: none;
+    border: 1px solid #ffffff1f;
+    border-radius: 10px;
     font-size: x-large;
     letter-spacing: 2px;
-    text-decoration: underline;
+    box-shadow: #00000040 0px 0px 5px 1px;
+
 
 }
 .mini-menu-signin-button{

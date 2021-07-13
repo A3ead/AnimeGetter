@@ -9,7 +9,7 @@
              <div style="font-size: x-large; text-align: left; font-weight: 600; letter-spacing:1px; margin-bottom:10px">
                Welcome to AnimeGetter 
              </div>
-             <div>
+             <div style=" display: flex;justify-content: space-evenly; ">
                <button class="button">Login</button>
                <button class="button">Register</button>
              </div>
