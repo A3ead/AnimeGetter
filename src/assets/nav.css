@@ -63,7 +63,12 @@
     text-decoration: none;
     font-size: xx-large;
 }
-
+.website-title:hover
+{
+    color: white;
+    text-decoration: none;
+    font-size: xx-large;
+}
 .search-toggle-container{
     width: 750px;
     display: flex;

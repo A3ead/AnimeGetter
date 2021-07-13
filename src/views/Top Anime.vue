@@ -28,15 +28,18 @@
         <th class="top-anime-list-header-element">Score</th>
         <th class="top-anime-list-header-element">Date</th>
       </tr>
-
-      <tr class="top-anime-list-element" v-for="anime in topAnimeList" :key="anime" @click="pushing(anime.mal_id)">
+      
+      <tr class="top-anime-list-element" v-for="anime in topAnimeList" :key="anime" >
+        
         <td class="top-anime-list-element-part">{{anime.rank}}</td>
-        <td class="top-anime-list-element-part"><img class="top-list-image" v-bind:src="anime.image_url" alt=""></td>
-        <td class="top-anime-list-element-part">{{anime.title}}</td>
+        <td class="top-anime-list-element-part"><a :href="hrefLinkAnime(anime.mal_id)"><img class="top-list-image" v-bind:src="anime.image_url" alt=""> </a></td>
+        <td class="top-anime-list-element-part"><a :href="hrefLinkAnime(anime.mal_id)">{{anime.title}}</a></td>
         <td class="top-anime-list-element-part">{{anime.episodes}}</td>
         <td class="top-anime-list-element-part">{{anime.score}}</td>
         <td class="top-anime-list-element-part">{{anime.start_date}} - {{anime.end_date}}</td>
+        
       </tr>
+     
     </table>
      <div class="top-filters-bottom-div">
       <div>
@@ -97,7 +100,7 @@ export default {
           document.getElementById(filterID).classList.add('button-filter-no-border-selected')
       }
       }
-   
+
   }
 }
 </script>

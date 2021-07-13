@@ -1,5 +1,6 @@
 <template>
     <div class="search-dropdown-result" v-for="anime in searchResults" :key="anime">
+      <a :href="hrefLinkAnime(anime.mal_id)">
       <div class="search-dropdown-entire-container" @click="pushing(anime.mal_id)">
         <div class="search-dropdown-result-image" :style="{ backgroundImage: 'url(' + anime.image_url + ')' }" @click="pushing(anime.mal_id)"></div>       
         <div class="search-dropdown-result-data-container">
@@ -9,6 +10,7 @@
             <div class="search-dropdown-result-info">Aired: {{dateForSearch(anime.start_date)}} to <br> {{dateForSearch(anime.end_date)}}</div>
         </div>
       </div>
+      </a>
     </div>   
 </template>
 

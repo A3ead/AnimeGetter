@@ -1,10 +1,10 @@
 <template>
         <div v-for="anime in animeList" :key="anime" class="card-container">
             <div class="card">
-            <div class="anime-card-image" :style="{ backgroundImage: 'url(' + anime.image_url + ')' }" @click="pushing(anime.mal_id)"></div>
+            <a :href="hrefLinkAnime(anime.mal_id)"><div class="anime-card-image" :style="{ backgroundImage: 'url(' + anime.image_url + ')' }"></div></a>
             <div class="anime-card-data-container">
-                <div @click="pushing(anime.mal_id)" class="anime-card-title">
-                        {{anime.title}}
+                <div class="anime-card-title">
+                      <a :href="hrefLinkAnime(anime.mal_id)" >{{anime.title}}</a> 
                 </div>        
                 <div class="anime-card-synopsis">
                         {{anime.synopsis}}
@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import AnimeInfo_mixins from '../mixins/AnimeInfo_mixins'
 
 export default {
@@ -41,10 +40,10 @@ export default {
   mixins:[AnimeInfo_mixins],
   methods:{
 
-  },
+        },
+ 
   computed:{
-
-  }
+ },
 }
 </script>
 
