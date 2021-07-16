@@ -12,7 +12,7 @@ body {
     overflow-y: scroll;
     background-color: var(--main-bg-color);
     font-family: 'Roboto', sans-serif;
-    font-weight: 900;
+    font-weight: 700;
     margin: 0px;
 }
 a {
@@ -377,9 +377,15 @@ border-radius: 50%;
 .top-anime-list-element a
 {
     all: unset;
+    height: 100%;
+    width: 100%;
 
 }
+.top-anime-list-element-part a:hover
+{
+    color: white;
 
+}
 .top-list-container
 {
     display: flex;
@@ -571,7 +577,7 @@ border-radius: 50%;
     max-height: 120px;
     overflow: auto;
     font-size: 13px;
-    font-weight: 750;
+    font-weight: 700;
     padding: 2px;
 
 }

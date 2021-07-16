@@ -62,6 +62,7 @@
     color: white;
     text-decoration: none;
     font-size: xx-large;
+    font-weight: bolder;
 }
 .website-title:hover
 {
@@ -223,9 +224,12 @@
 .mini-menu-login-register-container .button{
 
     background: none;
-    color: rgb(43, 43, 43);
+    color: white;
     border: 1px solid #ffffff1f;
+    font-weight: 500;
+    font-family: 'Avenir', sans-serif;
     border-radius: 10px;
+    width: 130px;
     font-size: x-large;
     letter-spacing: 2px;
     box-shadow: #00000040 0px 0px 5px 1px;

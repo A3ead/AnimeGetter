@@ -6,12 +6,12 @@
             <!-- <div class="mini-menu-profile-picture-container"><img class="mini-menu-profile-picture" :src="PPURL" alt="" srcset=""></div> -->
             <div v-if="isLoggedIn" class="mini-menu-profile-picture-container"><Font-awesome-icon v-if="!PPURL" :icon="awesomeIcons.faUser" /><img v-else class="mini-menu-profile-picture" :src="PPURL" alt=""> <span style="margin: 0px 5px; color: white;font-size: x-large;">{{username}}</span></div>
             <div v-else class="mini-menu-login-register-container">
-             <div style="font-size: x-large; text-align: left; font-weight: 600; letter-spacing:1px; margin-bottom:10px">
+             <div style="font-size: larger;text-align: center;font-weight: 500;letter-spacing: 1px;margin-bottom: 20px;">
                Welcome to AnimeGetter 
              </div>
              <div style=" display: flex;justify-content: space-evenly; ">
-               <button class="button">Login</button>
-               <button class="button">Register</button>
+                <router-link class="button" to="/login">Login</router-link>
+                <router-link class="button" to="/register">Register</router-link>
              </div>
              
             </div>
