@@ -10,18 +10,25 @@
                Welcome to AnimeGetter 
              </div>
              <div style=" display: flex;justify-content: space-evenly; ">
-                <router-link class="button" to="/login">Login</router-link>
-                <router-link class="button" to="/register">Register</router-link>
+                <router-link @click="closeMiniMenu()" class="button" to="/login">Login</router-link>
+                <router-link @click="closeMiniMenu()" class="button" to="/register">Register</router-link>
              </div>
              
             </div>
             <div class="mini-menu-items">
-                <router-link class="mini-menu-item" to="/">Home</router-link>
-                <router-link class="mini-menu-item" to="/top">Top Anime</router-link>
-                <router-link class="mini-menu-item" to="/seasonal">Seasonal</router-link>
-                <router-link class="mini-menu-item" to="/schedule">Schedule</router-link>
+                <router-link @click="closeMiniMenu()" class="mini-menu-item" to="/">Home</router-link>
+                <router-link @click="closeMiniMenu()" class="mini-menu-item" to="/top">Top Anime</router-link>
+                <router-link @click="closeMiniMenu()" class="mini-menu-item" to="/seasonal">Seasonal</router-link>
+                <router-link @click="closeMiniMenu()" class="mini-menu-item" to="/schedule">Schedule</router-link>
             </div>
-
+            <div class="dark-mode-toggle-switch">
+              <Font-awesome-icon :icon="awesomeIcons.faSun" />
+              <label class="switch" @change="darkModeToggle()">
+                <input id="darkmode-checkbox" type="checkbox">
+                <span class="slider round"></span>
+              </label>
+              <Font-awesome-icon :icon="awesomeIcons.faMoon" />
+            </div>
         </div>
         
 
@@ -55,14 +62,23 @@ export default {
     }
   },
   mounted(){
-
-  
       document.getElementById("mini-menu-container").addEventListener('click', e => {
         if(e.target !== e.currentTarget){}
         else {this.$emit('hideMiniMenu')}
-});
+      });
+
+      if (localStorage.getItem('darkMode') == 'true'){
+        document.getElementById('darkmode-checkbox').checked = true
+      }
   },
   methods:{
+    closeMiniMenu(){
+      this.$emit('hideMiniMenu')
+    },
+    darkModeToggle(){
+      this.$emit('darkModeToggle')
+
+    }
    
       
   },

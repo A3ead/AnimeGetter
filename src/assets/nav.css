@@ -91,6 +91,27 @@
     width: 85px;
 }
 
+.mini-menu .dark-mode-toggle-switch{
+color: var(--main-darkmode-icon-color);
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 5px;
+width: 100%;
+height: 60px;
+background-color: var(--main-card-bg-color);
+}
+
+
+.dark-mode-toggle-switch .slider.round{
+    border: solid 2px blueviolet;
+}
+.dark-mode-toggle-switch .slider:before{
+    bottom: 1.6px;
+} 
+.dark-mode-toggle-switch input:checked + .slider:before{
+    transform: translateX(17px);
+}
 
 .website-login-button{
     display: flex;

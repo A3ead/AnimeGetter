@@ -1,7 +1,7 @@
 <template>
 <div v-if="showMiniMenu" class="mini-menu-container"></div>
 <transition name="mini-menu-transition">
-  <MiniMenu v-if="showMiniMenu" @hideMiniMenu="hideMiniMenu()"/>
+  <MiniMenu v-if="showMiniMenu" @darkModeToggle="darkModeToggle()" @hideMiniMenu="hideMiniMenu()"/>
 </transition>
  <div class='search-div'>
         
@@ -26,7 +26,7 @@
          <div class="dark-mode-toggle-switch">
            <Font-awesome-icon :icon="awesomeIcons.faSun" />
           <label class="switch" @change="darkModeToggle()">
-            <input type="checkbox">
+            <input id="darkmode-checkbox" type="checkbox">
             <span class="slider round"></span>
           </label>
            <Font-awesome-icon :icon="awesomeIcons.faMoon" />
@@ -151,8 +151,15 @@ export default {
     //this.isLoggedIn = false
   }
   });
-
-    
+ 
+    if (localStorage.getItem('darkMode') == 'false'){
+      this.darkMode = true
+    }
+    else{
+      this.darkMode = false
+      document.getElementById('darkmode-checkbox').checked = true
+    }
+    this.darkModeToggle()
   },
   methods:{
     getdata(){
@@ -239,6 +246,7 @@ export default {
         
         //console.log("should be dark")
         this.darkMode = true
+        localStorage.setItem("darkMode",true)
       }
       else
       {
@@ -251,6 +259,8 @@ export default {
         setPropertyLeDocument('--main-darkmode-icon-color','#1F1E1F')
         //console.log("should be light")
         this.darkMode = false
+        localStorage.setItem("darkMode",false)
+
       }
       
     },
