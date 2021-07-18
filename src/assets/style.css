@@ -32,6 +32,8 @@ input:-webkit-autofill:active  {
 h1, h4{
     margin: 10px;
 }
+
+
 body::-webkit-scrollbar{
     background-color: #f7f6fb00;
     width: 0.7rem;
@@ -42,6 +44,9 @@ body::-webkit-scrollbar-thumb{
 }
 body::-webkit-scrollbar-thumb:hover{
     background-color: rgb(168, 87, 243);
+}
+.hidden-scrollbar::-webkit-scrollbar{
+    width: 0px;
 }
 #app {
   

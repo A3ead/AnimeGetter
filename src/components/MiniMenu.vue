@@ -70,6 +70,28 @@ export default {
       if (localStorage.getItem('darkMode') == 'true'){
         document.getElementById('darkmode-checkbox').checked = true
       }
+
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft
+      window.onscroll = function(){
+        window.scrollTo(scrollLeft,scrollTop)
+      }
+      
+      //document.getElementById('app').classList.add('hidden-scrollbar')
+      // document.getElementById('app').style.setProperty('overflow','auto')
+      // // document.getElementsByTagName('body')[0].style.setProperty('overflow','auto')
+      // // document.getElementsByTagName('body')[0].style.setProperty('height','100vh')
+      //  document.getElementById('app').style.setProperty('height','100vh')
+      //  document.getElementById('app').classList.add('hidden-scrollbar')
+       document.getElementsByTagName('body')[0].classList.add('hidden-scrollbar')
+  },
+  unmounted(){
+       //document.getElementById('app').classList.remove('hidden-scrollbar')
+       document.getElementsByTagName('body')[0].classList.remove('hidden-scrollbar')
+      // document.getElementById('app').style.removeProperty('overflow')
+      // document.getElementById('app').style.removeProperty('height')
+
+
   },
   methods:{
     closeMiniMenu(){
