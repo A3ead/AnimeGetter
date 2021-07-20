@@ -286,7 +286,7 @@ background-color: var(--main-card-bg-color);
 }
 
 .mini-menu-transition-enter-active, .mini-menu-transition-leave-active{
-    transition: all 0.3s ease-out;
+    transition: left 0.3s ease-out;
 }
 
 

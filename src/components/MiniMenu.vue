@@ -71,25 +71,25 @@ export default {
         document.getElementById('darkmode-checkbox').checked = true
       }
 
+
+
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft
-      window.onscroll = function(){
-        window.scrollTo(scrollLeft,scrollTop)
-      }
+      document.getElementsByClassName('mini-menu-container')[1].style.top = `${scrollTop }px`;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollTop }px`;
       
-      //document.getElementById('app').classList.add('hidden-scrollbar')
-      // document.getElementById('app').style.setProperty('overflow','auto')
-      // // document.getElementsByTagName('body')[0].style.setProperty('overflow','auto')
-      // // document.getElementsByTagName('body')[0].style.setProperty('height','100vh')
-      //  document.getElementById('app').style.setProperty('height','100vh')
-      //  document.getElementById('app').classList.add('hidden-scrollbar')
-       document.getElementsByTagName('body')[0].classList.add('hidden-scrollbar')
+       
+
+      document.body.classList.add('hidden-scrollbar')
   },
   unmounted(){
-       //document.getElementById('app').classList.remove('hidden-scrollbar')
-       document.getElementsByTagName('body')[0].classList.remove('hidden-scrollbar')
-      // document.getElementById('app').style.removeProperty('overflow')
-      // document.getElementById('app').style.removeProperty('height')
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);  
+
+      document.body.classList.remove('hidden-scrollbar')
+
 
 
   },
