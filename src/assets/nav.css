@@ -174,7 +174,6 @@ background-color: var(--main-card-bg-color);
     width: 100%;
     background-color: rgba(137, 43, 226, 0.261);
     backdrop-filter: blur(2px);
-    color: teal;
     z-index: 9999999;
     
 }
@@ -287,6 +286,15 @@ background-color: var(--main-card-bg-color);
 
 .mini-menu-transition-enter-active, .mini-menu-transition-leave-active{
     transition: left 0.3s ease-out;
+}
+
+.mini-search{
+    margin-top: 85px;
+    width: 100%;
+}
+.mini-search-input{
+    width: 85%;
+    padding: 10px;
 }
 
 

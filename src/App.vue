@@ -3,25 +3,28 @@
 <transition name="mini-menu-transition">
   <MiniMenu v-if="showMiniMenu" @darkModeToggle="darkModeToggle()" @hideMiniMenu="hideMiniMenu()"/>
 </transition>
+<div v-if="showMiniSearch" class="mini-menu-container"></div>
+  <MiniSearch v-if="showMiniSearch"/>
+
  <div class='search-div'>
         
-        <div class='title-and-menu'>
-              <router-link class="website-title" to="/">ANIME GETTER</router-link>
-              <div id="nav">
-                  <router-link class="menu-item" to="/">Home</router-link>
-                  <router-link class="menu-item" to="/top">Top Anime</router-link>
-                  <router-link class="menu-item" to="/seasonal">Seasonal</router-link>
-                  <router-link class="menu-item" to="/schedule">Schedule</router-link>
-              </div>
-              <div class="search-and-mini-menu">
-                <Font-awesome-icon :icon="awesomeIcons.faSearch" />
-                <Font-awesome-icon @click="showMiniMenu = true" :icon="awesomeIcons.faBars" />
-              </div>
+  <div class='title-and-menu'>
+        <router-link class="website-title" to="/">ANIME GETTER</router-link>
+        <div id="nav">
+            <router-link class="menu-item" to="/">Home</router-link>
+            <router-link class="menu-item" to="/top">Top Anime</router-link>
+            <router-link class="menu-item" to="/seasonal">Seasonal</router-link>
+            <router-link class="menu-item" to="/schedule">Schedule</router-link>
+        </div>
+        <div class="search-and-mini-menu">
+          <Font-awesome-icon @click="showMiniSearch = true" :icon="awesomeIcons.faSearch" />
+          <Font-awesome-icon @click="showMiniMenu = true" :icon="awesomeIcons.faBars" />
+        </div>
 
               
 
 
-       </div>
+  </div>
        <div class="search-toggle-container">
          <div class="dark-mode-toggle-switch">
            <Font-awesome-icon :icon="awesomeIcons.faSun" />
@@ -66,7 +69,7 @@ import AnimeInfo_mixins from './mixins/AnimeInfo_mixins'
 import SearchDropdown from '@/components/SearchDropdown.vue'
 import Logincomponent from '@/components/Logincomponent.vue'
 import MiniMenu from '@/components/MiniMenu.vue'
-import miniSearch from '@/components/miniSearch.vue'
+import MiniSearch from '@/components/MiniSearch.vue'
 
 import config from "./assets/config.json"
 let {ipServer, ipHeroku} = config.apiLocation
@@ -86,7 +89,7 @@ export default {
         FontAwesomeIcon,
         Logincomponent,
         MiniMenu,
-        miniSearch
+        MiniSearch
     },
 
   data(){
@@ -107,6 +110,7 @@ export default {
       profileDropDown:false,
       loginDropdown: false,
       showMiniMenu: false,
+      showMiniSearch: false,
     }
   },
   mixins:[AnimeInfo_mixins],
@@ -187,7 +191,7 @@ export default {
             axios.get(`${ipServer}/search?q=${searchQuery.trim()}`)
             .then(response=> 
             {
-              console.log(response.data)
+              //console.log(response.data)
               let temp = response.data
               this.searchResults = temp.filter(this.deleteHentai)
           }) 
