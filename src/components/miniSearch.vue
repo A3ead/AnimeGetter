@@ -2,9 +2,9 @@
 
   <div class="mini-menu-container" id="mini-menu-container" style="backdrop-filter: blur(0px); background: none;">
     <div class="mini-search">
-      <input type="text" class="mini-search-input" id="mini-search-input" v-model="userInput">
+      <div class="mini-search-input-div"><input type="text" class="mini-search-input" id="mini-search-input" v-model="userInput"></div>
       <div class="mini-search-results-container">
-        <div class="mini-search-result" v-for="anime in searchResults" :key="anime">{{anime.title}}</div>
+        <div class="mini-search-result" v-for="anime in searchResults" :key="anime"><div class="mini-search-results-data-container"><div class="mini-search-dropdown-result-image" :style="{ backgroundImage: 'url(' + anime.image_url + ')' }" ></div><div class="mini-search-dropdown-result-data">{{anime.title}}</div></div></div>
       </div>
 
     </div>
