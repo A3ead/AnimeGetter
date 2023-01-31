@@ -4,7 +4,7 @@
   <MiniMenu v-if="showMiniMenu" @darkModeToggle="darkModeToggle()" @hideMiniMenu="hideMiniMenu()"/>
 </transition>
 <div v-if="showMiniSearch" class="mini-menu-container"></div>
-  <MiniSearch v-if="showMiniSearch"/>
+  <SmallSearch v-if="showMiniSearch"/>
 
  <div class='search-div'>
         
@@ -69,7 +69,7 @@ import AnimeInfo_mixins from './mixins/AnimeInfo_mixins'
 import SearchDropdown from '@/components/SearchDropdown.vue'
 import Logincomponent from '@/components/Logincomponent.vue'
 import MiniMenu from '@/components/MiniMenu.vue'
-import MiniSearch from './components/MiniSearch.vue'
+import SmallSearch from '@/components/SmallSearch.vue'
 
 import config from "./assets/config.json"
 let {ipServer, ipHeroku} = config.apiLocation
@@ -89,7 +89,7 @@ export default {
         FontAwesomeIcon,
         Logincomponent,
         MiniMenu,
-        MiniSearch
+        SmallSearch
     },
 
   data(){
