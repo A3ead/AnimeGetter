@@ -18,7 +18,7 @@
 
 <script>
 
-import axios from 'axios'
+// import axios from 'axios'
 import config from "../assets/config.json"
 let {ipServer, ipHeroku} = config.apiLocation
 

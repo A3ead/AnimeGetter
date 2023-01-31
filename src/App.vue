@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import AnimeInfo_mixins from './mixins/AnimeInfo_mixins'
 import SearchDropdown from '@/components/SearchDropdown.vue'
 import Logincomponent from '@/components/Logincomponent.vue'

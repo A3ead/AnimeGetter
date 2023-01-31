@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import CardComponent from '@/components/CardComponent.vue'
 import config from "../assets/config.json"
 let {ipServer, ipHeroku} = config.apiLocation

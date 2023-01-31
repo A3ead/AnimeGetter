@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import AnimeInfo_mixins from '../mixins/AnimeInfo_mixins'
 import config from "../assets/config.json"
 let {ipServer, ipHeroku} = config.apiLocation
