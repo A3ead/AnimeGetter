@@ -115,6 +115,7 @@ export default {
   },
   mixins:[AnimeInfo_mixins],
   mounted(){
+    console.log('vercel test')
     document.title = 'Anime Getter'
     let searchTab = document.getElementById('search')
     searchTab.addEventListener('keydown',event=>{
