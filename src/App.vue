@@ -69,7 +69,7 @@ import AnimeInfo_mixins from './mixins/AnimeInfo_mixins'
 import SearchDropdown from '@/components/SearchDropdown.vue'
 import Logincomponent from '@/components/Logincomponent.vue'
 import MiniMenu from '@/components/MiniMenu.vue'
-import MiniSearch from '@/components/MiniSearch.vue'
+import MiniSearch from './components/MiniSearch.vue'
 
 import config from "./assets/config.json"
 let {ipServer, ipHeroku} = config.apiLocation
