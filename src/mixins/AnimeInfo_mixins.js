@@ -4,7 +4,7 @@ export default {
             this.$router.push({name:'Anime Info',query:{AG_ID:AG_ID}})            
           },
           hrefLinkAnime(AD_ID){
-            return `http://localhost:8080/info?AG_ID=${AD_ID}`
+            return location.protocol + `/info?AG_ID=${AD_ID}`
         }
     }
 

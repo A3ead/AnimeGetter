@@ -26,7 +26,8 @@
       <div class="anime-info-single-info-div">Status: {{fetcheddata.status}} </div>
     </div>
     <div class="anime-info-related-card">
-      <div class="anime-info-single-related" v-for="related in Object.entries(fetcheddata.related)" :key="related">{{related[0]}}: {{related[1][0].name}}</div>
+      <!-- <div class="anime-info-single-related" v-for="related in Object.entries(fetcheddata.related)" :key="related">{{related[0]}}: {{related[1][0].name}}</div> -->
+      <div class="anime-info-single-related" v-for="relation in fetcheddata.relations" :key="relation">{{relation.relation}}: <div v-for="entry in relation.entry" :key="entry">{{entry.name}}</div></div>
     </div>
 
 
@@ -59,11 +60,10 @@ export default {
   methods:{
     
     //console.log(malID);
-     renderAnimeInfo(){
+     async renderAnimeInfo(){
       let malID = this.$route.query.AG_ID
-      axios.get(`${this.apiIP}/animeInfo?animeID=${malID}`)
-      .then(response=> 
-      {
+      const request = await fetch(`/api/getAnimeById?malID=${malID}`)
+      const response = await request.json()
         console.log(response.data)
         let currentData = response.data
         this.fetcheddata.title = currentData.title
@@ -71,14 +71,13 @@ export default {
         this.fetcheddata.synopsis = currentData.synopsis
         this.fetcheddata.episodes = currentData.episodes
         this.fetcheddata.rating = currentData.score
-        this.fetcheddata.image = currentData.image_url
+        this.fetcheddata.image = currentData.images.webp.image_url
         this.fetcheddata.title_japanese = currentData.title_japanese
         this.fetcheddata.genres = currentData.genres
         this.fetcheddata.rank = currentData.rank
         this.fetcheddata.studios = currentData.studios
         this.fetcheddata.status = currentData.status
-        this.fetcheddata.related = currentData.related
-     })
+        this.fetcheddata.relations = currentData.relations
     }
   }
 }

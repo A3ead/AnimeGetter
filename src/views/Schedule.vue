@@ -72,19 +72,16 @@ export default {
   },
   mixins:[AnimeInfo_mixins],
   methods:{
-      getSchedule()
+      async getSchedule()
       {
-         axios.get(`${this.apiIP}/schedule`)
-        .then(res=>
-        {   
+        const request = await fetch('/api/getSchedules')
+        const response = await request.json() 
 
-            let currentData = res.data
-           //console.log(res.data)
-            let tempArray = [currentData.monday, currentData.tuesday, currentData.wednesday, currentData.thursday, currentData.friday, currentData.saturday, currentData.sunday]
-            this.schedule = tempArray.map(this.removeKids)
-            
-
-        })
+        let currentData = response.data
+        console.log(response)
+        let tempArray = [currentData.monday, currentData.tuesday, currentData.wednesday, currentData.thursday, currentData.friday, currentData.saturday, currentData.sunday]
+        //this.schedule = tempArray.map(this.removeKids)
+        
     },
     deleteKidsFromDay(anime){
         return anime.kids == false
