@@ -11,7 +11,7 @@
     </div>
     
     <div class="Schedule-Container" v-if="selected_day=='all'">
-        <div class="Day-Container" v-for="(days,index) in schedule" :key="days">
+        <div class="Day-Container" v-for="(days,index) in Object.values(schedule)" :key="days">
             <div class="Day">{{day[index]}}</div>
             <div class="Day-Schedule">
                 <div class="Schedule-Anime" v-for="anime in days" :key="anime">
@@ -25,25 +25,25 @@
     </div>
     
     <div v-if="selected_day=='monday'" class="single-day-container">
-        <CardComponent :animeList='schedule[0]'/>
+        <CardComponent :animeList='schedule.monday'/>
     </div>
     <div v-if="selected_day=='tuesday'" class="single-day-container">
-        <CardComponent :animeList='schedule[1]'/>
+        <CardComponent :animeList='schedule.tuesday'/>
     </div>
     <div v-if="selected_day=='wednesday'" class="single-day-container">
-        <CardComponent :animeList='schedule[2]'/>
+        <CardComponent :animeList='schedule.wednesday'/>
     </div>
     <div v-if="selected_day=='thursday'" class="single-day-container">
-        <CardComponent :animeList='schedule[3]'/>
+        <CardComponent :animeList='schedule.thursday'/>
     </div>
     <div v-if="selected_day=='friday'" class="single-day-container">
-        <CardComponent :animeList='schedule[4]'/>
+        <CardComponent :animeList='schedule.friday'/>
     </div>
     <div v-if="selected_day=='saturday'" class="single-day-container">
-        <CardComponent :animeList='schedule[5]'/>
+        <CardComponent :animeList='schedule.saturday'/>
     </div>
     <div v-if="selected_day=='sunday'" class="single-day-container">
-        <CardComponent :animeList='schedule[6]'/>
+        <CardComponent :animeList='schedule.sunday'/>
     </div>
 </template>
 
@@ -64,7 +64,7 @@ export default {
   data(){
     return{
         day:['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-        schedule:[],
+        schedule:{'monday':[], 'tuesday':[], 'wednesday':[], 'thursday':[], 'friday':[], 'saturday':[], 'sunday':[]},
         selected_day:'',
         apiIP: ipServer,
 
@@ -74,12 +74,49 @@ export default {
   methods:{
       async getSchedule()
       {
-        const request = await fetch('/api/getSchedules')
-        const response = await request.json() 
+        const request = await fetch('/api/getSchedules?limit=1')
+        const response = await request.json()
+        const totalItems = response.pagination.items.total
+        const request2 = await fetch(`/api/getSchedules?limit=${totalItems}`)
+        const response2 = await request2.json()
 
-        let currentData = response.data
-        console.log(response)
-        let tempArray = [currentData.monday, currentData.tuesday, currentData.wednesday, currentData.thursday, currentData.friday, currentData.saturday, currentData.sunday]
+        let currentData = response2.data
+        currentData.sort((a,b)=>a.popularity - b.popularity)
+
+        for(let entry of currentData){
+            let entryDay = entry.broadcast.day
+            if (entry.members > 0){
+                switch (entryDay){
+                    case "Mondays":
+                        this.schedule.monday.push(entry)
+                        break
+                    case "Tuesdays":
+                        this.schedule.tuesday.push(entry)
+                        break
+                    case "Wednesdays":
+                        this.schedule.wednesday.push(entry)
+                        break
+                    case "Thursdays":
+                        this.schedule.thursday.push(entry)
+                        break
+                    case "Fridays":
+                        this.schedule.friday.push(entry)
+                        break
+                    case "Saturdays":
+                        this.schedule.saturday.push(entry)
+                        break
+                    case "Sundays":
+                        this.schedule.sunday.push(entry)
+                        break
+                    default: 
+                        break
+                }
+            }
+            
+        }
+
+        console.log(response2)
+        console.log(this.schedule)
         //this.schedule = tempArray.map(this.removeKids)
         
     },

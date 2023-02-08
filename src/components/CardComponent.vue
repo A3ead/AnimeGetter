@@ -1,7 +1,7 @@
 <template>
         <div v-for="anime in animeList" :key="anime" class="card-container">
             <div class="card">
-            <a :href="hrefLinkAnime(anime.mal_id)"><div class="anime-card-image" :style="{ backgroundImage: 'url(' + anime.image_url + ')' }"></div></a>
+            <a :href="hrefLinkAnime(anime.mal_id)"><div class="anime-card-image" :style="{ backgroundImage: 'url(' + anime.images.webp.image_url + ')' }"></div></a>
             <div class="anime-card-data-container">
                 <div class="anime-card-title">
                       <a :href="hrefLinkAnime(anime.mal_id)" >{{anime.title}}</a> 
