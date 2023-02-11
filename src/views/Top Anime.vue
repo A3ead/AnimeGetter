@@ -73,7 +73,7 @@ export default {
   },
   mixins:[AnimeInfo_mixins],
   mounted(){
-    this.getTop('',this.currentPage)
+    this.getTop()
     this.highlightFilter('All')
 
   },
@@ -84,7 +84,7 @@ export default {
       const request = await fetch(`/api/getTopAnime?page=${this.currentPage}&type=${this.type}&filter=${this.filter}`)
       const response = await request.json()
           this.topAnimeList = response.data
-          console.log(response)
+          //onsole.log(response)
   },
     highlightFilter(filterID){
       try {

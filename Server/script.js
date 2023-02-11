@@ -134,50 +134,50 @@ app.use(express.json())
 //     })
 // })
 
-app.get('/schedule',function(req,res)
-{
-    console.log(`recieved request "/schedule"`)
-    axios.get('https://api.jikan.moe/v3/schedule')
-    .then(function(response)
-    {   
-        res.json(response.data)
-    })
-})
+// app.get('/schedule',function(req,res)
+// {
+//     console.log(`recieved request "/schedule"`)
+//     axios.get('https://api.jikan.moe/v3/schedule')
+//     .then(function(response)
+//     {   
+//         res.json(response.data)
+//     })
+// })
 
-app.get('/archive',function(req,res)
-{
- console.log(`recieved request "/archive"`)
- axios.get(`https://api.jikan.moe/v3/season/archive`)
-    .then(function (response) 
-    {
-       //console.log(response.data);
-        res.json(response.data)
-    })
-})
+// app.get('/archive',function(req,res)
+// {
+//  console.log(`recieved request "/archive"`)
+//  axios.get(`https://api.jikan.moe/v3/season/archive`)
+//     .then(function (response) 
+//     {
+//        //console.log(response.data);
+//         res.json(response.data)
+//     })
+// })
 
-app.get('/seasonal',function(req,res)
-{
-    let year = req.query.year
-    let season = req.query.season
-    console.log(`recieved request "/archive" with data: {season: ${season}, year: ${year}}`)
- axios.get(`https://api.jikan.moe/v3/season/${year}/${season}`)
-    .then(function (response) 
-    {
-       //console.log(response.data);
-        res.json(response.data)
-    })
-})
+// app.get('/seasonal',function(req,res)
+// {
+//     let year = req.query.year
+//     let season = req.query.season
+//     console.log(`recieved request "/archive" with data: {season: ${season}, year: ${year}}`)
+//  axios.get(`https://api.jikan.moe/v3/season/${year}/${season}`)
+//     .then(function (response) 
+//     {
+//        //console.log(response.data);
+//         res.json(response.data)
+//     })
+// })
 
-app.get('/current',function(req,res)
-{
- console.log(`recieved request "/current"`)
- axios.get(`https://api.jikan.moe/v3/season`)
-    .then(function (response) 
-    {
-       //console.log(response.data);
-        res.json(response.data)
-    })
-})
+// app.get('/current',function(req,res)
+// {
+//  console.log(`recieved request "/current"`)
+//  axios.get(`https://api.jikan.moe/v3/season`)
+//     .then(function (response) 
+//     {
+//        //console.log(response.data);
+//         res.json(response.data)
+//     })
+// })
 
 app.get('/search',function(req,res)
 {

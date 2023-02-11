@@ -1,7 +1,13 @@
 <template>
-<div v-if="entireArchive!=null">
+<div v-if="allSeasonsList!=null">
     <button class="button" @click="highlightTabBasedOnSeason(), currentYear++">Previous Year</button>
-    <button class="button" :id="entireArchive[currentYear].year + season" @click="getSeasonal(entireArchive[currentYear].year,season), currentSelectedButton = entireArchive[currentYear].year + season, highlightTab(entireArchive[currentYear].year + season)" v-for="season in entireArchive[currentYear].seasons" :key="season">{{season}} {{entireArchive[currentYear].year}}</button>
+    <button
+        class="button" :id="allSeasonsList[currentYear].year + season" 
+        @click="getSeasonal(allSeasonsList[currentYear].year,season), currentSelectedButton = allSeasonsList[currentYear].year + season, highlightTab(allSeasonsList[currentYear].year + season)" 
+        v-for="season in allSeasonsList[currentYear].seasons" :key="season"
+      >
+      {{capitalizeLetter(season)}} {{allSeasonsList[currentYear].year}}
+    </button>
     <button class="button" v-if="currentSeasonCheck != currentSelectedButton"  @click="getCurrentSeason()">Current Season</button>
     <button class="button" @click=" highlightTabBasedOnSeason(),currentYear--" v-if="currentYear!=0">Next Year</button>
 </div>
@@ -26,12 +32,12 @@
           <CardComponent :animeList='tvArray'/>
       </div>
     </div>
-    <div  v-if="selectedFilter == 'All' || selectedFilter == 'TV'">
+    <!-- <div  v-if="selectedFilter == 'All' || selectedFilter == 'TV'">
       <div class="Season-Type">TV Continuing</div>
       <div class="single-day-container"> 
           <CardComponent :animeList='tvCArray'/>
       </div>
-    </div>
+    </div> -->
     <div v-if="selectedFilter == 'All' || selectedFilter == 'Movies'">
       <div class="Season-Type">Movies</div>
       <div class="single-day-container"> 
@@ -78,7 +84,7 @@ export default {
     return{
         currentSelectedButton: null,
         currentYear:0,
-        entireArchive:null,
+        allSeasonsList:null,
         animeArray:null,
         tvArray:null,
         tvCArray:null,
@@ -92,83 +98,78 @@ export default {
 
     }
   },
+  
   methods:{
-      getArchive() {
-          axios.get(`${this.apiIP}/archive`)
-          .then(res => 
-          {
-             this.entireArchive = res.data.archive
-             //console.log(res.data.archive)
-
-
-         })
+      capitalizeLetter(text){
+        return text.charAt(0).toUpperCase() + text.slice(1);
       },
-      getSeasonal(year,season) {
-          //console.log(year,season)
+      async getSeasonsList() {
+        const request = await fetch(`/api/getSeasonsList`)
+        const response = await request.json()
+        this.allSeasonsList = response.data
+      },
+      assignArrays(tempArray){
+        this.tvArray = tempArray.filter(this.getTV)
+        //this.tvCArray = tempArray.filter(this.getTVC)
+        this.movieArray = tempArray.filter(this.getMovie)
+        this.ovaArray = tempArray.filter(this.getOVA)
+        this.onaArray = tempArray.filter(this.getONA)
+        this.specialArray = tempArray.filter(this.getSpecial)
+      },
 
-          axios.get(`${this.apiIP}/seasonal`,{params:{'year':year,'season':season.toLowerCase()}})
-          .then(res => 
-          { 
-            let tempArray = res.data.anime
-            //console.log(res.data)
-            //this.animeArray = tempArray.filter(this.deleteKidsFromDay)
-            this.tvArray = tempArray.filter(this.getTV)
-            this.tvCArray = tempArray.filter(this.getTVC)
-            this.movieArray = tempArray.filter(this.getMovie)
-            this.ovaArray = tempArray.filter(this.getOVA)
-            this.onaArray = tempArray.filter(this.getONA)
-            this.specialArray = tempArray.filter(this.getSpecial)
+      async getSeasonal(year,season) {
+        //console.log(year,season)
 
+        const request = await fetch(`/api/getSeasonal?year=${year}&season=${season}&current=false`)
+        const response = await request.json()
+        const tempArray = response.data
+        this.assignArrays(tempArray)
 
-         })
           
       },
       // deleteKidsFromDay(anime){
-      //   return anime.kids == false && anime.r18 == false
+      //   return this.checkForDemographic('kids',anime) == false && this.checkForGenre('hentai', anime) == false
       // },
+      checkForGenre(genre, anime){
+          return anime.genres.some((arrVal) => arrVal.name.toLowerCase() === genre.toLowerCase()); 
+      },
+      checkForDemographic(demographic, anime){
+          return anime.demographics.some((arrVal) => arrVal.name.toLowerCase() === demographic.toLowerCase()); 
+      },
+
       getTV(anime){
-        return anime.kids == false && anime.r18 == false && anime.type == 'TV' && anime.continuing == false
+        return this.checkForDemographic('kids',anime) == false && this.checkForGenre('hentai', anime) == false && anime.type == 'TV' //&& anime.continuing == false
       },
-      getTVC(anime){
-        return anime.kids == false && anime.r18 == false && anime.type == 'TV' && anime.continuing == true
-      },
+      // getTVC(anime){
+      //   return this.checkForDemographic('kids',anime) == false && this.checkForGenre('hentai', anime) == false && anime.type == 'TV' && anime.continuing == true
+      // },
       getMovie(anime){
-        return anime.kids == false && anime.r18 == false && anime.type == 'Movie'
+        return this.checkForDemographic('kids',anime) == false && this.checkForGenre('hentai', anime) == false && anime.type == 'Movie'
       },
       getOVA(anime){
-        return anime.kids == false && anime.r18 == false && anime.type == 'OVA'
+        return this.checkForDemographic('kids',anime) == false && this.checkForGenre('hentai', anime) == false && anime.type == 'OVA'
       },
       getONA(anime){
-        return anime.kids == false && anime.r18 == false && anime.type == 'ONA'
+        return this.checkForDemographic('kids',anime) == false && this.checkForGenre('hentai', anime) == false && anime.type == 'ONA'
       },
       getSpecial(anime){
-        return anime.kids == false && anime.r18 == false && anime.type == 'Special'
+        return this.checkForDemographic('kids',anime) == false && this.checkForGenre('hentai', anime) == false && anime.type == 'Special'
       },
 
-      getCurrentSeason(){
-          axios.get(`${this.apiIP}/current`)
-          .then(res => 
-          { 
-            let tempArray = res.data.anime
-            //console.log(res.data)
-            //this.animeArray = tempArray.filter(this.deleteKidsFromDay)
-            this.tvArray = tempArray.filter(this.getTV)
-            this.tvCArray = tempArray.filter(this.getTVC)
-            this.movieArray = tempArray.filter(this.getMovie)
-            this.ovaArray = tempArray.filter(this.getOVA)
-            this.onaArray = tempArray.filter(this.getONA)
-            this.specialArray = tempArray.filter(this.getSpecial)
-            this.currentYear = 0
+      async getCurrentSeason(){
+        const request = await fetch(`/api/getSeasonal?year=0&season=0&current=true`)
+        const response = await request.json()
+        const tempArray = response.data
+        this.assignArrays(tempArray)
+        this.currentYear = 0
 
-            this.currentSelectedButton = res.data.season_year + res.data.season_name
-            this.currentSeasonCheck = res.data.season_year + res.data.season_name
-            this.selectedFilter = 'All'
+        this.currentSelectedButton = tempArray[0].year + tempArray[0].season
+        this.currentSeasonCheck = tempArray[0].year + tempArray[0].season
 
-            this.highlightTabBasedOnSeason()
-            this.highlightFilter('All')
+        this.selectedFilter = 'All'
+        this.highlightTabBasedOnSeason()
+        this.highlightFilter('All')
 
-
-         })
         
       },
       highlightTab(dayID){
@@ -218,15 +219,11 @@ export default {
 
   },
   created(){
-    this.getArchive()
+    this.getSeasonsList()
 
   },
    mounted(){
     this.getCurrentSeason()
-  },
-
-  computed:{
-
   }
 }
 </script>
