@@ -186,22 +186,21 @@ export default {
      })
 
     },
-    animeSearch(searchQuery){
+    async animeSearch(searchQuery){
       if(searchQuery.trim() != "" && searchQuery.trim().length > 2){
             //console.log('searching', 'search q = : ' + searchQuery)
-            axios.get(`${ipServer}/search?q=${searchQuery.trim()}`)
-            .then(response=> 
-            {
-              //console.log(response.data)
-              let temp = response.data
-              this.searchResults = temp.filter(this.deleteHentai)
-          }) 
+
+            const request = await fetch(`/api/getAnimeSearch?q=${searchQuery}&sfw=1`)
+            const response = await request.json()
+            this.searchResults = response.data.splice(0,10)
+
+            //this.searchResults = response.data.filter(this.deleteHentai)
       }
      
     },
-    deleteHentai(anime){
-        return anime.rated != "Rx"
-    },
+    // deleteHentai(anime){
+    //     return anime.rated != "Rx"
+    // },
     sendSearch(){
       if(this.userInput.trim().length > 2)
       {

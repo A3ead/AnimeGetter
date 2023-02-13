@@ -2,12 +2,12 @@
     <div class="search-dropdown-result" v-for="anime in searchResults" :key="anime">
       <a :href="hrefLinkAnime(anime.mal_id)">
       <div class="search-dropdown-entire-container" >
-        <div class="search-dropdown-result-image" :style="{ backgroundImage: 'url(' + anime.image_url + ')' }" ></div>       
+        <div class="search-dropdown-result-image" :style="{ backgroundImage: 'url(' + anime.images.webp.image_url + ')' }" ></div>       
         <div class="search-dropdown-result-data-container">
             <div class="search-dropdown-result-title">{{anime.title}}</div>
             <div class="search-dropdown-result-info">Episodes: {{anime.episodes}} ({{anime.type}})</div>
             <div class="search-dropdown-result-info">Score: {{anime.score}}</div>
-            <div class="search-dropdown-result-info">Aired: {{dateForSearch(anime.start_date)}} to <br> {{dateForSearch(anime.end_date)}}</div>
+            <div class="search-dropdown-result-info">Aired: {{dateForSearch(anime.aired.from)}} to <br> {{dateForSearch(anime.aired.to)}}</div>
         </div>
       </div>
       </a>

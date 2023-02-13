@@ -2,12 +2,12 @@
     <div class="search-dropdown-result" v-for="anime in searchResults" :key="anime">
       <a :href="hrefLinkAnime(anime.mal_id)">
       <div class="search-dropdown-entire-container" @click="pushing(anime.mal_id)">
-        <div class="search-dropdown-result-image" :style="{ backgroundImage: 'url(' + anime.image_url + ')' }" @click="pushing(anime.mal_id)"></div>       
+        <div class="search-dropdown-result-image" :style="{ backgroundImage: 'url(' + anime.images.webp.image_url + ')' }" @click="pushing(anime.mal_id)"></div>       
         <div class="search-dropdown-result-data-container">
             <div class="search-dropdown-result-title">{{anime.title}}</div>
             <div class="search-dropdown-result-info">Episodes: {{anime.episodes}} ({{anime.type}})</div>
             <div class="search-dropdown-result-info">Score: {{anime.score}}</div>
-            <div class="search-dropdown-result-info">Aired: {{dateForSearch(anime.start_date)}} to <br> {{dateForSearch(anime.end_date)}}</div>
+            <div class="search-dropdown-result-info">Aired: {{dateForSearch(anime.aired.from)}} to <br> {{dateForSearch(anime.aired.to)}}</div>
         </div>
       </div>
       </a>
@@ -42,16 +42,14 @@ export default {
   },
   methods:{
 
-     animeSearch(){
+     async animeSearch(){
         let searchQuery = this.$route.query.q
-      if(searchQuery != ""){
+        if(searchQuery != ""){
             //console.log('searching', 'search q = : ' + searchQuery)
-            axios.get(`${this.apiIP}/search?q=${searchQuery}`)
-            .then(response=> 
-            {
-              //console.log(response.data)
-              this.searchResults = response.data
-          }) 
+
+            const request = await fetch(`/api/getAnimeSearch?q=${searchQuery}&sfw=0`)
+            const response = await request.json()
+            this.searchResults = response.data
       }
      
     },
