@@ -3,7 +3,7 @@
     <div class="top-filters-div">
       <div>
         <button class="button-filter-no-border" @click="highlightFilter('All'), currentPage = 1, type = '',  filter = '', getTop()" id="All">All Anime</button>
-        <button class="button-filter-no-border" @click="highlightFilter('Airing'), currentPage = 1, type = 'airing', filter = 'airing', getTop()" id="Airing">Top Airing</button>
+        <button class="button-filter-no-border" @click="highlightFilter('Airing'), currentPage = 1, type = '', filter = 'airing', getTop()" id="Airing">Top Airing</button>
         <button class="button-filter-no-border" @click="highlightFilter('Upcoming'), currentPage = 1, type = '', filter = 'upcoming', getTop()" id="Upcoming">Top Upcoming</button>
         <button class="button-filter-no-border" @click="highlightFilter('TV'), currentPage = 1, type = 'tv', filter = '', getTop()" id="TV">Top TV Series</button>
         <button class="button-filter-no-border" @click="highlightFilter('Movies'), currentPage = 1, type = 'movie', filter = '', getTop()" id="Movies">Top Movies</button>
@@ -15,8 +15,8 @@
       </div>
       <div>
         <button class="button-filter" @click="currentPage = 1, getTop()" v-if="currentPage > 2"> First </button>
-        <button class="button-filter" @click="currentPage--, getTop()" v-if="currentPage != 1">Prev 50</button>
-        <button class="button-filter" @click="currentPage++, getTop()">Next 50</button>
+        <button class="button-filter" @click="currentPage--, getTop()" v-if="currentPage != 1">Prev 25</button>
+        <button class="button-filter" @click="currentPage++, getTop()">Next 25</button>
       </div>
     </div>
     <table class="top-anime-table">
@@ -44,8 +44,8 @@
      <div class="top-filters-bottom-div">
       <div>
         <button class="button-filter" @click="currentPage = 1, getTop()" v-if="currentPage > 2"> First </button>
-        <button class="button-filter" @click="currentPage--, getTop()" v-if="currentPage != 1">Prev 50</button>
-        <button class="button-filter" @click="currentPage++, getTop()">Next 50</button>
+        <button class="button-filter" @click="currentPage--, getTop()" v-if="currentPage != 1">Prev 25</button>
+        <button class="button-filter" @click="currentPage++, getTop()">Next 25</button>
       </div>
     </div>
   </div>
@@ -83,6 +83,7 @@ export default {
 
       const request = await fetch(`/api/getTopAnime?page=${this.currentPage}&type=${this.type}&filter=${this.filter}`)
       const response = await request.json()
+      console.log(response)
           this.topAnimeList = response.data
           //onsole.log(response)
   },

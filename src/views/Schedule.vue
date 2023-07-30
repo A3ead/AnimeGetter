@@ -10,55 +10,63 @@
         <button class="button" @click="selected_day = 'sunday',highlightTab('sunday')" id="sunday">Sunday</button>
     </div>
     
-    <div class="Schedule-Container" v-if="selected_day=='all'">
-        <div class="Day-Container" v-for="(days,index) in Object.values(schedule)" :key="days">
-            <div class="Day">{{day[index]}}</div>
-            <div class="Day-Schedule">
-                <div class="Schedule-Anime" v-for="anime in days" :key="anime">
-                    <div class="anime-schedule-title" @click="pushing(anime.mal_id)">
-                         {{anime.title}}
-                    </div>                 
+    <LoadingSkeleton v-if="isLoading"/>
+
+    <template v-else>
+        <div class="Schedule-Container" v-if="selected_day=='all'">
+            <div class="Day-Container" v-for="(days,index) in Object.values(schedule)" :key="days">
+                <div class="Day">{{day[index]}}</div>
+                <div class="Day-Schedule">
+                    <div class="Schedule-Anime" v-for="anime in days" :key="anime">
+                        <div class="anime-schedule-title" @click="pushing(anime.mal_id)">
+                            {{anime.title}}
+                        </div>                 
+                    </div>
                 </div>
+                
             </div>
-            
         </div>
-    </div>
-    
-    <div v-if="selected_day=='monday'" class="single-day-container">
-        <CardComponent :animeList='schedule.monday'/>
-    </div>
-    <div v-if="selected_day=='tuesday'" class="single-day-container">
-        <CardComponent :animeList='schedule.tuesday'/>
-    </div>
-    <div v-if="selected_day=='wednesday'" class="single-day-container">
-        <CardComponent :animeList='schedule.wednesday'/>
-    </div>
-    <div v-if="selected_day=='thursday'" class="single-day-container">
-        <CardComponent :animeList='schedule.thursday'/>
-    </div>
-    <div v-if="selected_day=='friday'" class="single-day-container">
-        <CardComponent :animeList='schedule.friday'/>
-    </div>
-    <div v-if="selected_day=='saturday'" class="single-day-container">
-        <CardComponent :animeList='schedule.saturday'/>
-    </div>
-    <div v-if="selected_day=='sunday'" class="single-day-container">
-        <CardComponent :animeList='schedule.sunday'/>
-    </div>
+        
+        <div v-if="selected_day=='monday'" class="single-day-container">
+            <CardComponent :animeList='schedule.monday'/>
+        </div>
+        <div v-if="selected_day=='tuesday'" class="single-day-container">
+            <CardComponent :animeList='schedule.tuesday'/>
+        </div>
+        <div v-if="selected_day=='wednesday'" class="single-day-container">
+            <CardComponent :animeList='schedule.wednesday'/>
+        </div>
+        <div v-if="selected_day=='thursday'" class="single-day-container">
+            <CardComponent :animeList='schedule.thursday'/>
+        </div>
+        <div v-if="selected_day=='friday'" class="single-day-container">
+            <CardComponent :animeList='schedule.friday'/>
+        </div>
+        <div v-if="selected_day=='saturday'" class="single-day-container">
+            <CardComponent :animeList='schedule.saturday'/>
+        </div>
+        <div v-if="selected_day=='sunday'" class="single-day-container">
+            <CardComponent :animeList='schedule.sunday'/>
+        </div>
+    </template>
+
 </template>
 
 <script>
 // import axios from 'axios'
 import CardComponent from '@/components/CardComponent.vue'
 import AnimeInfo_mixins from '../mixins/AnimeInfo_mixins'
+import { useFetchQueue } from '../mixins/fetch_mixin'
 import config from "../assets/config.json"
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
 let {ipServer, ipHeroku} = config.apiLocation
 
 
 export default {
 
   components:{
-        CardComponent
+        CardComponent,
+        LoadingSkeleton
     },
 
   data(){
@@ -67,20 +75,44 @@ export default {
         schedule:{'monday':[], 'tuesday':[], 'wednesday':[], 'thursday':[], 'friday':[], 'saturday':[], 'sunday':[]},
         selected_day:'',
         apiIP: ipServer,
+        isLoading: false
 
     }
   },
   mixins:[AnimeInfo_mixins],
   methods:{
+    // logDate(){
+    //     const d = new Date();
+    //     let m = d.getUTCMinutes();
+    //     let s = d.getUTCSeconds();
+    //     let ms = d.getUTCMilliseconds();
+    //     console.log(m + ":" + s + "." + ms)
+    // },
       async getSchedule()
       {
-        const request = await fetch('/api/getSchedules?limit=1')
-        const response = await request.json()
-        const totalItems = response.pagination.items.total
-        const request2 = await fetch(`/api/getSchedules?limit=${totalItems}`)
-        const response2 = await request2.json()
+        this.isLoading = true
+        const response = await new Promise((resolve, reject)=>{
+            useFetchQueue([['/api/getSchedules?limit=1&page=1',(result)=>{resolve(result)}]])
+        })
 
-        let currentData = response2.data
+        const totalItems = response.pagination.items.total
+        const numOfPages = Math.ceil(totalItems/25)
+
+        let currentData = []
+        let responses = []
+
+        for(let i = 0; i < numOfPages; i++){
+           responses[i] = new Promise((resolve, reject)=>{
+                useFetchQueue([[`/api/getSchedules?limit=25&page=${i+1}`,(result)=>{resolve(result)}]])
+            })
+        }
+
+        let results = await Promise.all(responses)
+
+        for(let result of results){
+            currentData = [...currentData, ...result.data] 
+        }
+
         currentData.sort((a,b)=>a.popularity - b.popularity)
 
         for(let entry of currentData){
@@ -115,10 +147,9 @@ export default {
             
         }
 
-        console.log(response2)
         console.log(this.schedule)
         //this.schedule = tempArray.map(this.removeKids)
-        
+        this.isLoading = false
     },
     deleteKidsFromDay(anime){
         return anime.kids == false
