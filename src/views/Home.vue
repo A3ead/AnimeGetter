@@ -1,20 +1,23 @@
 <template>
   <div class="home">
-    <DataGetter/>
-    <ListShower/>
+    <HomeWelcome/>
+    <!-- <DataGetter/>
+    <ListShower/> -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import DataGetter from '@/components/DataGetter.vue'
-import ListShower from '@/components/ListShower.vue'
+// import DataGetter from '@/components/DataGetter.vue'
+// import ListShower from '@/components/ListShower.vue'
+import HomeWelcome from '../components/HomeWelcome.vue';
 
 export default {
   name: 'Home',
   components: {
-    DataGetter,
-    ListShower
+    // DataGetter,
+    // ListShower
+    HomeWelcome
   }
 }
 </script>
