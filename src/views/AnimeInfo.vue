@@ -35,11 +35,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
-import config from "../assets/config.json"
-let {ipServer, ipHeroku} = config.apiLocation
-
-
 export default {
   name: 'AnimeInfo',
   watch: {
@@ -51,7 +46,7 @@ export default {
     data(){
     return{
       fetcheddata:{title:'',synopsis:'',episodes:'',rating:'',image:'',imagelink:'',title_japanese:'', title_english:'',genres:'',rank:'',studios:'',status:'',related:'',},
-      apiIP: ipServer
+
     }
   },
   mounted(){
